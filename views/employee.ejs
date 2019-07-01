@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="uza - Model Agency HTML5 Template">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>UPSIDC</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    <link href="/css/style-todo.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/sortit.js"></script>
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="wrapper">
+            <div class="cssload-loader"></div>
+        </div>
+    </div>
+
+    
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="uzaNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="/employees/<%= username %>"><img src="/img/core-img/logo+.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li class="current-item"><a href="/employees/<%= username %>">Home</a></li>
+                                
+                                <li><a href="#">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li><a href="#">Contacts</a></li>
+
+                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                                <li><a href="/logout">Log Out</a></li>
+                            </ul>
+
+               
+
+                        </div>
+                        <!-- Nav End -->
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+
+    <!-- ***** Welcome Area Start ***** -->
+    <section class="welcome-area">
+        
+
+            
+
+            <!-- Single Welcome Slide -->
+            <div class="single-welcome-slide">
+                <!-- Background Curve -->
+                <div class="background-curve">
+                    <img src="/img/core-img/curve-1.png" alt="">
+                </div>
+
+            </div>
+
+    </section>
+
+        <!-- About Background Pattern -->
+        <!-- ***** Todo Area Start ***** -->
+    <section class="uza-about-us-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="todolist not-done">
+                     <h1>To-do</h1>
+                        <input type="text" class="form-control add-todo" placeholder="Add todo">
+                            <button id="checkAll" class="btn btn-success">Mark all as done</button>
+                            
+                            <hr>
+                            <ul id="sortable" class="list-unstyled">
+                            <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" />Take out the trash</label>
+                                </div>
+                            </li>
+                            <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" />Buy bread</label>
+                                </div>
+                            </li>
+                            <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" />Teach penguins to fly</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="todo-footer">
+                            <strong><span class="count-todos"></span></strong> Items Left
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="todolist">
+                     <h1>Already Done</h1>
+                        <ul id="done-items" class="list-unstyled">
+                            <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- About Background Pattern -->
+        <div class="about-bg-pattern">
+            <img src="/img/core-img/curve-2.png" alt="">
+        </div>
+    </section>
+    <!-- ***** Todo Area End ***** -->        
+
+    <!-- ***** Footer Area Start ***** -->
+    <footer class="footer-area section-padding-80-0">
+        <div class="container">
+            <div class="row justify-content-between">
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-80">
+                        <!-- Widget Title -->
+                        <h4 class="widget-title">Quick Links</h4>
+
+                        <!-- Nav -->
+                        <nav>
+                            <ul class="our-link">
+                                <li class="current-item"><a href="/">Home</a></li>
+                                
+                                <li><a href="#">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li><a href="#">Contacts</a></li>
+
+                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                            </ul>
+                        </nav>
+                </div>
+
+                
+            </div>
+
+        </div>
+    </footer>
+    <!-- ***** Footer Area End ***** -->
+
+    <!-- ******* All JS Files ******* -->
+    <!-- jQuery js -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- All js -->
+    <script src="/js/uza.bundle.js"></script>
+    <!-- Active js -->
+    <script src="/js/default-assets/active.js"></script>
+
+    <script src="/js/todo.js"></script>
+
+</body>
+
+</html>
