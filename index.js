@@ -167,7 +167,7 @@ app.use(function(req,res,next) {
 			var dbo = db.db("ProfileDetails");
 			dbo.collection("Employees").find().toArray(function(err,result){
 				for(var i=0; i<result.length; i++){
-					EmployeesArr.push(result[i]);
+					EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email});
 				}
 				res.render("contact",{employees: EmployeesArr, username: req.session.passport.user.username});
 				EmployeesArr = [];
