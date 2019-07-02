@@ -18,6 +18,8 @@ app.use(passport.session());
 app.set("view engine","ejs");
 app.listen(3000);
 
+var EmployeesArr = [];
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -140,8 +142,37 @@ app.use(function(req,res,next) {
 				res.render("profile", doc);
 			});
 		});
-		//res.send("Hey " + req.session.passport.user.name + ", you are an employee");
-		// res.render("profile");
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.use(function(req,res,next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+})
+.get("/employees/:employee/contacts", function(req,res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.username != req.params.employee){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(req.session.passport.user.username == req.params.employee && typeof req.session.passport.user.boss === "undefined"){
+		mongo.connect(url,function(err,db){
+			var dbo = db.db("ProfileDetails");
+			dbo.collection("Employees").find().toArray(function(err,result){
+				for(var i=0; i<result.length; i++){
+					EmployeesArr.push(result[i]);
+				}
+				res.render("contact",{employees: EmployeesArr, username: req.session.passport.user.username});
+				EmployeesArr = [];
+			});
+		});
 	}
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	
@@ -155,4 +186,4 @@ app.get("/logout", function(req,res){
 
 console.log("Listening on port 3000");
 
-//use cookiekkkk
+//use cookie

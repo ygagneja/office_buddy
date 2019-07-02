@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="uza - Model Agency HTML5 Template">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>Contacts</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    <link href="/css/style-todo.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/sortit.js"></script>
+    <link rel="icon" type="image/png" href="/contact_images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/animate/animate.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_css/util.css">
+    <link rel="stylesheet" type="text/css" href="/contact_css/main.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="wrapper">
+            <div class="cssload-loader"></div>
+        </div>
+    </div>
+
+    
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="uzaNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="/employees/<%= username %>"><img src="/img/core-img/logo+.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li><a href="/employees/<%= username %>">Home</a></li>
+                                
+                                <li><a href="#">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li class="current-item"><a href="/employees/<%= username %>/contacts">Contacts</a></li>
+
+                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                                <li><a href="/logout">Log Out</a></li>
+                            </ul>
+
+               
+
+                        </div>
+                        <!-- Nav End -->
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+
+    <!-- ***** Welcome Area Start ***** -->
+    <section class="welcome-area">
+
+        <!-- Single Welcome Slide -->
+            <div class="single-welcome-slide">
+                <!-- Background Curve -->
+                <div class="limiter">
+
+                    <div class="container-table100" style="background: none">
+                        <div class="background-curve">
+                            <img src="/img/core-img/curve-1.png" alt="">
+                                
+                        </div>
+                        <div class="wrap-table100">
+
+                            <div class="table100 ver1 m-b-110">
+
+                                <div class="table100-head">
+
+                                    <table>
+                                        <thead>
+                                            <tr class="row100 head">
+                                                <th class="cell100 column1">Employee Name</th>
+                                                <th class="cell100 column2">Designation</th>
+                                                <th class="cell100 column3">Office Phone</th>
+                                                <th class="cell100 column4">Mobile</th>
+                                                <th class="cell100 column5">E-Mail</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                                <div class="table100-body js-pscroll">
+                                    <table>
+                                        <tbody>
+                                            <% employees.forEach(function(employee){%>
+                                            <tr class="row100 body">
+                                                <td class="cell100 column1"><%= employee.name %></td>
+                                                <td class="cell100 column2"><%= employee.designation %></td>
+                                                <td class="cell100 column3"><%= employee.phone %></td>
+                                                <td class="cell100 column4"><%= employee.mobile %></td>
+                                                <td class="cell100 column5"><%= employee.email %></td>
+                                            </tr>
+                                            <%}); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </section>
+
+        <!-- About Background Pattern -->
+                                            
+
+
+
+
+    <!-- ***** Footer Area Start ***** -->
+    <footer class="footer-area section-padding-80-0">
+        <div class="container">
+            <div class="row justify-content-between">
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-80">
+                        <!-- Widget Title -->
+                        <h4 class="widget-title">Quick Links</h4>
+
+                        <!-- Nav -->
+                        <nav>
+                            <ul class="our-link">
+                                <li><a href="/">Home</a></li>
+                                
+                                <li><a href="#">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li class="current-item"><a href="/employees/<%= username %>/contacts">Contacts</a></li>
+
+                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                            </ul>
+                        </nav>
+                </div>
+
+                
+            </div>
+
+        </div>
+    </footer>
+    <!-- ***** Footer Area End ***** -->
+
+    <!-- ******* All JS Files ******* -->
+    <!-- jQuery js -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- All js -->
+    <script src="/js/uza.bundle.js"></script>
+    <!-- Active js -->
+    <script src="/js/default-assets/active.js"></script>
+
+    <script src="/contact_vendor/bootstrap/js/popper.js"></script>
+    <script src="/contact_vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+    <script src="/contact_vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+    <script src="/contact_vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script>
+        $('.js-pscroll').each(function(){
+            var ps = new PerfectScrollbar(this);
+
+            $(window).on('resize', function(){
+                ps.update();
+            })
+        });
+            
+        
+    </script>
+<!--===============================================================================================-->
+    <script src="/contact_js/main.js"></script>
+
+</body>
+
+</html>
