@@ -22,10 +22,22 @@
     
     <link href="/css/style-todo.css" rel="stylesheet">
     <script type="text/javascript" src="/js/sortit.js"></script>
+    <style>
+        .container_todo{
+            width:100%;
+        }
+        .uza-about-us-area{
+            padding:10%;
+        }
+        #checkAll{
+            background-color:dodgerblue;
+        }
+
+    </style>
 
 </head>
 
-<body>
+<body style="font-family:Aileron">
     <!-- Preloader -->
     <div id="preloader">
         <div class="wrapper">
@@ -63,7 +75,7 @@
                             <ul id="nav">
                                 <li class="current-item"><a href="/employees/<%= username %>">Home</a></li>
                                 
-                                <li><a href="#">To-Do</a></li>
+                                <li><a href="#todo">To-Do</a></li>
 
                                 <li><a href="#">My Attendance</a></li>
                                 
@@ -106,17 +118,18 @@
 
         <!-- About Background Pattern -->
         <!-- ***** Todo Area Start ***** -->
-    <section class="uza-about-us-area">
-        <div class="container">
+    <section class="uza-about-us-area" id="todo">
+        <br><br><br>
+        <div class="container_todo">
             <div class="row">
                 <div class="col-md-6">
                     <div class="todolist not-done">
                      <h1>To-do</h1>
-                        <input type="text" class="form-control add-todo" placeholder="Add todo">
-                            <button id="checkAll" class="btn btn-success">Mark all as done</button>
+                        <input style="font-size:20px" type="text" class="form-control add-todo" placeholder="Add todo">
+                            <button style="font-size:20px" id="checkAll" class="btn btn-success">Mark all as done</button>
                             
                             <hr>
-                            <ul id="sortable" class="list-unstyled">
+                            <ul id="sortable" class="list-unstyled" style="font-size:20px">
                             <li class="ui-state-default">
                                 <div class="checkbox">
                                     <label>
@@ -136,7 +149,7 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="todo-footer">
+                        <div class="todo-footer" style="font-size:20px">
                             <strong><span class="count-todos"></span></strong> Items Left
                         </div>
                     </div>
@@ -144,7 +157,7 @@
                 <div class="col-md-6">
                     <div class="todolist">
                      <h1>Already Done</h1>
-                        <ul id="done-items" class="list-unstyled">
+                        <ul id="done-items" class="list-unstyled" style="font-size:20px">
                             <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
                             
                         </ul>
@@ -154,9 +167,7 @@
         </div>
     
         <!-- About Background Pattern -->
-        <div class="about-bg-pattern">
-            <img src="/img/core-img/curve-2.png" alt="">
-        </div>
+        
     </section>
     <!-- ***** Todo Area End ***** -->        
 
@@ -176,7 +187,7 @@
                             <ul class="our-link">
                                 <li class="current-item"><a href="/">Home</a></li>
                                 
-                                <li><a href="#">To-Do</a></li>
+                                <li><a href="#todo">To-Do</a></li>
 
                                 <li><a href="#">My Attendance</a></li>
                                 
