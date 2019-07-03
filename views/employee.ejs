@@ -194,23 +194,21 @@
     <!-- ***** Header Area End ***** -->
 
 
-
     <!-- ***** Welcome Area Start ***** -->
     <section class="welcome-area">
-        
-
             
 
             <!-- Single Welcome Slide -->
             <div class="single-welcome-slide">
                 <section class="two-column-list mb-sm-5 pr-lg-3 container-fluid" id="two-column-list">
+                            <br><br><br>
                             <div class="container">
                                 <div class="row row-added">
                                         <div class="col-lg-1 pr-0">
                                                 <br><br><br><br><br>
                                                 <br>
                                                 <br>
-                                                <br>    
+                                                <br><br><br><br>    
                                                 <h2 class="column-added">
                                                         ANNOUNCEMENTS
                                                     </h2>
@@ -221,49 +219,17 @@
                                             <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                                 <div>
                                                     <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
+                                                        <% for(var i=0; i<iter; i++) {%>
                                                         <li class="border-bottom pb-3 mt-3">
-                                                            <span class="meta text-uppercase"><h5 ><b>April 02nd, 2018</b></h5></span>
+                                                            <span class="meta"><h5 ><b><%= announcements[i].date %></b></h5></span>
                                                             <h5 class="font-weight-bold mt-0 ">
-                                                                    Solodev Ranked as High Performer on G2 C Ranked as High Performer on G2 Ranked as High Performer on G2 CRanked as High Performer on G2 CRanked as High Performer on G2 C
-                                                                
-                                                                
+                                                                    <%= announcements[i].announcement %>
                                                             </h5>
                                                         </li>
-                                                        <li class="border-bottom pb-3 mt-3 ">
-                                                                <span class="meta text-uppercase"><h5 ><b>April 02nd, 2018</b></h5></span>
-                                                                <h5 class="font-weight-bold mt-0 ">
-                                                                        Solodev Ranked as High Performer on G2 C Ranked as High Performer on G2 Ranked as High Performer on G2 CRanked as High Performer on G2 CRanked as High Performer on G2 C
-                                                                    
-                                                                    
-                                                                </h5>
-                                                            </li>
-                                                            <li class="border-bottom pb-3 mt-3">
-                                                                    <span class="meta text-uppercase"><h5 ><b>April 02nd, 2018</b></h5></span>
-                                                                    <h5 class="font-weight-bold mt-0 ">
-                                                                            Solodev Ranked as High Performer on G2 C Ranked as High Performer on G2 Ranked as High Performer on G2 CRanked as High Performer on G2 CRanked as High Performer on G2 C
-                                                                        
-                                                                        
-                                                                    </h5>
-                                                                </li>
-                                                                <li class="border-bottom pb-3 mt-3">
-                                                                        <span class="meta text-uppercase"><h5 ><b>April 02nd, 2018</b></h5></span>
-                                                                        <h5 class="font-weight-bold mt-0 ">
-                                                                                Solodev Ranked as High Performer on G2 C Ranked as High Performer on G2 Ranked as High Performer on G2 CRanked as High Performer on G2 CRanked as High Performer on G2 C
-                                                                            
-                                                                            
-                                                                        </h5>
-                                                                    </li>
-                                                                    <li class="border-bottom pb-3 mt-3 ">
-                                                                            <span class="meta text-uppercase"><h5 ><b>April 02nd, 2018</b></h5></span>
-                                                                            <h5 class="font-weight-bold mt-0 ">
-                                                                                    Solodev Ranked as High Performer on G2 C Ranked as High Performer on G2 Ranked as High Performer on G2 CRanked as High Performer on G2 CRanked as High Performer on G2 C
-                                                                                
-                                                                                
-                                                                            </h5>
-                                                                        </li>
+                                                        <%} %>
                                                     </ul>
                                                     <h4><b>
-                                                    <a class="all pos-stat text-uppercase ml-lg-5" href="https://www.solodev.com/news/">All announcements
+                                                    <a class="all pos-stat text-uppercase ml-lg-5" href="#">All announcements
                                                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                     </a>
                                                     </b></h4>
@@ -290,7 +256,7 @@
 
         <!-- About Background Pattern -->
         <!-- ***** Todo Area Start ***** -->
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
 
     <section class="uza-about-us-area" id="todo">
         <div class="container_todo">
