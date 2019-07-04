@@ -131,7 +131,7 @@ app.use(function(req,res,next) {
 	else if(req.session.passport.user.username == req.params.username){
 		if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined"){
 			mongo.connect(url, function(err,db){
-				var dbo = db.db("ProfileDetails");
+				var dbo = db.db("MainDB");
 				dbo.collection("Announcements").find().toArray(function(err, result){
 					var Announcements = [];
 					for(var i=result.length - 1; i>=0; i--){
@@ -159,24 +159,29 @@ app.use(function(req,res,next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 })
-.get("/employees/:employee/profile", function(req,res){
+.get("/:type/:username/profile", function(req,res){
 	if(typeof req.session.passport === "undefined"){
 		res.sendFile("/template/error.html",{root:__dirname});
 	}
 	else if(typeof req.session.passport.user === "undefined"){
 		res.sendFile("/template/error.html",{root:__dirname});	
 	}
-	else if(req.session.passport.user.username != req.params.employee){
+	else if(req.session.passport.user.username != req.params.username){
 		res.sendFile("/template/error.html",{root:__dirname});
 	}
-	else if(req.session.passport.user.username == req.params.employee && typeof req.session.passport.user.boss === "undefined"){
-		mongo.connect(url,function(err,db){
-			var dbo = db.db("ProfileDetails");
-			dbo.collection("Employees").findOne({username: req.session.passport.user.username}, function(err,doc){
-				if(err) throw err;
-				res.render("profile", doc);
+	else if(req.session.passport.user.username == req.params.username){
+		if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined"){
+			mongo.connect(url,function(err,db){
+				var dbo = db.db("MainDB");
+				dbo.collection("Employees").findOne({username: req.session.passport.user.username}, function(err,doc){
+					if(err) throw err;
+					res.render("profile", doc);
+				});
 			});
-		});
+		}	
+		else if(req.params.type == "boss" && req.session.passport.user.boss == true){
+			
+		}
 	}
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	
@@ -187,27 +192,32 @@ app.use(function(req,res,next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 })
-.get("/employees/:employee/contacts", function(req,res){
+.get("/:type/:username/contacts", function(req,res){
 	if(typeof req.session.passport === "undefined"){
 		res.sendFile("/template/error.html",{root:__dirname});
 	}
 	else if(typeof req.session.passport.user === "undefined"){
 		res.sendFile("/template/error.html",{root:__dirname});	
 	}
-	else if(req.session.passport.user.username != req.params.employee){
+	else if(req.session.passport.user.username != req.params.username){
 		res.sendFile("/template/error.html",{root:__dirname});
 	}
-	else if(req.session.passport.user.username == req.params.employee && typeof req.session.passport.user.boss === "undefined"){
-		mongo.connect(url,function(err,db){
-			var dbo = db.db("ProfileDetails");
-			dbo.collection("Employees").find().toArray(function(err,result){
-				var EmployeesArr = [];
-				for(var i=0; i<result.length; i++){
-					EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email});
-				}
-				res.render("contact",{employees: EmployeesArr, username: req.session.passport.user.username});
+	else if(req.session.passport.user.username == req.params.username){
+		if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined"){
+			mongo.connect(url,function(err,db){
+				var dbo = db.db("MainDB");
+				dbo.collection("Employees").find().toArray(function(err,result){
+					var EmployeesArr = [];
+					for(var i=0; i<result.length; i++){
+						EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email});
+					}
+					res.render("contact",{employees: EmployeesArr, username: req.session.passport.user.username});
+				});
 			});
-		});
+		}	
+		else if(req.params.type == "boss" && req.session.passport.user.boss == true){
+			
+		}
 	}
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	
@@ -218,18 +228,23 @@ app.use(function(req,res,next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
 })
-.get("/employees/:employee/profile/changePassword", function(req,res){
+.get("/:type/:username/profile/changePassword", function(req,res){
 	if(typeof req.session.passport === "undefined"){
 		res.sendFile("/template/error.html",{root:__dirname});
 	}
 	else if(typeof req.session.passport.user === "undefined"){
 		res.sendFile("/template/error.html",{root:__dirname});	
 	}
-	else if(req.session.passport.user.username != req.params.employee){
+	else if(req.session.passport.user.username != req.params.username){
 		res.sendFile("/template/error.html",{root:__dirname});
 	}
-	else if(req.session.passport.user.username == req.params.employee && typeof req.session.passport.user.boss === "undefined"){
-		res.sendFile("template/changepass.html",{root:__dirname});
+	else if(req.session.passport.user.username == req.params.username){
+		if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined"){
+			res.sendFile("template/changepass.html",{root:__dirname});
+		}	
+		else if(req.params.type == "boss" && req.session.passport.user.boss == true){
+			
+		}
 	}
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	
