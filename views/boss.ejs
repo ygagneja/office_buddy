@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="uza - Model Agency HTML5 Template">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>UPSIDC</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+    <link href="/css/style-todo.css" rel="stylesheet">
+    <!-- Announcements -->
+    <script type="text/javascript" src="/js/sortit.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/announcements-events.css" rel="stylesheet">
+    <style>
+        @media (min-width: 1200px){
+    .row-added {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .column-added{
+        text-orientation:upright; 
+        writing-mode: vertical-rl;
+    }
+    .topmargin{
+        margin-top: 100px;
+    }
+    }
+        @media (min-width: 992px) and (max-width: 1199px){
+    .row-added {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .column-added{
+        text-orientation:upright; 
+        writing-mode: vertical-rl;
+    }
+    .topmargin{
+        margin-top: 180px;
+    }
+    }
+        @media (min-width: 768px) and (max-width: 991px){
+    .row-added {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    h2 {
+        margin-left: 200px;
+        margin-bottom: -75px;
+    }
+    .topmargin{
+        margin-top: 400px;
+    }
+    }
+
+
+    @media (min-width: 576px) and (max-width: 767px){
+    .row-added {
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .topmargin{
+            margin-top:100px;
+        }
+        h2 {
+        margin-left: 120px;
+        margin-bottom: -75px;
+    }
+}
+
+    @media (min-width: 405px) and (max-width: 575px){
+        .topmargin{
+            margin-top:200px;
+        }
+        h2 {
+        margin-left: 80px;
+        margin-bottom: -75px;
+        }
+    }
+    @media (min-width: 380px) and (max-width: 404px){
+        .topmargin{
+            margin-top:300px;
+        }
+        h2 {
+        margin-left: 40px;
+        margin-bottom: -75px;
+    }
+    }
+    @media (min-width: 350px) and (max-width: 379px){
+        .topmargin{
+            margin-top: 400px;
+        }
+        h2 {
+        margin-left: 10px;
+        margin-bottom: -75px;
+    }
+    }
+    @media (min-width: 320px) and (max-width: 349px){
+        .topmargin{
+            margin-top: 420px;
+        }
+        h2 {
+        
+        margin-bottom: -75px;
+    }
+    }
+        .container_todo{
+            width:100%;
+        }
+        .uza-about-us-area{
+            padding:10%;
+        }
+        #checkAll{
+            background-color:dodgerblue;
+        }
+
+    </style>
+
+</head>
+
+<body style="font-family:Aileron">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="wrapper">
+            <div class="cssload-loader"></div>
+        </div>
+    </div>
+
+    
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="uzaNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="/"><img src="/img/core-img/logo+.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li class="current-item"><a href="/boss/<%= username %>">Home</a></li>
+                                
+                                <li><a href="#todo">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+
+                                <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
+
+                                <li><a href="/logout">Log Out</a></li>
+                            </ul>
+
+               
+
+                        </div>
+                        <!-- Nav End -->
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+
+    <!-- ***** Welcome Area Start ***** -->
+    <section class="welcome-area">
+            
+
+            <!-- Single Welcome Slide -->
+            <div class="single-welcome-slide">
+                <section class="two-column-list mb-sm-5 pr-lg-3 container-fluid" id="two-column-list">
+                            <br><br><br>
+                            <div class="container">
+                                <div class="row row-added">
+                                        <div class="col-lg-1 pr-0">
+                                                <br><br><br><br><br>
+                                                <br>
+                                                <br>
+                                                <br><br><br><br>    
+                                                <h2 class="column-added">
+                                                        ANNOUNCEMENTS
+                                                    </h2>
+                                                </div>   
+                                    <div class="col-lg-6 pr-0">
+                                        <section aria-label="Announcements" class="announcements">
+                                            <br><br><br><br>
+                                            <div class="announcement-slider border-r-xs-0 border-r position-relative ">
+                                                <div>
+                                                    <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
+                                                        <% for(var i=0; i<iter; i++) {%>
+                                                        <li class="border-bottom pb-3 mt-3">
+                                                            <span class="meta"><h5 ><b><%= announcements[i].date %></b></h5></span>
+                                                            <h5 class="font-weight-bold mt-0 ">
+                                                                    <%= announcements[i].announcement %>
+                                                            </h5>
+                                                            <a href="#"><img src="/img/core-img/zoom6.png"></a>
+                                                            &nbsp;
+                                                            <a href="#"><img src="/img/core-img/zoom6(1).png"></a>
+                                                        </li>
+                                                        <%} %>
+                                                    </ul>
+                                                    <h4><b>
+                                                    <a class="all pos-stat text-uppercase ml-lg-5" href="#">All announcements
+                                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                    </a>
+                                                    </b></h4>
+                                                    <a href="#" class="btn uza-btn btn-2" data-animation="fadeInUp" data-delay="700ms" style="animation-delay: 700ms;">Create</a>
+                                                </div>
+                                                
+                                                
+                                        </section>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                
+                            
+                
+                        </section>
+                <!-- Background Curve -->
+                <div class="background-curve">
+                    <img src="/img/core-img/curve-1.png" alt="">
+                </div>
+
+            </div>
+
+    </section>
+
+        <!-- About Background Pattern -->
+        <!-- ***** Todo Area Start ***** -->
+    
+
+    <section class="uza-about-us-area" id="todo">
+        <div class="container_todo">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="todolist not-done">
+                     <h1>To-do</h1>
+                        <input style="font-size:20px" type="text" class="form-control add-todo" placeholder="Add to-do">
+                            <button style="font-size:20px" id="checkAll" class="btn btn-success">Mark all as done</button>
+                            
+                            <hr>
+                            <ul id="sortable" class="list-unstyled" style="font-size:20px">
+                            <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" />Take out the trash</label>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="todo-footer" style="font-size:20px">
+                            <strong><span class="count-todos"></span></strong> Items Left
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="todolist">
+                     <h1>Already Done</h1>
+                        <ul id="done-items" class="list-unstyled" style="font-size:20px">
+                            <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- About Background Pattern -->
+        
+    </section>
+    <!-- ***** Todo Area End ***** -->        
+
+    <!-- ***** Footer Area Start ***** -->
+    <footer class="footer-area section-padding-80-0">
+        <div class="container">
+            <div class="row justify-content-between">
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-80">
+                        <!-- Widget Title -->
+                        <h4 class="widget-title">Quick Links</h4>
+
+                        <!-- Nav -->
+                        <nav>
+                            <ul class="our-link">
+                                <li class="current-item"><a href="/">Home</a></li>
+                                
+                                <li><a href="#todo">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+
+                                <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
+                            </ul>
+                        </nav>
+                </div>
+
+                
+            </div>
+
+        </div>
+    </footer>
+    <!-- ***** Footer Area End ***** -->
+
+    <!-- ******* All JS Files ******* -->
+    <!-- jQuery js -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- All js -->
+    <script src="/js/uza.bundle.js"></script>
+    <!-- Active js -->
+    <script src="/js/default-assets/active.js"></script>
+
+    <script src="/js/todo.js"></script>
+
+    <!-- Announcements js-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="/js/announcements-events.js"></script>
+
+</body>
+
+</html>
