@@ -36,6 +36,21 @@
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/contact_css/util.css">
     <link rel="stylesheet" type="text/css" href="/contact_css/main.css">
+    <style>
+
+        #myInput {
+            background-image: url('/img/core-img/search(2).jpg');
+            background-position: ;
+            background-repeat: no-repeat;
+            width: 40%;
+            font-size: 16px;
+            padding: 12px 20px 12px 50px;
+            border: 5px;
+            border-style:solid;
+            border-color:black;
+            margin-bottom: 12px;
+        }
+    </style>
 
 </head>
 
@@ -75,15 +90,15 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul id="nav">
-                                <li><a href="/employees/<%= username %>">Home</a></li>
+                                <li><a href="/boss/<%= username %>">Home</a></li>
                                 
-                                <li><a href="/employees/<%= username %>#todo">To-Do</a></li>
+                                <li><a href="/boss/<%= username %>#todo">To-Do</a></li>
 
                                 <li><a href="#">My Attendance</a></li>
                                 
-                                <li class="current-item"><a href="/employees/<%= username %>/contacts">Contacts</a></li>
+                                <li class="current-item"><a href="/boss/<%= username %>/contacts">Contacts</a></li>
 
-                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                                <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
                                 <li><a href="/logout">Log Out</a></li>
                             </ul>
 
@@ -110,21 +125,17 @@
                 <div class="limiter">
 
                     <div class="container-table100" style="background: none">
+                    <input id="myInput" type="text" placeholder="Search.."> 
                         <div class="background-curve">
                             <img src="/img/core-img/curve-1.png" alt="">
-                                
                         </div>
-
-                        <h3 Search here></h3>
-                        <div class="search-icon" data-toggle="modal" data-target="#searchModal">
-                            <i class="icon_search"></i>
-                        </div>
-
                         <div class="wrap-table100">
 
                             <div class="table100 ver1 m-b-110">
 
+
                                 <div class="table100-head">
+
 
                                     <table>
                                         <thead>
@@ -140,10 +151,10 @@
                                 </div>
 
                                 <div class="table100-body js-pscroll">
-                                    <table>
+                                    <table id="myTable">
                                         <tbody>
                                             <% employees.forEach(function(employee){%>
-                                            <tr class="row100 body">
+                                            <tr id="search" class="row100 body">
                                                 <td class="cell100 column1"><a href="/boss/<%= username %>/contacts/<%= employee.username %>"><%= employee.name %></a></td>
                                                 <td class="cell100 column2"><%= employee.designation %></td>
                                                 <td class="cell100 column3"><%= employee.phone %></td>
@@ -185,13 +196,13 @@
                             <ul class="our-link">
                                 <li><a href="/">Home</a></li>
                                 
-                                <li><a href="/employees/<%= username %>#todo">To-Do</a></li>
+                                <li><a href="/boss/<%= username %>#todo">To-Do</a></li>
 
                                 <li><a href="#">My Attendance</a></li>
                                 
-                                <li class="current-item"><a href="/employees/<%= username %>/contacts">Contacts</a></li>
+                                <li class="current-item"><a href="/boss/<%= username %>/contacts">Contacts</a></li>
 
-                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                                <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
                             </ul>
                         </nav>
                 </div>
@@ -232,6 +243,16 @@
             
         
     </script>
+    <script>
+        $(document).ready(function(){
+              $("#myInput").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+            });
+        });
+    </script> 
 <!--===============================================================================================-->
     <script src="/contact_js/main.js"></script>
 

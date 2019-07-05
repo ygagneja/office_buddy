@@ -36,6 +36,21 @@
 <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/contact_css/util.css">
     <link rel="stylesheet" type="text/css" href="/contact_css/main.css">
+    <style>
+
+        #myInput {
+            background-image: url('/img/core-img/search(2).jpg');
+            background-position: ;
+            background-repeat: no-repeat;
+            width: 40%;
+            font-size: 16px;
+            padding: 12px 20px 12px 50px;
+            border: 5px;
+            border-style:solid;
+            border-color:black;
+            margin-bottom: 12px;
+        }
+    </style>
 
 </head>
 
@@ -110,6 +125,7 @@
                 <div class="limiter">
 
                     <div class="container-table100" style="background: none">
+                        <input id="myInput" type="text" placeholder="Search.."> 
                         <div class="background-curve">
                             <img src="/img/core-img/curve-1.png" alt="">
                                 
@@ -134,7 +150,7 @@
                                 </div>
 
                                 <div class="table100-body js-pscroll">
-                                    <table>
+                                    <table id="myTable">
                                         <tbody>
                                             <% employees.forEach(function(employee){%>
                                             <tr class="row100 body">
@@ -226,6 +242,16 @@
             
         
     </script>
+    <script>
+        $(document).ready(function(){
+              $("#myInput").on("keyup", function() {
+              var value = $(this).val().toLowerCase();
+              $("#myTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+              });
+            });
+        });
+    </script> 
 <!--===============================================================================================-->
     <script src="/contact_js/main.js"></script>
 

@@ -23,116 +23,222 @@
     <link href="/css/style-todo.css" rel="stylesheet">
     <!-- Announcements -->
     <script type="text/javascript" src="/js/sortit.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="/css/announcements-events.css" rel="stylesheet">
+
+
+    <!--chat box css-->
+    <style type="text/css">
+        .chat {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat li {
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px dotted #B3A9A9;
+        }
+
+        .chat li.left .chat-body {
+            margin-left: 60px;
+        }
+
+        .chat li.right .chat-body {
+            margin-right: 60px;
+        }
+
+
+        .chat li .chat-body p {
+            margin: 0;
+            color: #777777;
+        }
+
+        .panel .slidedown .glyphicon,
+        .chat .glyphicon {
+            margin-right: 5px;
+        }
+
+        .panel-body {
+            overflow-y: scroll;
+            height: 405px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            background-color: #E7E7E7;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: dodgerblue;
+            border: 1px solid rgba(92, 92, 92, 0.5);
+            border-radius: 10px;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--humne khud banaya-->
     <style>
-    
-    a:hover{text-decoration: none;}
+        a:hover{ 
+            text-decoration: none;
+        }
         @media (min-width: 1200px){
-    .row-added {
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-    .column-added{
-        text-orientation:upright; 
-        writing-mode: vertical-rl;
-    }
-    .topmargin{
-        margin-top: 100px;
-    }
-    }
+            .row-added {
+                margin-right: -15px;
+                margin-left: -200px;
+            }
+            .column-added{
+                text-orientation:upright; 
+                writing-mode: vertical-rl;
+                
+            }
+            .topmargin{
+                margin-top: 15%;
+            }
+            
+        }
         @media (min-width: 992px) and (max-width: 1199px){
-    .row-added {
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-    .column-added{
-        text-orientation:upright; 
-        writing-mode: vertical-rl;
-    }
-    .topmargin{
-        margin-top: 180px;
-    }
-    }
+            .row-added {
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+            .column-added{
+                text-orientation:upright; 
+                writing-mode: vertical-rl;
+               
+            }
+            .topmargin{
+                margin-top: 15%;
+            }
+            
+        }
         @media (min-width: 768px) and (max-width: 991px){
-    .row-added {
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-    h2 {
-        margin-left: 200px;
-        margin-bottom: -75px;
-    }
-    .topmargin{
-        margin-top: 400px;
-    }
-    }
+            .row-added {
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+            h2 {
+                margin-left: 200px;
+                margin-bottom: -75px;
+            }
+            .topmargin{
+                margin-top: 15%;
+            }
+            .chat-flex{
+                flex: 0 0 100%;
+                max-width: 95%;
+                margin: auto;
+            }
+            leftfix{
+                left: -5%;
+            }
+        }
 
 
     @media (min-width: 576px) and (max-width: 767px){
-    .row-added {
-        margin-right: -15px;
-        margin-left: -15px;
-    }
-    .topmargin{
-            margin-top:100px;
+            .row-added {
+                margin-right: -15px;
+                margin-left: -15px;
+            }
+            .topmargin{
+                margin-top:15%;
+            }
+            h2 {
+                margin-left: 120px;
+                margin-bottom: -75px;
+            }
+            leftfix{
+                left: -6%;
+            }
+            
         }
-        h2 {
-        margin-left: 120px;
-        margin-bottom: -75px;
-    }
-}
 
     @media (min-width: 405px) and (max-width: 575px){
-        .topmargin{
-            margin-top:200px;
+            .topmargin{
+                margin-top:15%;
+            }
+            h2 {
+            margin-left: 80px;
+            margin-bottom: -75px;
+            }
+            leftfix{
+                left: -4%;
+            }
+            
         }
-        h2 {
-        margin-left: 80px;
-        margin-bottom: -75px;
-        }
-    }
+
     @media (min-width: 380px) and (max-width: 404px){
-        .topmargin{
-            margin-top:300px;
+            .topmargin{
+                margin-top:15%;
+            }
+            h2 {
+            margin-left: 40px;
+            margin-bottom: -75px;
+            }
+           
         }
-        h2 {
-        margin-left: 40px;
-        margin-bottom: -75px;
-    }
-    }
+
     @media (min-width: 350px) and (max-width: 379px){
-        .topmargin{
-            margin-top: 400px;
+            .topmargin{
+                margin-top: 15%;
+            }
+            h2 {
+            margin-left: 10px;
+            margin-bottom: -75px;
+            }
+            
         }
-        h2 {
-        margin-left: 10px;
-        margin-bottom: -75px;
-    }
-    }
     @media (min-width: 320px) and (max-width: 349px){
-        .topmargin{
-            margin-top: 420px;
+            .topmargin{
+                margin-top: 15%;
+            }
+            h2 {
+            
+            margin-bottom: -75px;
+            }
         }
-        h2 {
-        
-        margin-bottom: -75px;
-    }
-    }
+
         .container_todo{
-            width:100%;
+            width:90%;
+            margin: auto;
         }
-        .uza-about-us-area{
-            padding:10%;
-        }
-        #checkAll{
-            background-color:dodgerblue;
-        }
-
+        
+    
+    .scroll_text{
+    	height:500px;
+	    overflow:auto;
+        padding:0px 15px;
+        
+    }
+    .scroll_text::-webkit-scrollbar {  
+        width: 8px;  
+    }  
+    .scroll_text::-webkit-scrollbar-track {  
+        background-color: #E7E7E7;
+    }  
+    .scroll_text::-webkit-scrollbar-thumb {  
+        background-color: dodgerblue;
+        border: 1px solid rgba(92, 92, 92, 0.5);
+        border-radius: 10px;
+    }  
+    .scroll_text::-webkit-scrollbar-thumb:hover {  
+        background-color: #000;  
+    }
+    .pt-lg-5{
+        padding-top: 0!important;
+    }
     </style>
-
+    
 </head>
 
 <body style="font-family:Aileron">
@@ -196,49 +302,344 @@
     <!-- ***** Header Area End ***** -->
 
 
+
     <!-- ***** Welcome Area Start ***** -->
     <section class="welcome-area">
+        
+
             
 
             <!-- Single Welcome Slide -->
             <div class="single-welcome-slide">
                 <section class="two-column-list mb-sm-5 pr-lg-3 container-fluid" id="two-column-list">
-                            <br><br><br>
-                            <div class="container">
-                                <div class="row row-added">
-                                        <div class="col-lg-1 pr-0">
-                                                <br><br><br><br><br>
-                                            
+                            <div class="container_todo">
+                                <div class="row " >
+                                        <div class="col-lg-1 pr-0 topmargin">   
                                                 <h2 class="column-added">
                                                         ANNOUNCEMENTS
                                                     </h2>
-                                                </div>   
-                                    <div class="col-lg-6 pr-0">
+                                        </div>
+                                        
+                                    <div class="col-lg-5 pr-0 scroll_text topmargin leftfix" style="left: -6%;">
                                         <section aria-label="Announcements" class="announcements">
-                                            <br><br><br><br>
+                                           
                                             <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                                 <div>
                                                     <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
-                                                        <% for(var i=0; i<iter; i++) {%>
+                                                        <% announcements.forEach(function(announcement){ %>
                                                         <li class="border-bottom pb-3 mt-3">
-                                                            <span class="meta"><h5 ><b><%= announcements[i].date %></b></h5></span>
-                                                            <h5 class="font-weight-bold mt-0 ">
-                                                                    <%= announcements[i].announcement %>
-                                                            </h5>
+                                                            <span class="meta text-uppercase"><h5 ><b><%= announcement.date %></b></h5></span>
+                                                            <h4 class="font-weight-bold mt-0 ">
+                                                                    <%= announcement.announcement %>
+                                                            </h4>
                                                         </li>
-                                                        <%} %>
+                                                        <% }) %>
                                                     </ul>
-                                                    <h4><b>
-                                                    <a class="all pos-stat text-uppercase ml-lg-5" href="#">All announcements
-                                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                                    </a>
-                                                    </b></h4>
                                                 </div>
-                        
-                                                
                                         </section>
                                         
                                     </div>
+                                    <div class="col-md-1 topmargin" ></div>
+
+                                    <!-- Chat Start Here-->
+                                    <div class="col-md-4 topmargin chat-flex" >
+                                            <div class="panel panel-primary">
+                                                <div class="panel-heading">
+                                                    <span class="glyphicon glyphicon-comment"></span> Chat
+                                                    <div class="btn-group pull-right">
+                                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu slidedown">
+                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh">
+                                                                    </span>Refresh</a></li>
+                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-ok-sign">
+                                                                    </span>Available</a></li>
+                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-remove">
+                                                                    </span>Busy</a></li>
+                                                            <li><a href="http://www.jquery2dotnet.com"><span
+                                                                        class="glyphicon glyphicon-time"></span>
+                                                                    Away</a></li>
+                                                            <li class="divider"></li>
+                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
+                                                                    Sign Out</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <ul class="chat">
+                                                        <li class="left clearfix"><span class="chat-img pull-left">
+                                                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
+                                                                    class="img-circle" />
+                                                            </span>
+                                                            <div class="chat-body clearfix">
+                                                                <div class="header">
+                                                                    <strong class="primary-font">Jack Sparrow</strong> <small
+                                                                        class="pull-right text-muted">
+                                                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                                                </div>
+                                                                <p>
+                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                                                    ornare
+                                                                    dolor, quis ullamcorper ligula sodales.
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                        <li class="right clearfix"><span class="chat-img pull-right">
+                                                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
+                                                                    class="img-circle" />
+                                                            </span>
+                                                            <div class="chat-body clearfix">
+                                                                <div class="header">
+                                                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins
+                                                                        ago</small>
+                                                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                                </div>
+                                                                <p>
+                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                                                    ornare
+                                                                    dolor, quis ullamcorper ligula sodales.
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                        <li class="left clearfix"><span class="chat-img pull-left">
+                                                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
+                                                                    class="img-circle" />
+                                                            </span>
+                                                            <div class="chat-body clearfix">
+                                                                <div class="header">
+                                                                    <strong class="primary-font">Jack Sparrow</strong> <small
+                                                                        class="pull-right text-muted">
+                                                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                                                </div>
+                                                                <p>
+                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                                                    ornare
+                                                                    dolor, quis ullamcorper ligula sodales.
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                        <li class="right clearfix"><span class="chat-img pull-right">
+                                                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
+                                                                    class="img-circle" />
+                                                            </span>
+                                                            <div class="chat-body clearfix">
+                                                                <div class="header">
+                                                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins
+                                                                        ago</small>
+                                                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                                </div>
+                                                                <p>
+                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
+                                                                    ornare
+                                                                    dolor, quis ullamcorper ligula sodales.
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="panel-footer">
+                                                    <div class="input-group">
+                                                        <input id="btn-input" type="text" class="form-control input-sm"
+                                                            placeholder="Type your message here..." />
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-warning btn-sm" id="btn-chat">
+                                                                Send</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-lg-10 pl-0">
+                                            <section class="events-section pl-lg-3 topmargin " aria-label="Events">
+                            
+                                                <div class="events p-lg-5">
+                                                    <div class="events-block">
+                                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
+                                                            <li class="border-bottom d-flex align-items-center">
+                                                                <div class="events-date text-uppercase text-center">
+                                                                    <a class="text-white" href="#">May
+                                                                        <span>10</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline-block pl-3 event-li">
+                                                                    <h3 class="font-weight-bold mt-0">
+                                                                        <a href="#">
+                                                                            CMS City Exhibition
+                                                                        </a>
+                                                                    </h3>
+                                                                    <p>
+                                                                        10:30 PM
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li class="border-bottom d-flex align-items-center">
+                                                                <div class="events-date text-uppercase text-center">
+                                                                    <a class="text-white" href="#">May
+                                                                        <span>31</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline-block pl-3 event-li">
+                                                                    <h3 class="font-weight-bold mt-0">
+                                                                        <a href="#">
+                                                                            Content Management Expo
+                                                                        </a>
+                                                                    </h3>
+                                                                    <p>
+                                                                        6:30 PM
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li class="border-bottom d-flex align-items-center">
+                                                                <div class="events-date text-uppercase text-center">
+                                                                    <a class="text-white" href="#">June
+                                                                        <span>07</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline-block pl-3 event-li">
+                                                                    <h3 class="font-weight-bold mt-0">
+                                                                        <a href="#">
+                                                                            Techolocon
+                                                                        </a>
+                                                                    </h3>
+                                                                    <p>
+                                                                        8:30 AM
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="all pos-stat text-uppercase ml-lg-5" href="/calendar/">All events
+                                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                        </a>
+                                                        <div class="left-right-arrows second">
+                                                            <button class="prev-arrow-events" type="button"><i class="fa fa-chevron-left"></i></button>
+                                                            <button class="next-arrow-events" type="button"><i class="fa fa-chevron-right"></i></button>
+                                                        </div>
+                            
+                                                    </div>
+                                                    <div class="events-block">
+                                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
+                            
+                                                            <li class="border-bottom d-flex align-items-center">
+                                                                <div class="events-date text-uppercase text-center">
+                                                                    <a class="text-white" href="#">June
+                                                                        <span>15</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline-block pl-3 event-li">
+                                                                    <h3 class="font-weight-bold mt-0">
+                                                                        <a href="#">
+                                                                            Cloud City Expo
+                                                                        </a>
+                                                                    </h3>
+                                                                    <p>
+                                                                        12PM
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li class="border-bottom d-flex align-items-center">
+                                                                <div class="events-date text-uppercase text-center">
+                                                                    <a class="text-white" href="#">June
+                                                                        <span>23</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline-block pl-3 event-li">
+                                                                    <h3 class="font-weight-bold mt-0">
+                                                                        <a href="#">
+                                                                            Solodev at the Education Conference
+                                                                        </a>
+                                                                    </h3>
+                                                                    <p>
+                                                                        10:30
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li class="border-bottom d-flex align-items-center">
+                                                                <div class="events-date text-uppercase text-center">
+                                                                    <a class="text-white" href="#">July
+                                                                        <span>25</span>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="d-inline-block pl-3 event-li">
+                                                                    <h3 class="font-weight-bold mt-0">
+                                                                        <a href="#">
+                                                                            AWS Challenge Conference
+                                                                        </a>
+                                                                    </h3>
+                                                                    <p>
+                                                                        9:15AM
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <a class="all text-uppercase ml-lg-5" href="/calendar/">All events
+                                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                        </a>
+                                                        <div class="left-right-arrows second">
+                                                            <button class="prev-arrow-events" type="button"><i class="fa fa-chevron-left"></i></button>
+                                                            <button class="next-arrow-events" type="button"><i class="fa fa-chevron-right"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                </div>
+                                <div class="row topmargin">
+                                    <div class="col-md-6" id="todo">
+                                        <div class="todolist not-done">
+                                         <h1>To-do</h1>
+                                            <input style="font-size:20px" type="text" class="form-control add-todo" placeholder="Add to-do">
+                                                <button id="checkAll" style="font-size:20px" class="btn btn-primary">Mark all as done</button>
+                                                
+                                                <hr>
+                                                <ul id="sortable" class="list-unstyled" style="font-size:20px">
+                                                <li class="ui-state-default">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" />Take out the trash</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="todo-footer" style="font-size:20px">
+                                                <strong><span class="count-todos"></span></strong> Items Left
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="todolist">
+                                         <h1>Already Done</h1>
+                                            <ul id="done-items" class="list-unstyled" style="font-size:20px">
+                                                <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-between topmargin" style="display:flow-root">
+
+                                    <!-- Single Footer Widget -->
+                                    <div class="col-12 col-sm-6 col-lg-3">
+                                        <div class="single-footer-widget mb-80">
+                                            <!-- Widget Title -->
+                                            <h4 class="widget-title">Quick Links</h4>
+                    
+                                            <!-- Nav -->
+                                            <nav>
+                                                <ul class="our-link">
+                                                    <li class="current-item"><a href="/">Home</a></li>
+                                                    
+                                                    <li><a href="#todo">To-Do</a></li>
+                    
+                                                    <li><a href="#">My Attendance</a></li>
+                                                    
+                                                    <li><a href="/employees/<%= username %>/contacts">Contacts</a></li>
+                    
+                                                    <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
+                                                </ul>
+                                            </nav>
+                                    </div>
+                    
+                                    
                                 </div>
                             </div>
                 
@@ -254,84 +655,20 @@
 
     </section>
 
-        <!-- About Background Pattern -->
-        <!-- ***** Todo Area Start ***** -->
-    
+      
 
-    <section class="uza-about-us-area" id="todo">
-        <div class="container_todo">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="todolist not-done">
-                     <h1>To-do</h1>
-                        <input style="font-size:20px" type="text" class="form-control add-todo" placeholder="Add to-do">
-                            <button style="font-size:20px" id="checkAll" class="btn btn-success">Mark all as done</button>
-                            
-                            <hr>
-                            <ul id="sortable" class="list-unstyled" style="font-size:20px">
-                            <li class="ui-state-default">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="" />Take out the trash</label>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="todo-footer" style="font-size:20px">
-                            <strong><span class="count-todos"></span></strong> Items Left
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="todolist">
-                     <h1>Already Done</h1>
-                        <ul id="done-items" class="list-unstyled" style="font-size:20px">
-                            <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-        <!-- About Background Pattern -->
-        
-    </section>
-    <!-- ***** Todo Area End ***** -->        
-
+   
+            
+<section>
     <!-- ***** Footer Area Start ***** -->
     <footer class="footer-area section-padding-80-0">
         <div class="container">
-            <div class="row justify-content-between">
-
-                <!-- Single Footer Widget -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-80">
-                        <!-- Widget Title -->
-                        <h4 class="widget-title">Quick Links</h4>
-
-                        <!-- Nav -->
-                        <nav>
-                            <ul class="our-link">
-                                <li class="current-item"><a href="/">Home</a></li>
-                                
-                                <li><a href="#todo">To-Do</a></li>
-
-                                <li><a href="#">My Attendance</a></li>
-                                
-                                <li><a href="/employees/<%= username %>/contacts">Contacts</a></li>
-
-                                <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
-                            </ul>
-                        </nav>
-                </div>
-
-                
-            </div>
+           
 
         </div>
     </footer>
     <!-- ***** Footer Area End ***** -->
-
+</section>
     <!-- ******* All JS Files ******* -->
     <!-- jQuery js -->
     <script src="/js/jquery.min.js"></script>

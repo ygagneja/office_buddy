@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="uza - Model Agency HTML5 Template">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>My Profile</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/core-img/favicon.ico">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    <link href="/css/bootstrap-4.3.1.css" rel="stylesheet" type="text/css">
+	
+	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="wrapper">
+            <div class="cssload-loader"></div>
+        </div>
+    </div>
+
+    <!-- ***** Top Search Area Start ***** -->
+    
+    <!-- ***** Top Search Area End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+        <!-- Main Header Start -->
+        <div class="main-header-area">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="uzaNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="/"><img src="/img/core-img/logo+.png" alt=""></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- Menu Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li><a href="/">Home</a></li>
+                                
+                                <li><a href="/boss/<%= username %>#todo">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+
+                                <li class="current-item"><a href="/boss/<%= username%>/profile">My Profile</a></li>
+
+                                <li><a href="/logout">Log Out</a></li>
+                            </ul>
+
+                        <!-- Nav End -->
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Breadcrumb Area Start ***** -->
+    <div class="breadcrumb-area">
+        <div class="container h-100">
+            <div class="row h-100 align-items-end">
+                <div class="col-12">
+                    <div class="breadcumb--con">
+                        <h3 class="title"><%= name %></h3>
+                        <!-- <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                            </ol>
+                        </nav> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Curve -->
+        <div class="breadcrumb-bg-curve">
+            <img src="/img/core-img/curve-5.png" alt="">
+        </div>
+    </div>
+    <!-- ***** Breadcrumb Area End ***** -->
+
+    <!-- ***** Blog Area Start ***** -->
+    <div class="uza-blog-area section-padding-80">
+		<div class="container bootstrap snippet">
+    <div class="row">
+  		  <div class="col-sm-10"></div>
+    	  <div class="col-sm-2"><a href="/users" class="pull-right"></a></div>
+    </div>
+    <div class="row Form">
+  		  <div class="col-sm-3"><!--left col-->
+            <div class="text-center">
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+
+            </div></hr><br>
+
+            <div class="panel panel-default">
+				        <div class="panel-body"><center>
+					           <!-- <a href="./employees/<%= username%>/profile/edit" class="btn uza-btn btn-2" data-animation="fadeInUp" data-delay="700ms">Edit Profile</a> -->
+                               <button class="btn uza-btn btn-2 edit" id="edit_button">Edit Profile</button>
+					           <br><br>
+                               <a href="/boss/<%= username%>/profile/changePassword" class="btn uza-btn btn-2" data-animation="fadeInUp" data-delay="700ms">Change Password</a>
+                               <br>
+			               </center>
+                </div>
+            </div>
+          
+        </div><!--/col-3-->
+    	  <div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <form method="POST" action="/boss/<%= username %>/profile/update">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="username"><h4>Name</h4></label>
+                            <input name="name" type="text" class="form-control" value="<%= name %>" readonly="readonly" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="username"><h4>Username</h4></label>
+                              <input name="username" type="text" class="form-control" value="<%= username %>" readonly="readonly" />
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="designation"><h4>Designation</h4></label>
+                              <input name="designation" type="text" class="form-control" value="<%= designation %>" readonly="readonly" />
+                          </div>
+                      </div>
+                      
+          
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="phone"><h4>Office No.</h4></label>
+                              <input name="phone" type="text" class="form-control" value="<%= phone %>" readonly="readonly" />
+                          </div>
+                      </div>
+          
+                      <div class="form-group">
+                          <div class="col-xs-6">
+                             <label for="mobile"><h4>Mobile No.</h4></label>
+                              <input name="mobile" type="text" class="form-control" value="<%= mobile %>" readonly="readonly" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="email"><h4>Email</h4></label>
+                              <input name="email" type="text" class="form-control" value="<%= email %>" readonly="readonly" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-xs-6">
+                           <label for="mobile"><h4>Gender</h4></label>
+                            <input name="gender" type="text" class="form-control" value="<%= gender %>" readonly="readonly" />
+                        </div>
+                    </div>
+                      <div class="form-group">
+                          
+                          <div class="col-xs-6">
+                              <label for="location"><h4>Address</h4></label>
+                              <input name="address" type="text" class="form-control" value="<%= address %>" readonly="readonly" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Nationality</h4></label>
+                            <input name="nationality" type="text" class="form-control" value="<%= nationality %>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Date of Birth</h4></label>
+                            <input name="dob" type="text" class="form-control" value="<%= dob %>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Adhaar No.</h4></label>
+                            <input name="adhaar" type="text" class="form-control" value="<%= adhaar %>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Account No.</h4></label>
+                            <input name="account" type="text" class="form-control" value="<%= account %>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Joining Date</h4></label>
+                            <input name="joining" type="text" class="form-control" value="<%= joining %>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Marital Status</h4></label>
+                            <input name="marital" type="text" class="form-control" value="<%= marital %>" readonly="readonly" />
+                        </div>
+                    </div>
+                    <center><div class="fff"></div></center>
+                </form>
+                <hr>
+            </div><!--/tab-pane-->
+        </div><!--/tab-pane-->
+    </div><!--/tab-content-->
+
+</div><!--/col-9-->
+</div><!--/row-->
+                                                      
+</div>
+    <!-- ***** Blog Area End ***** -->
+
+   
+
+    <!-- ***** Footer Area Start ***** -->
+    <footer class="footer-area section-padding-80-0">
+        <div class="container">
+            <div class="row justify-content-between">
+
+                <!-- Single Footer Widget -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="single-footer-widget mb-80">
+                        <!-- Widget Title -->
+                        <h4 class="widget-title">Quick Links</h4>
+
+                        <!-- Nav -->
+                        <nav>
+                            <ul class="our-link">
+                                <li><a href="/">Home</a></li>
+                                
+                                <li><a href="/boss/<%= username %>#todo">To-Do</a></li>
+
+                                <li><a href="#">My Attendance</a></li>
+                                
+                                <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+
+                                <li class="current-item"><a href="/boss/<%= username%>/profile">My Profile</a></li>
+                            </ul>
+                        </nav>
+                </div>
+
+                
+            </div>
+
+        </div>
+    </footer>
+    <!-- ***** Footer Area End ***** -->
+
+    <!-- ******* All JS Files ******* -->
+    <!-- jQuery js -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <!-- <script src="js/bootstrap.min.js"></script> -->
+    <script src="/js/bootstrap-4.3.1.js"></script>
+
+    <!-- All js -->
+    <script src="/js/uza.bundle.js"></script>
+    <!-- Active js -->
+    <script src="/js/default-assets/active.js"></script>
+    <script>
+        $(function () {
+            $(".edit").click(function (){
+                $('input:text').removeAttr("readonly");
+                $(".fff").append(
+                    $("<button>")
+                    .attr('class', 'btn uza-btn btn-2').text("Submit")
+                );
+                $("#edit_button").attr("disabled", true); 
+            });
+        })
+
+
+
+       
+    </script>
+</body>
+
+</html>
