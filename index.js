@@ -114,6 +114,13 @@ app.post("/changePassword", function(req,res){
 	}
 });
 
+app.post("/chatAppend", function(req, res){
+	mongo.connect(url, function(err, db){
+		var dbo = db.db("MainDB");
+		dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});
+	});
+});
+
 app.post("/changePasswordBoss", function(req,res){
 	if(req.body.newpassword != req.body.retypepassword){
 		res.redirect("/boss/" + req.user.username + "/profile/changePassword");
@@ -159,10 +166,16 @@ app.use(function(req,res,next) {
 				for(var i=result.length - 1; i>=0; i--){
 					Announcements.push({date: result[i].date,announcement: result[i].announcement})
 				}
-				if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined")
-				res.render("employee", {username: req.session.passport.user.username, announcements: Announcements});
-				else if(req.params.type == "boss" && req.session.passport.user.boss == true)
-				res.render("boss", {username: req.session.passport.user.username, announcements: Announcements});
+				dbo.collection("Messages").find().toArray(function(err, result){
+					var Messages = [];
+					for(var i=0; i<result.length; i++){
+						Messages.push(result[i]);
+					}
+					if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined")
+					res.render("employee", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages});
+					else if(req.params.type == "boss" && req.session.passport.user.boss == true)
+					res.render("boss", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages});
+				});
 			});
 		});
 	}

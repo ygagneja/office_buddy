@@ -23,6 +23,7 @@
     <link href="/css/style-todo.css" rel="stylesheet">
     <!-- Announcements -->
     <script type="text/javascript" src="/js/sortit.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -367,87 +368,57 @@
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <ul class="chat">
-                                                        <li class="left clearfix"><span class="chat-img pull-left">
-                                                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
-                                                                    class="img-circle" />
-                                                            </span>
-                                                            <div class="chat-body clearfix">
-                                                                <div class="header">
-                                                                    <strong class="primary-font">Jack Sparrow</strong> <small
-                                                                        class="pull-right text-muted">
-                                                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
-                                                                </div>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                                                    ornare
-                                                                    dolor, quis ullamcorper ligula sodales.
-                                                                </p>
-                                                            </div>
-                                                        </li>
+                                                    <form method="POST" action="/chatAppend">
+                                                    <ul class="chat" id="chatList">
+                                                        <% messages.forEach(function(message){ %>
+                                                        <% if(message.name == name){ %>
                                                         <li class="right clearfix"><span class="chat-img pull-right">
                                                                 <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
                                                                     class="img-circle" />
                                                             </span>
                                                             <div class="chat-body clearfix">
                                                                 <div class="header">
-                                                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins
-                                                                        ago</small>
-                                                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                                    <strong class="pull-right primary-font"><%= message.name %></strong>
                                                                 </div>
                                                                 <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                                                    ornare
-                                                                    dolor, quis ullamcorper ligula sodales.
+                                                                    <%= message.message %>
                                                                 </p>
                                                             </div>
                                                         </li>
+                                                        <% } else { %>
                                                         <li class="left clearfix"><span class="chat-img pull-left">
                                                                 <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
                                                                     class="img-circle" />
                                                             </span>
                                                             <div class="chat-body clearfix">
                                                                 <div class="header">
-                                                                    <strong class="primary-font">Jack Sparrow</strong> <small
+                                                                    <strong class="primary-font"><%= message.name %></strong> <small
                                                                         class="pull-right text-muted">
-                                                                        <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                                                        <span class="glyphicon glyphicon-time"></span><%= message.date %></small>
                                                                 </div>
                                                                 <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                                                    ornare
-                                                                    dolor, quis ullamcorper ligula sodales.
+                                                                    <%= message.message %>
                                                                 </p>
                                                             </div>
                                                         </li>
-                                                        <li class="right clearfix"><span class="chat-img pull-right">
-                                                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
-                                                                    class="img-circle" />
-                                                            </span>
-                                                            <div class="chat-body clearfix">
-                                                                <div class="header">
-                                                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins
-                                                                        ago</small>
-                                                                    <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                                                </div>
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum
-                                                                    ornare
-                                                                    dolor, quis ullamcorper ligula sodales.
-                                                                </p>
-                                                            </div>
-                                                        </li>
+                                                        <% } %>
+                                                        <% }) %>
                                                     </ul>
+
+                                                                                                         
+                                                    
                                                 </div>
                                                 <div class="panel-footer">
                                                     <div class="input-group">
-                                                        <input id="btn-input" type="text" class="form-control input-sm"
+                                                        <input name="message" id="btn-input" type="text" class="form-control input-sm"
                                                             placeholder="Type your message here..." />
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-warning btn-sm" id="btn-chat">
-                                                                Send</button>
+                                                            <button onclick="appendChat()" class="btn btn-warning btn-sm" id="btn-chat">Send</button>
                                                         </span>
                                                     </div>
                                                 </div>
+                                            </form>
                                             </div>
                                         </div>
                                     <div class="col-lg-10 pl-0">
@@ -690,6 +661,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/js/announcements-events.js"></script>
 
+    <script type="text/javascript">
+        function appendChat(){
+            $("#chatList")
+            .append(
+                $("<li>").attr('class','right clearfix')
+                .append(
+                    $("<span>").attr('class','chat-img pull-right')
+                    .append(
+                        $("<img>").attr('src','http://placehold.it/50/FA6F57/fff&text=ME').attr('alt','User Avatar').attr('class','img-circle')
+                    )
+                )
+                .append(
+                    $("<div>").attr('class', 'chat-body clearfix')
+                    .append(
+                        $("<div>").attr("class","header")
+                        .append(
+                            $("<small>").attr('class','text-muted')
+                            .append(
+                                $("<span>").attr('class','glyphicon glyphicon-time')
+                            )
+                            .text(new Date())
+                        )
+                        .append(
+                            $("<strong>").attr("class","pull-right primary-font").text("<%= name %>")
+                        )
+                        .append(
+                            $("<p>").text(document.getElementById('btn-input').value)
+                        )
+                    )
+                )
+            )
+        }
+    </script>
 </body>
 
 </html>
