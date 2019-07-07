@@ -138,7 +138,6 @@ app.post("/changePasswordBoss", function(req,res){
 });
 
 app.post("/chatAppend", function(req, res){
-	console.log(req.body)
 	mongo.connect(url, function(err, db){
 		var dbo = db.db("MainDB");
 		dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});

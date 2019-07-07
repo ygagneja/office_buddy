@@ -27,7 +27,7 @@
     <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/announcements-events.css" rel="stylesheet">\
+    <link href="/css/announcements-events.css" rel="stylesheet">
 
     <link href="/css/popup.css" rel="stylesheet">
     <script type="text/javascript" src="/js/popup.js"></script>
@@ -332,8 +332,8 @@
                                                     </h2>
                                         </div>
                                         
-                                    <div class="col-lg-5 pr-0 scroll_text topmargin leftfix" style="left: -6%;">
-                                        <section aria-label="Announcements" class="announcements">
+                                    <div class="col-lg-5 pr-0 topmargin leftfix" style="left: -6%;">
+                                        <section aria-label="Announcements" class="announcements scroll_text">
                                            
                                             <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                                 <div>
@@ -347,19 +347,21 @@
                                                             <img src="/img/core-img/del.png" style="display: inline-block" alt="edit"  class="edit-btn">
                                                         </li>
                                                         <% }) %>
-                                                        <li><img src="/img/core-img/add.png" style="display: inline-block" alt="edit" data-js="open" class="edit-btn"></li>
-                                                    </ul>
+                                                        </ul>
+                                                    
                                                 </div>
-                                        </section>
-                                        
+                                        </section><br><br>
+                                        <div style="margin:auto"><button name="close" class="uza-btn btn-2" data-js="open">Add Announcement</button>
+                                        </div>
                                     </div>
-
                                     <!--Popup starts here -->
                                     <div class="popup">
-                                        <h2></h2>
-                                        
-                                        <button name="close" class="uza-btn btn-2 ">Close</button>
-                                      </div>
+                                        <h2>Add a new announcement</h2>
+                                        <form>
+                                        <input type="text" name="newAnnouncement" placeholder="Type here..."><br><br>
+                                        <input type="button" class="uza-btn btn-2" value="Add Announcement">
+                                        </form>
+                                    </div>
                                       
 
                                     <!--Popup ends here -->
@@ -446,139 +448,7 @@
                                             </form>
                                             </div>
                                         </div>
-                                    <div class="col-lg-10 pl-0">
-                                            <section class="events-section pl-lg-3 topmargin " aria-label="Events">
-                            
-                                                <div class="events p-lg-5">
-                                                    <div class="events-block">
-                                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
-                                                            <li class="border-bottom d-flex align-items-center">
-                                                                <div class="events-date text-uppercase text-center">
-                                                                    <a class="text-white" href="#">May
-                                                                        <span>10</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block pl-3 event-li">
-                                                                    <h3 class="font-weight-bold mt-0">
-                                                                        <a href="#">
-                                                                            CMS City Exhibition
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>
-                                                                        10:30 PM
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="border-bottom d-flex align-items-center">
-                                                                <div class="events-date text-uppercase text-center">
-                                                                    <a class="text-white" href="#">May
-                                                                        <span>31</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block pl-3 event-li">
-                                                                    <h3 class="font-weight-bold mt-0">
-                                                                        <a href="#">
-                                                                            Content Management Expo
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>
-                                                                        6:30 PM
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="border-bottom d-flex align-items-center">
-                                                                <div class="events-date text-uppercase text-center">
-                                                                    <a class="text-white" href="#">June
-                                                                        <span>07</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block pl-3 event-li">
-                                                                    <h3 class="font-weight-bold mt-0">
-                                                                        <a href="#">
-                                                                            Techolocon
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>
-                                                                        8:30 AM
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="all pos-stat text-uppercase ml-lg-5" href="/calendar/">All events
-                                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                                        </a>
-                                                        <div class="left-right-arrows second">
-                                                            <button class="prev-arrow-events" type="button"><i class="fa fa-chevron-left"></i></button>
-                                                            <button class="next-arrow-events" type="button"><i class="fa fa-chevron-right"></i></button>
-                                                        </div>
-                            
-                                                    </div>
-                                                    <div class="events-block">
-                                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
-                            
-                                                            <li class="border-bottom d-flex align-items-center">
-                                                                <div class="events-date text-uppercase text-center">
-                                                                    <a class="text-white" href="#">June
-                                                                        <span>15</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block pl-3 event-li">
-                                                                    <h3 class="font-weight-bold mt-0">
-                                                                        <a href="#">
-                                                                            Cloud City Expo
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>
-                                                                        12PM
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="border-bottom d-flex align-items-center">
-                                                                <div class="events-date text-uppercase text-center">
-                                                                    <a class="text-white" href="#">June
-                                                                        <span>23</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block pl-3 event-li">
-                                                                    <h3 class="font-weight-bold mt-0">
-                                                                        <a href="#">
-                                                                            Solodev at the Education Conference
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>
-                                                                        10:30
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                            <li class="border-bottom d-flex align-items-center">
-                                                                <div class="events-date text-uppercase text-center">
-                                                                    <a class="text-white" href="#">July
-                                                                        <span>25</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="d-inline-block pl-3 event-li">
-                                                                    <h3 class="font-weight-bold mt-0">
-                                                                        <a href="#">
-                                                                            AWS Challenge Conference
-                                                                        </a>
-                                                                    </h3>
-                                                                    <p>
-                                                                        9:15AM
-                                                                    </p>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                        <a class="all text-uppercase ml-lg-5" href="/calendar/">All events
-                                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                                        </a>
-                                                        <div class="left-right-arrows second">
-                                                            <button class="prev-arrow-events" type="button"><i class="fa fa-chevron-left"></i></button>
-                                                            <button class="next-arrow-events" type="button"><i class="fa fa-chevron-right"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
+                                    
                                 </div>
                                 <div class="row topmargin">
                                     <div class="col-md-6" id="todo">
