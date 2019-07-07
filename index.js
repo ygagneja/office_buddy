@@ -114,13 +114,6 @@ app.post("/changePassword", function(req,res){
 	}
 });
 
-app.post("/chatAppend", function(req, res){
-	mongo.connect(url, function(err, db){
-		var dbo = db.db("MainDB");
-		dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});
-	});
-});
-
 app.post("/changePasswordBoss", function(req,res){
 	if(req.body.newpassword != req.body.retypepassword){
 		res.redirect("/boss/" + req.user.username + "/profile/changePassword");
@@ -143,6 +136,41 @@ app.post("/changePasswordBoss", function(req,res){
 		});
 	}
 });
+
+app.post("/chatAppend", function(req, res){
+	console.log(req.body)
+	mongo.connect(url, function(err, db){
+		var dbo = db.db("MainDB");
+		dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});
+	});
+});
+
+// app.post("/todoPostBoss", function(req, res){
+// 	mongo.connect(url, function(err, db){
+// 		var dbo = db.db("MainDB");
+// 		dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
+// 			if(err) throw err;
+// 			var myQuery = {name: req.session.passport.user.name};
+// 			dbo.collection("Boss").remove(myQuery);
+// 			doc.todo.push(req.body.todo);
+// 			dbo.collection("Boss").insertOne(doc);
+// 		});
+// 	});
+// });
+
+// app.post("/todoDonePostBoss", function(req, res){
+// 	mongo.connect(url, function(err, db){
+// 		var dbo = db.db("MainDB");
+// 		dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
+// 			if(err) throw err;
+// 			var myQuery = {name: req.session.passport.user.name};
+// 			dbo.collection("Boss").remove(myQuery);
+
+// 			doc.todoDone.push(req.body.todoDone);
+// 			dbo.collection("Boss").insertOne(doc);
+// 		});
+// 	});
+// });
 
 app.use(function(req,res,next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -171,10 +199,22 @@ app.use(function(req,res,next) {
 					for(var i=0; i<result.length; i++){
 						Messages.push(result[i]);
 					}
-					if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined")
-					res.render("employee", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages});
-					else if(req.params.type == "boss" && req.session.passport.user.boss == true)
-					res.render("boss", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages});
+					if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined"){
+						dbo.collection("Employees").findOne({username: req.session.passport.user.username}, function(err, doc){
+							if(err) throw err;
+							if(doc){
+								res.render("employee", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages, todoList: doc.todo, todoDoneList: doc.todoDone});
+							}
+						});
+					}
+					else if(req.params.type == "boss" && req.session.passport.user.boss == true){
+						dbo.collection("Boss").findOne({username: req.session.passport.user.username}, function(err, doc){
+							if(err) throw err;
+							if(doc){
+								res.render("boss", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages, todoList: doc.todo, todoDoneList: doc.todoDone});
+							}
+						});
+					}
 				});
 			});
 		});

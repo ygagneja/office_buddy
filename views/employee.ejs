@@ -368,7 +368,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <form method="POST" action="/chatAppend">
+                                                    
                                                     <ul class="chat" id="chatList">
                                                         <% messages.forEach(function(message){ %>
                                                         <% if(message.name == name){ %>
@@ -395,7 +395,7 @@
                                                                 <div class="header">
                                                                     <strong class="primary-font"><%= message.name %></strong> <small
                                                                         class="pull-right text-muted">
-                                                                        <span class="glyphicon glyphicon-time"></span><%= message.date %></small>
+                                                                        <span class="glyphicon glyphicon-time"></span><%= message.time %></small>
                                                                 </div>
                                                                 <p>
                                                                     <%= message.message %>
@@ -406,15 +406,15 @@
                                                         <% }) %>
                                                     </ul>
 
-                                                                                                         
-                                                    
+                                                       
                                                 </div>
+                                            <form id="form1">
                                                 <div class="panel-footer">
                                                     <div class="input-group">
                                                         <input name="message" id="btn-input" type="text" class="form-control input-sm"
                                                             placeholder="Type your message here..." />
                                                         <span class="input-group-btn">
-                                                            <button onclick="appendChat()" class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                                                            <input type="button" class="btn btn-warning btn-sm" id="btn-chat" value="Send">
                                                         </span>
                                                     </div>
                                                 </div>
@@ -564,12 +564,15 @@
                                                 
                                                 <hr>
                                                 <ul id="sortable" class="list-unstyled" style="font-size:20px">
+                                                <% todoList.forEach(function(todo){ %>
                                                 <li class="ui-state-default">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" value="" />Take out the trash</label>
+                                                            <input type="checkbox" value="" /><%= todo %>
+                                                        </label>
                                                     </div>
                                                 </li>
+                                                <% }) %>
                                             </ul>
                                             <div class="todo-footer" style="font-size:20px">
                                                 <strong><span class="count-todos"></span></strong> Items Left
@@ -580,8 +583,9 @@
                                         <div class="todolist">
                                          <h1>Already Done</h1>
                                             <ul id="done-items" class="list-unstyled" style="font-size:20px">
-                                                <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
-                                                
+                                                <% todoDoneList.forEach(function(todoDone){ %>
+                                                <li><%= todoDone %> <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
+                                                <% }) %>
                                             </ul>
                                         </div>
                                     </div>
@@ -661,38 +665,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/js/announcements-events.js"></script>
 
-    <script type="text/javascript">
-        function appendChat(){
-            $("#chatList")
-            .append(
-                $("<li>").attr('class','right clearfix')
-                .append(
-                    $("<span>").attr('class','chat-img pull-right')
+    <script type="text/javascript">          
+        $(document).ready(function(){
+            $('input[id="btn-chat"]').on('click',function(e){
+                if(document.getElementById('btn-input').value != ""){
+                    $("#chatList")
                     .append(
-                        $("<img>").attr('src','http://placehold.it/50/FA6F57/fff&text=ME').attr('alt','User Avatar').attr('class','img-circle')
-                    )
-                )
-                .append(
-                    $("<div>").attr('class', 'chat-body clearfix')
-                    .append(
-                        $("<div>").attr("class","header")
+                        $("<li>").attr('class','right clearfix')
                         .append(
-                            $("<small>").attr('class','text-muted')
+                            $("<span>").attr('class','chat-img pull-right')
                             .append(
-                                $("<span>").attr('class','glyphicon glyphicon-time')
+                                $("<img>").attr('src','http://placehold.it/50/FA6F57/fff&text=ME').attr('alt','User Avatar').attr('class','img-circle')
                             )
-                            .text(new Date())
                         )
                         .append(
-                            $("<strong>").attr("class","pull-right primary-font").text("<%= name %>")
-                        )
-                        .append(
-                            $("<p>").text(document.getElementById('btn-input').value)
+                            $("<div>").attr('class', 'chat-body clearfix')
+                            .append(
+                                $("<div>").attr("class","header")
+                                .append(
+                                    $("<small>").attr('class','text-muted')
+                                    .append(
+                                        $("<span>").attr('class','glyphicon glyphicon-time')
+                                    )
+                                    .text(new Date())
+                                )
+                                .append(
+                                    $("<strong>").attr("class","pull-right primary-font").text("<%= name %>")
+                                )
+                                .append(
+                                    $("<p>").text(document.getElementById('btn-input').value)
+                                )
+                            )
                         )
                     )
-                )
-            )
-        }
+                    e.preventDefault();
+
+                    var frm = $(this).closest("form");
+                    var frm_id = frm.attr("id");
+                    var frm_id_splitted = frm_id.split("_");
+                    var frm_id_splitted_2 = frm_id_splitted[2];
+
+                    var frm_serialized = frm.serialize();
+                    $.ajax({
+                            url: "/chatAppend",
+                            method: "POST",
+                            data: frm_serialized,
+                            success: function(data) {
+                                console.log(data);
+                                $('div#id_div_' + frm_id_splitted_2).append(data);
+                            }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 
