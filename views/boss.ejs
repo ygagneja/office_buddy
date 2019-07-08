@@ -19,7 +19,7 @@
     <!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    
+
     <link href="/css/style-todo.css" rel="stylesheet">
     <!-- Announcements -->
     <script type="text/javascript" src="/js/sortit.js"></script>
@@ -93,164 +93,203 @@
 
     <!--humne khud banaya-->
     <style>
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 16px;
+            resize: none;
+        }
+
         .edit-btn {
-            height:10%;
+            height: 10%;
             width: 10%;
             border-radius: 5px;
         }
-        .edit-btn:hover{
-            background:#e7f2fd
+
+        .edit-btn:hover {
+            background: #e7f2fd
         }
-        a:hover{ 
+
+        a:hover {
             text-decoration: none;
         }
-        @media (min-width: 1200px){
+
+        @media (min-width: 1200px) {
             .row-added {
                 margin-right: -15px;
                 margin-left: -200px;
             }
-            .column-added{
-                text-orientation:upright; 
+
+            .column-added {
+                text-orientation: upright;
                 writing-mode: vertical-rl;
-                
+
             }
-            .topmargin{
+
+            .topmargin {
                 margin-top: 15%;
             }
-            
+
         }
-        @media (min-width: 992px) and (max-width: 1199px){
+
+        @media (min-width: 992px) and (max-width: 1199px) {
             .row-added {
                 margin-right: -15px;
                 margin-left: -15px;
             }
-            .column-added{
-                text-orientation:upright; 
+
+            .column-added {
+                text-orientation: upright;
                 writing-mode: vertical-rl;
-               
+
             }
-            .topmargin{
+
+            .topmargin {
                 margin-top: 15%;
             }
-            
+
         }
-        @media (min-width: 768px) and (max-width: 991px){
+
+        @media (min-width: 768px) and (max-width: 991px) {
             .row-added {
                 margin-right: -15px;
                 margin-left: -15px;
             }
+
             h2 {
                 margin-left: 200px;
                 margin-bottom: -75px;
             }
-            .topmargin{
+
+            .topmargin {
                 margin-top: 15%;
             }
-            .chat-flex{
+
+            .chat-flex {
                 flex: 0 0 100%;
                 max-width: 95%;
                 margin: auto;
             }
-            leftfix{
+
+            leftfix {
                 left: -5%;
             }
         }
 
 
-    @media (min-width: 576px) and (max-width: 767px){
+        @media (min-width: 576px) and (max-width: 767px) {
             .row-added {
                 margin-right: -15px;
                 margin-left: -15px;
             }
-            .topmargin{
-                margin-top:15%;
+
+            .topmargin {
+                margin-top: 15%;
             }
+
             h2 {
                 margin-left: 120px;
                 margin-bottom: -75px;
             }
-            leftfix{
+
+            leftfix {
                 left: -6%;
             }
-            
+
         }
 
-    @media (min-width: 405px) and (max-width: 575px){
-            .topmargin{
-                margin-top:15%;
+        @media (min-width: 405px) and (max-width: 575px) {
+            .topmargin {
+                margin-top: 15%;
             }
+
             h2 {
-            margin-left: 80px;
-            margin-bottom: -75px;
+                margin-left: 80px;
+                margin-bottom: -75px;
             }
-            leftfix{
+
+            leftfix {
                 left: -4%;
             }
-            
+
         }
 
-    @media (min-width: 380px) and (max-width: 404px){
-            .topmargin{
-                margin-top:15%;
-            }
-            h2 {
-            margin-left: 40px;
-            margin-bottom: -75px;
-            }
-           
-        }
-
-    @media (min-width: 350px) and (max-width: 379px){
-            .topmargin{
+        @media (min-width: 380px) and (max-width: 404px) {
+            .topmargin {
                 margin-top: 15%;
             }
+
             h2 {
-            margin-left: 10px;
-            margin-bottom: -75px;
+                margin-left: 40px;
+                margin-bottom: -75px;
             }
-            
+
         }
-    @media (min-width: 320px) and (max-width: 349px){
-            .topmargin{
+
+        @media (min-width: 350px) and (max-width: 379px) {
+            .topmargin {
                 margin-top: 15%;
             }
+
             h2 {
-            
-            margin-bottom: -75px;
+                margin-left: 10px;
+                margin-bottom: -75px;
+            }
+
+        }
+
+        @media (min-width: 320px) and (max-width: 349px) {
+            .topmargin {
+                margin-top: 15%;
+            }
+
+            h2 {
+
+                margin-bottom: -75px;
             }
         }
 
-        .container_todo{
-            width:90%;
+        .container_todo {
+            width: 90%;
             margin: auto;
         }
-        
-    
-    .scroll_text{
-        height:500px;
-        overflow:auto;
-        padding:0px 15px;
-        
-    }
-    .scroll_text::-webkit-scrollbar {  
-        width: 8px;  
-    }  
-    .scroll_text::-webkit-scrollbar-track {  
-        background-color: #E7E7E7;
-    }  
-    .scroll_text::-webkit-scrollbar-thumb {  
-        background-color: dodgerblue;
-        border: 1px solid rgba(92, 92, 92, 0.5);
-        border-radius: 10px;
-    }  
-    .scroll_text::-webkit-scrollbar-thumb:hover {  
-        background-color: #000;  
-    }
-    .pt-lg-5{
-        padding-top: 0!important;
-    }
+
+
+        .scroll_text {
+            height: 500px;
+            overflow: auto;
+            padding: 0px 15px;
+
+        }
+
+        .scroll_text::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scroll_text::-webkit-scrollbar-track {
+            background-color: #E7E7E7;
+        }
+
+        .scroll_text::-webkit-scrollbar-thumb {
+            background-color: dodgerblue;
+            border: 1px solid rgba(92, 92, 92, 0.5);
+            border-radius: 10px;
+        }
+
+        .scroll_text::-webkit-scrollbar-thumb:hover {
+            background-color: #000;
+        }
+
+        .pt-lg-5 {
+            padding-top: 0 !important;
+        }
     </style>
-    
+
 </head>
 
 <body style="font-family:Aileron">
@@ -261,7 +300,7 @@
         </div>
     </div>
 
-    
+
 
     <!-- ***** Header Area Start ***** -->
     <header class="header-area">
@@ -290,18 +329,18 @@
                         <div class="classynav">
                             <ul id="nav">
                                 <li class="current-item"><a href="/">Home</a></li>
-                                
+
                                 <li><a href="#todo">To-Do</a></li>
 
                                 <li><a href="#">My Attendance</a></li>
-                                
+
                                 <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
 
                                 <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
                                 <li><a href="/logout">Log Out</a></li>
                             </ul>
 
-               
+
 
                         </div>
                         <!-- Nav End -->
@@ -317,228 +356,218 @@
 
     <!-- ***** Welcome Area Start ***** -->
     <section class="welcome-area">
-        
 
-            
 
-            <!-- Single Welcome Slide -->
-            <div class="single-welcome-slide">
-                <section class="two-column-list mb-sm-5 pr-lg-3 container-fluid" id="two-column-list">
-                            <div class="container_todo">
-                                <div class="row " >
-                                        <div class="col-lg-1 pr-0 topmargin">   
-                                                <h2 class="column-added">
-                                                        ANNOUNCEMENTS
-                                                    </h2>
-                                        </div>
-                                        
-                                    <div class="col-lg-5 pr-0 topmargin leftfix" style="left: -6%;">
-                                        <section aria-label="Announcements" class="announcements scroll_text">
-                                           
-                                            <div class="announcement-slider border-r-xs-0 border-r position-relative ">
-                                                <div>
-                                                    <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
-                                                        <% announcements.forEach(function(announcement){ %>
-                                                        <li class="border-bottom pb-3 mt-3">
-                                                            <span class="meta text-uppercase"><h5 ><b><%= announcement.date %></b></h5></span>
-                                                            <h4 class="font-weight-bold mt-0 ">
-                                                                    <%= announcement.announcement %>
-                                                            </h4>
-                                                            <img src="/img/core-img/del.png" style="display: inline-block" alt="edit"  class="edit-btn">
-                                                        </li>
-                                                        <% }) %>
-                                                        </ul>
-                                                    
-                                                </div>
-                                        </section><br><br>
-                                        <div style="margin:auto"><button name="close" class="uza-btn btn-2" data-js="open">Add Announcement</button>
-                                        </div>
+
+
+        <!-- Single Welcome Slide -->
+        <div class="single-welcome-slide">
+            <section class="two-column-list mb-sm-5 pr-lg-3 container-fluid" id="two-column-list">
+                <div class="container_todo">
+                    <div class="row ">
+                        <div class="col-lg-1 pr-0 topmargin">
+                            <h2 class="column-added">
+                                ANNOUNCEMENTS
+                            </h2>
+                        </div>
+
+                        <div class="col-lg-5 pr-0 topmargin leftfix" style="left: -6%;">
+                            <section aria-label="Announcements" class="announcements scroll_text">
+
+                                <div class="announcement-slider border-r-xs-0 border-r position-relative ">
+                                    <div>
+                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
+                                            <% announcements.forEach(function(announcement){ %>
+                                            <li class="border-bottom pb-3 mt-3">
+                                                <span class="meta text-uppercase">
+                                                    <h5><b><%= announcement.date %></b></h5>
+                                                </span>
+                                                <h4 class="font-weight-bold mt-0 ">
+                                                    <%= announcement.announcement %>
+                                                </h4>
+                                                <img src="/img/core-img/del.png" style="display: inline-block"
+                                                    alt="edit" class="edit-btn">
+                                            </li>
+                                            <% }) %>
+                                        </ul>
+
                                     </div>
-                                    <!--Popup starts here -->
-                                    <div class="popup">
-                                        <h2>Add a new announcement</h2>
-                                        <form>
-                                        <input type="text" name="newAnnouncement" placeholder="Type here..."><br><br>
-                                        <input type="button" class="uza-btn btn-2" value="Add Announcement">
-                                        </form>
-                                    </div>
-                                      
+                            </section><br><br>
+                            <div>
+                                <button name="add_announmt" class="uza-btn btn-2" data-js="open">Add
+                                    Announcement</button>
+                                <button name="refresh" class="uza-btn btn-2">Refresh</button>
+                            </div>
+                        </div>
+                        <!--Popup starts here -->
+                        <div class="popup">
+                            <h2>Add a new announcement</h2>
+                            <form>
+                                <textarea placeholder="Write here..." maxlength="" required></textarea><br><br>
+                                <input type="button" class="uza-btn btn-2" value="Add Announcement">
+                            </form>
+                        </div>
 
-                                    <!--Popup ends here -->
+
+                        <!--Popup ends here -->
 
 
-                                    <div class="col-md-1 topmargin" ></div>
+                        <div class="col-md-1 topmargin"></div>
 
-                                    <!-- Chat Start Here-->
-                                    <div class="col-md-4 topmargin chat-flex" >
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">
-                                                    <span class="glyphicon glyphicon-comment"></span> Chat
-                                                    <div class="btn-group pull-right">
-                                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="glyphicon glyphicon-chevron-down"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu slidedown">
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh">
-                                                                    </span>Refresh</a></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-ok-sign">
-                                                                    </span>Available</a></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-remove">
-                                                                    </span>Busy</a></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span
-                                                                        class="glyphicon glyphicon-time"></span>
-                                                                    Away</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
-                                                                    Sign Out</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <ul class="chat" id="chatList">
-                                                        <% messages.forEach(function(message){ %>
-                                                        <% if(message.name == name){ %>
-                                                        <li class="right clearfix"><span class="chat-img pull-right">
-                                                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
-                                                                    class="img-circle" />
-                                                            </span>
-                                                            <div class="chat-body clearfix">
-                                                                <div class="header">
-                                                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><%= message.time %></small>
-                                                                    <strong class="pull-right primary-font"><%= message.name %></strong>
-                                                                </div>
-                                                                <p>
-                                                                    <%= message.message %>
-                                                                </p>
-                                                            </div>
-                                                        </li>
-                                                        <% } else { %>
-                                                        <li class="left clearfix"><span class="chat-img pull-left">
-                                                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
-                                                                    class="img-circle" />
-                                                            </span>
-                                                            <div class="chat-body clearfix">
-                                                                <div class="header">
-                                                                    <strong class="primary-font"><%= message.name %></strong> <small
-                                                                        class="pull-right text-muted">
-                                                                        <span class="glyphicon glyphicon-time"></span><%= message.time %></small>
-                                                                </div>
-                                                                <p>
-                                                                    <%= message.message %>
-                                                                </p>
-                                                            </div>
-                                                        </li>
-                                                        <% } %>
-                                                        <% }) %>
-                                                    </ul>
-
-                                                                                                         
-                                                    
-                                                </div>
-                                            <form id="form1">
-                                                <div class="panel-footer">
-                                                    <div class="input-group">
-                                                        <input name="message" id="btn-input" type="text" class="form-control input-sm"
-                                                            placeholder="Type your message here..." />
-                                                        <span class="input-group-btn">
-                                                            <input type="button" class="btn btn-warning btn-sm" id="btn-chat" value="Send">
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                            </div>
-                                        </div>
-                                    
-                                </div>
-                                <div class="row topmargin">
-                                    <div class="col-md-6" id="todo">
-                                        <div class="todolist not-done">
-                                         <h1>To-do</h1>
-                                            <input style="font-size:20px" type="text" class="form-control add-todo" placeholder="Add to-do">
-                                                <button id="checkAll" style="font-size:20px" class="btn btn-primary">Mark all as done</button>
+                        <!-- Chat Start Here-->
+                        <div class="col-md-4 topmargin chat-flex">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <span class="glyphicon glyphicon-comment"></span> Chat
+                                    <div class="btn-group pull-right">
+                                            <button type="button" class="btn btn-default btn-xs ">
+                                                    <a href="http://www.jquery2dotnet.com"><span
+                                                        class="glyphicon glyphicon-refresh">
+                                                    </span></a>
                                                 
-                                                <hr>
-                                                <ul id="sortable" class="list-unstyled" style="font-size:20px">
-                                                <% todoList.forEach(function(todo){ %>
-                                                <li class="ui-state-default">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="" /><%= todo %>
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                                <% }) %>
-                                            </ul>
-                                            <div class="todo-footer" style="font-size:20px">
-                                                <strong><span class="count-todos"></span></strong> Items Left
-                                            </div>
+                                            </button>
+                                            
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="todolist">
-                                         <h1>Already Done</h1>
-                                            <ul id="done-items" class="list-unstyled" style="font-size:20px">
-                                                <% todoDoneList.forEach(function(todoDone){ %>
-                                                <li><%= todoDone %> <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
-                                                <% }) %>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="row justify-content-between topmargin" style="display:flow-root">
+                                <div class="panel-body">
+                                    <ul class="chat" id="chatList">
+                                        <% messages.forEach(function(message){ %>
+                                        <% if(message.name == name){ %>
+                                        <li class="right clearfix"><span class="chat-img pull-right">
+                                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
+                                                    class="img-circle" />
+                                            </span>
+                                            <div class="chat-body clearfix">
+                                                <div class="header">
+                                                    <small class=" text-muted"><span
+                                                            class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                    <strong class="pull-right primary-font"><%= message.name %></strong>
+                                                </div>
+                                                <p>
+                                                    <%= message.message %>
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <% } else { %>
+                                        <li class="left clearfix"><span class="chat-img pull-left">
+                                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
+                                                    class="img-circle" />
+                                            </span>
+                                            <div class="chat-body clearfix">
+                                                <div class="header">
+                                                    <strong class="primary-font"><%= message.name %></strong> <small
+                                                        class="pull-right text-muted">
+                                                        <span
+                                                            class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                </div>
+                                                <p>
+                                                    <%= message.message %>
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <% } %>
+                                        <% }) %>
+                                    </ul>
 
-                                    <!-- Single Footer Widget -->
-                                    <div class="col-12 col-sm-6 col-lg-3">
-                                        <div class="single-footer-widget mb-80">
-                                            <!-- Widget Title -->
-                                            <h4 class="widget-title">Quick Links</h4>
-                    
-                                            <!-- Nav -->
-                                            <nav>
-                                                <ul class="our-link">
-                                                    <li class="current-item"><a href="/">Home</a></li>
-                                                    
-                                                    <li><a href="#todo">To-Do</a></li>
-                    
-                                                    <li><a href="#">My Attendance</a></li>
-                                                    
-                                                    <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
-                    
-                                                    <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
-                                                </ul>
-                                            </nav>
+
+
+                                </div>
+                                <form id="form1">
+                                    <div class="panel-footer">
+                                        <div class="input-group">
+                                            <input name="message" id="btn-input" type="text"
+                                                class="form-control input-sm" placeholder="Type your message here..." />
+                                            <span class="input-group-btn">
+                                                <input type="button" class="btn btn-warning btn-sm" id="btn-chat"
+                                                    value="Send">
+                                            </span>
+                                        </div>
                                     </div>
-                    
-                                    
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row topmargin">
+                        <div class="col-md-6" id="todo">
+                            <div class="todolist not-done">
+                                <h1>To-do</h1>
+                                <input style="font-size:20px" type="text" class="form-control add-todo"
+                                    placeholder="Add to-do">
+                                <button id="checkAll" style="font-size:20px" class="btn btn-primary">Mark all as
+                                    done</button>
+
+                                <hr>
+                                <ul id="sortable" class="list-unstyled" style="font-size:20px">
+                                    <% todoList.forEach(function(todo){ %>
+                                    <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /><%= todo %>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <% }) %>
+                                </ul>
+                                <div class="todo-footer" style="font-size:20px">
+                                    <strong><span class="count-todos"></span></strong> Items Left
                                 </div>
                             </div>
-                
-                            
-                
-                        </section>
-                <!-- Background Curve -->
-                <div class="background-curve">
-                    <img src="/img/core-img/curve-1.png" alt="">
-                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="todolist">
+                                <h1>Already Done</h1>
+                                <ul id="done-items" class="list-unstyled" style="font-size:20px">
+                                    <% todoDoneList.forEach(function(todoDone){ %>
+                                    <li><%= todoDone %> <button
+                                            class="remove-item btn btn-default btn-xs pull-right"><span
+                                                class="glyphicon glyphicon-remove"></span></button></li>
+                                    <% }) %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                    <div class="row justify-content-between topmargin" style="display:flow-root">
 
+                        <!-- Single Footer Widget -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget mb-80">
+                                <!-- Widget Title -->
+                                <h4 class="widget-title">Quick Links</h4>
+
+                                <!-- Nav -->
+                                <nav>
+                                    <ul class="our-link">
+                                        <li class="current-item"><a href="/">Home</a></li>
+
+                                        <li><a href="#todo">To-Do</a></li>
+
+                                        <li><a href="#">My Attendance</a></li>
+
+                                        <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+
+                                        <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+
+            </section>
+            <!-- Background Curve -->
+            <div class="background-curve">
+                <img src="/img/core-img/curve-1.png" alt="">
             </div>
+
+        </div>
 
     </section>
 
-      
 
-   
-            
-<section>
-    <!-- ***** Footer Area Start ***** -->
-    <footer class="footer-area section-padding-80-0">
-        <div class="container">
-           
-
-        </div>
-    </footer>
-    <!-- ***** Footer Area End ***** -->
-</section>
     <!-- ******* All JS Files ******* -->
     <!-- jQuery js -->
     <script src="/js/jquery.min.js"></script>
@@ -560,39 +589,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="/js/announcements-events.js"></script>
 
-    <script type="text/javascript">          
-        $(document).ready(function(){
-            $('input[id="btn-chat"]').on('click',function(e){
-                if(document.getElementById('btn-input').value != ""){
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[id="btn-chat"]').on('click', function (e) {
+                if (document.getElementById('btn-input').value != "") {
                     $("#chatList")
-                    .append(
-                        $("<li>").attr('class','right clearfix')
                         .append(
-                            $("<span>").attr('class','chat-img pull-right')
+                            $("<li>").attr('class', 'right clearfix')
                             .append(
-                                $("<img>").attr('src','http://placehold.it/50/FA6F57/fff&text=ME').attr('alt','User Avatar').attr('class','img-circle')
-                            )
-                        )
-                        .append(
-                            $("<div>").attr('class', 'chat-body clearfix')
-                            .append(
-                                $("<div>").attr("class","header")
+                                $("<span>").attr('class', 'chat-img pull-right')
                                 .append(
-                                    $("<small>").attr('class','text-muted')
+                                    $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
+                                    .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                )
+                            )
+                            .append(
+                                $("<div>").attr('class', 'chat-body clearfix')
+                                .append(
+                                    $("<div>").attr("class", "header")
                                     .append(
-                                        $("<span>").attr('class','glyphicon glyphicon-time')
+                                        $("<small>").attr('class', 'text-muted')
+                                        .append(
+                                            $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                        )
+                                        .text(new Date())
                                     )
-                                    .text(new Date())
-                                )
-                                .append(
-                                    $("<strong>").attr("class","pull-right primary-font").text("<%= name %>")
-                                )
-                                .append(
-                                    $("<p>").text(document.getElementById('btn-input').value)
+                                    .append(
+                                        $("<strong>").attr("class", "pull-right primary-font").text(
+                                            "<%= name %>")
+                                    )
+                                    .append(
+                                        $("<p>").text(document.getElementById('btn-input').value)
+                                    )
                                 )
                             )
                         )
-                    )
                     e.preventDefault();
 
                     var frm = $(this).closest("form");
@@ -602,13 +633,13 @@
 
                     var frm_serialized = frm.serialize();
                     $.ajax({
-                            url: "/chatAppend",
-                            method: "POST",
-                            data: frm_serialized,
-                            success: function(data) {
-                                console.log(data);
-                                $('div#id_div_' + frm_id_splitted_2).append(data);
-                            }
+                        url: "/chatAppend",
+                        method: "POST",
+                        data: frm_serialized,
+                        success: function (data) {
+                            console.log(data);
+                            $('div#id_div_' + frm_id_splitted_2).append(data);
+                        }
                     });
                 }
             });
