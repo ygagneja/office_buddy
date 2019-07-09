@@ -543,32 +543,30 @@
 
 
                             <div class="table100 ver1 m-b-110">
-                                <div class="table100-head" style="border-bottom-width: thick">
+                                <div class="table100-head">
                                     <table>
                                         <thead>
                                             <tr class="row100 head">
-                                                <th class="cell100 column2" style="font-size: 30px">ID</th>
-                                                <th class="cell100 column2" style="font-size: 30px">Status</th>
-                                                <th class="cell100 column2" style="font-size: 30px">Date</th>
-                                                <th class="cell100 column2" style="font-size: 30px">Customer</th>
-                                                <th class="cell100 column2" style="font-size: 30px">Subject</th>
+                                                <th class="cell100 column1">ID</th>
+                                                <th class="cell100 column2">Status</th>
+                                                <th class="cell100 column3">Date</th>
+                                                <th class="cell100 column4">Customer</th>
+                                                <th class="cell100 column5">Subject</th>
 
                                             </tr>
                                         </thead>
                                     </table>
                                 </div>
-
-                                <br><br>
                                 <div class="table100-body js-pscroll">
 
                                     <table>
                                         <tbody>
-                                            <tr>
-                                                <td><button data-js="openApp">1234</button></td>
-                                                <td>pending</td>
-                                                <td>12/12/12</td>
-                                                <td>xyz</td>
-                                                <td>xyz</td>
+                                            <tr class="row100 body">
+                                                <td class="cell100 column1"><button data-js="openApp">1234</button></td>
+                                                <td class="cell100 column2">pending</td>
+                                                <td class="cell100 column3">12/12/12</td>
+                                                <td class="cell100 column4">xyz</td>
+                                                <td class="cell100 column5">xyz</td>
                                             </tr>
 
                                         </tbody>
@@ -770,7 +768,7 @@
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                    console.log(this.responseText);
+                    
                     data = JSON.parse(this.responseText);
                     $("#remove").remove();
                     $("#announcements_list").append($("<div>").attr("id","remove"))
@@ -809,6 +807,8 @@
 
             xhr.send(data);
         }
+        
+        setInterval(refreshAnnouncements,20000);
     </script>
     <script type="text/javascript">
         function refreshMessages(){
@@ -819,7 +819,7 @@
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                    console.log(this.responseText);
+                    
                     data = JSON.parse(this.responseText);
                     $("#removeC").remove();
                     $("#chatList").append($("<div>").attr("id", "removeC"))
@@ -896,6 +896,7 @@
 
             xhr.send(data);
         }
+        setInterval(refreshMessages, 5000);
     </script>
         <!-- Status New apllication js  -->
     <script>
