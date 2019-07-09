@@ -18,6 +18,15 @@ app.use(passport.session());
 app.set("view engine","ejs");
 app.listen(3000);
 
+function deleteDone(Arr, str){
+	for(var i=0; i<Arr.length; i++){
+		if(Arr[i] == str){
+			Arr.splice(i);
+		}
+	}
+	return Arr;
+}
+
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
@@ -137,39 +146,281 @@ app.post("/changePasswordBoss", function(req,res){
 	}
 });
 
-app.post("/chatAppend", function(req, res){
-	mongo.connect(url, function(err, db){
-		var dbo = db.db("MainDB");
-		dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});
-	});
+app.post("/addAnnouncement", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.boss == true){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Announcements").insertOne({id: new Date().getUTCMilliseconds().toString(),date: new Date(), announcement: req.body.announcement});
+			res.redirect("/");
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
 });
 
-// app.post("/todoPostBoss", function(req, res){
-// 	mongo.connect(url, function(err, db){
-// 		var dbo = db.db("MainDB");
-// 		dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
-// 			if(err) throw err;
-// 			var myQuery = {name: req.session.passport.user.name};
-// 			dbo.collection("Boss").remove(myQuery);
-// 			doc.todo.push(req.body.todo);
-// 			dbo.collection("Boss").insertOne(doc);
-// 		});
-// 	});
-// });
+app.post("/deleteAnnouncement", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(req.session.passport.user.boss == true){	
+		mongo.connect(url,function(err,db){
+			var dbo = db.db("MainDB");
+			console.log(req.body.id);
+			dbo.collection("Announcements").remove({id: req.body.id});
+			res.redirect("/");
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
 
-// app.post("/todoDonePostBoss", function(req, res){
-// 	mongo.connect(url, function(err, db){
-// 		var dbo = db.db("MainDB");
-// 		dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
-// 			if(err) throw err;
-// 			var myQuery = {name: req.session.passport.user.name};
-// 			dbo.collection("Boss").remove(myQuery);
+app.post("/chatAppend", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
 
-// 			doc.todoDone.push(req.body.todoDone);
-// 			dbo.collection("Boss").insertOne(doc);
-// 		});
-// 	});
-// });
+app.get("/refreshAnnouncements", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Announcements").find().toArray(function(err, result){
+				res.json(result);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.get("/refreshMessages", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Messages").find().toArray(function(err, result){
+				res.json(result);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/todoPostBoss", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.boss == true){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
+				if(err) throw err;
+				var myQuery = {name: req.session.passport.user.name};
+				var Arr = doc.todo;
+				Arr.push(req.body.todo);
+				var newValues = {$set: {todo: Arr}};
+				dbo.collection("Boss").updateOne(myQuery, newValues);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/todoDonePostBoss", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.boss == true){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
+				if(err) throw err;
+				var myQuery = {name: req.session.passport.user.name};
+				var Arr = doc.todoDone;
+				Arr.push(req.body.todoDone);
+				var newValues = {$set: {todoDone: Arr}};
+				dbo.collection("Boss").updateOne(myQuery, newValues);
+				var Arr2 = doc.todo;
+				Arr2 = deleteDone(Arr2, req.body.todoDone);
+				var newValues2 = {$set: {todo: Arr2}};
+				dbo.collection("Boss").updateOne(myQuery, newValues2);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/todoDeletePostBoss", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.boss == true){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Boss").findOne({name: req.session.passport.user.name}, function(err, doc){
+				if(err) throw err;
+				var myQuery = {name: req.session.passport.user.name};
+				var Arr = doc.todoDone;
+				console.log(Arr)
+				Arr = deleteDone(Arr, req.body.todoDelete)
+				console.log(req.body.todoDelete)
+				console.log(Arr)
+				var newValues = {$set: {todoDone: Arr}};
+				dbo.collection("Boss").updateOne(myQuery, newValues);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/todoPost", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Employees").findOne({name: req.session.passport.user.name}, function(err, doc){
+				if(err) throw err;
+				var myQuery = {name: req.session.passport.user.name};
+				var Arr = doc.todo;
+				Arr.push(req.body.todo);
+				var newValues = {$set: {todo: Arr}};
+				dbo.collection("Employees").updateOne(myQuery, newValues);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/todoDonePost", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Employees").findOne({name: req.session.passport.user.name}, function(err, doc){
+				if(err) throw err;
+				var myQuery = {name: req.session.passport.user.name};
+				var Arr = doc.todoDone;
+				Arr.push(req.body.todoDone);
+				var newValues = {$set: {todoDone: Arr}};
+				dbo.collection("Employees").updateOne(myQuery, newValues);
+				var Arr2 = doc.todo;
+				Arr2 = deleteDone(Arr2, req.body.todoDone);
+				var newValues2 = {$set: {todo: Arr2}};
+				dbo.collection("Employees").updateOne(myQuery, newValues2);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/todoDeletePost", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Employees").findOne({name: req.session.passport.user.name}, function(err, doc){
+				if(err) throw err;
+				var myQuery = {name: req.session.passport.user.name};
+				var Arr = doc.todoDone;
+				console.log(Arr)
+				Arr = deleteDone(Arr, req.body.todoDelete)
+				console.log(req.body.todoDelete)
+				console.log(Arr)
+				var newValues = {$set: {todoDone: Arr}};
+				dbo.collection("Employees").updateOne(myQuery, newValues);
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
 
 app.use(function(req,res,next) {
   res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -191,7 +442,7 @@ app.use(function(req,res,next) {
 			dbo.collection("Announcements").find().toArray(function(err, result){
 				var Announcements = [];
 				for(var i=result.length - 1; i>=0; i--){
-					Announcements.push({date: result[i].date,announcement: result[i].announcement})
+					Announcements.push({id: result[i].id, date: result[i].date,announcement: result[i].announcement})
 				}
 				dbo.collection("Messages").find().toArray(function(err, result){
 					var Messages = [];
@@ -425,5 +676,3 @@ app.get("/logout", function(req,res){
 });
 
 console.log("Listening on port 3000");
-
-//use cookie

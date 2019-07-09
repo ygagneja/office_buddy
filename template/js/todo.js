@@ -3,11 +3,6 @@
 
 countTodos();
 
-// all done btn
-$("#checkAll").click(function(){
-    AllDone();
-});
-
 //create todo
 $('.add-todo').on('keypress',function (e) {
       e.preventDefault
@@ -33,6 +28,14 @@ $('.todolist').on('change','#sortable li input[type="checkbox"]',function(){
 
 //delete done task from "already done"
 $('.todolist').on('click','.remove-item',function(){
+  console.log($(this).parent().text())
+    $.ajax({
+        url: "/todoDeletePostBoss",
+        method: "POST",
+        data: {todoDelete: $(this).parent().text()},
+
+    });
+
     removeItem(this);
 });
 
@@ -46,6 +49,14 @@ function countTodos(){
 function createTodo(text){
     var markup = '<li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" />'+ text +'</label></div></li>';
     $('#sortable').append(markup);
+    console.log(text)
+    $.ajax({
+        url: "/todoPostBoss",
+        method: "POST",
+        data: {todo: text},
+        
+    });
+
     $('.add-todo').val('');
 }
 
@@ -54,25 +65,15 @@ function done(doneItem){
     var done = doneItem;
     var markup = '<li>'+ done +'<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
     $('#done-items').append(markup);
-    $('.remove').remove();
-}
-
-//mark all tasks as done
-function AllDone(){
-    var myArray = [];
-
-    $('#sortable li').each( function() {
-         myArray.push($(this).text());   
+    console.log(doneItem)
+    $.ajax({
+        url: "/todoDonePostBoss",
+        method: "POST",
+        data: {todoDone: doneItem},
+        
     });
-    
-    // add to done
-    for (i = 0; i < myArray.length; i++) {
-        $('#done-items').append('<li>' + myArray[i] + '<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>');
-    }
-    
-    // myArray
-    $('#sortable li').remove();
-    countTodos();
+
+    $('.remove').remove();
 }
 
 //remove done task from list

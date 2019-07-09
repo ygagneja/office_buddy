@@ -321,15 +321,15 @@
                                                     </h2>
                                         </div>
                                         
-                                    <div class="col-lg-5 pr-0 scroll_text topmargin leftfix" style="left: -6%;">
-                                        <section aria-label="Announcements" class="announcements">
+                                    <div class="col-lg-5 pr-0 topmargin leftfix" style="left: -6%;">
+                                        <section aria-label="Announcements" class="announcements scroll_text">
                                            
                                             <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                                 <div>
                                                     <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
                                                         <% announcements.forEach(function(announcement){ %>
                                                         <li class="border-bottom pb-3 mt-3">
-                                                            <span class="meta text-uppercase"><h5 ><b><%= announcement.date %></b></h5></span>
+                                                            <span class="meta text-uppercase"><h5 ><b><font color="dodgerblue"><%= announcement.date %></font></b></h5></span>
                                                             <h4 class="font-weight-bold mt-0 ">
                                                                     <%= announcement.announcement %>
                                                             </h4>
@@ -338,33 +338,28 @@
                                                     </ul>
                                                 </div>
                                         </section>
-                                        
+                                        <br><br>
+                                        <div>
+                                            
+                                            <button name="refresh" class="uza-btn btn-2">Refresh</button>
+                                        </div>
                                     </div>
+                                    
                                     <div class="col-md-1 topmargin" ></div>
 
                                     <!-- Chat Start Here-->
-                                    <div class="col-md-4 topmargin chat-flex" >
-                                            <div class="panel panel-primary">
-                                                <div class="panel-heading">
-                                                    <span class="glyphicon glyphicon-comment"></span> Chat
-                                                    <div class="btn-group pull-right">
-                                                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                    <div class="col-md-4 topmargin chat-flex">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <span class="glyphicon glyphicon-comment"></span> Chat
+                                                <div class="btn-group pull-right">
+                                                        <button type="button" class="btn btn-default btn-xs ">
+                                                                <a href="http://www.jquery2dotnet.com"><span
+                                                                    class="glyphicon glyphicon-refresh">
+                                                                </span></a>
+                                                            
                                                         </button>
-                                                        <ul class="dropdown-menu slidedown">
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-refresh">
-                                                                    </span>Refresh</a></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-ok-sign">
-                                                                    </span>Available</a></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-remove">
-                                                                    </span>Busy</a></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span
-                                                                        class="glyphicon glyphicon-time"></span>
-                                                                    Away</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-off"></span>
-                                                                    Sign Out</a></li>
-                                                        </ul>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
@@ -523,7 +518,7 @@
     <!-- Active js -->
     <script src="/js/default-assets/active.js"></script>
 
-    <script src="/js/todo.js"></script>
+    <script src="/js/todoE.js"></script>
 
     <!-- Announcements js-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
