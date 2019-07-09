@@ -542,7 +542,7 @@
 
 
 
-                            <div class="table100 ver4 m-b-110">
+                            <div class="table100 ver1 m-b-110">
                                 <div class="table100-head" style="border-bottom-width: thick">
                                     <table>
                                         <thead>
@@ -762,9 +762,9 @@
         });
     </script>
     <script type="text/javascript">
-        function refreshAnnouncements() {
+        function refreshAnnouncements(){
             var data = null;
-
+     
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
@@ -773,9 +773,8 @@
                     console.log(this.responseText);
                     data = JSON.parse(this.responseText);
                     $("#remove").remove();
-<<<<<<< HEAD
                     $("#announcements_list").append($("<div>").attr("id","remove"))
-                    for(var i=0; i<data.length; i++){
+                    for(var i=data.length-1; i>=0; i--){
                         $("#remove")
                         .append(
                             $("<li>").attr("class", "border-bottom pb-3 mt-3")
@@ -797,37 +796,10 @@
                                     $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
                                     .append(
                                         $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
-=======
-                    for (var i = 0; i < data.length; i++) {
-                        $("#announcements_list")
-                            .append(
-                                $("<div>").attr("id", "remove")
-                                    .append(
-                                        $("<li>").attr("class", "border-bottom pb-3 mt-3")
-                                            .append(
-                                                $("<span>").attr("class", "meta text-uppercase")
-                                                    .append(
-                                                        $("<h5>").append($("<b>").append($("<font>").attr("color", "dodgerblue").text(data[i].date)))
-                                                    )
-                                            )
-                                            .append(
-                                                $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
-                                            )
-                                            .append(
-                                                $("<form>").attr("name", data[i].id).attr("action", "deleteAnnouncement").attr("method", "POST")
-                                                    .append(
-                                                        $("<input>").attr("type", "hidden").attr("name", "id").attr("value", data[i].id)
-                                                    )
-                                                    .append(
-                                                        $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
-                                                            .append(
-                                                                $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
-                                                            )
-                                                    )
-                                            )
->>>>>>> 31744642865a69ff16374150cea922cc2e034b31
                                     )
+                                )
                             )
+                        )
                     }
                 }
             });
@@ -839,9 +811,9 @@
         }
     </script>
     <script type="text/javascript">
-        function refreshMessages() {
+        function refreshMessages(){
             var data = null;
-
+     
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
@@ -850,47 +822,28 @@
                     console.log(this.responseText);
                     data = JSON.parse(this.responseText);
                     $("#removeC").remove();
-<<<<<<< HEAD
                     $("#chatList").append($("<div>").attr("id", "removeC"))
                     for(var i=0; i<data.length-1; i++){
                         if(data[data.length-1].name == data[i].name){
                             $("#removeC")
-=======
-                    for (var i = 0; i < data.length; i++) {
-                        $("#chatList")
->>>>>>> 31744642865a69ff16374150cea922cc2e034b31
                             .append(
-                                $("<div>").attr("id", "removeC")
+                                $("<li>").attr('class', 'right clearfix')
+                                .append(
+                                    $("<span>").attr('class', 'chat-img pull-right')
                                     .append(
-                                        $("<li>").attr('class', 'right clearfix')
+                                        $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
+                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                    )
+                                )
+                                .append(
+                                    $("<div>").attr('class', 'chat-body clearfix')
+                                    .append(
+                                        $("<div>").attr("class", "header")
+                                        .append(
+                                            $("<small>").attr('class', 'text-muted')
                                             .append(
-                                                $("<span>").attr('class', 'chat-img pull-right')
-                                                    .append(
-                                                        $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
-                                                            .attr('alt', 'User Avatar').attr('class', 'img-circle')
-                                                    )
+                                                $("<span>").attr('class', 'glyphicon glyphicon-time')
                                             )
-                                            .append(
-                                                $("<div>").attr('class', 'chat-body clearfix')
-                                                    .append(
-                                                        $("<div>").attr("class", "header")
-                                                            .append(
-                                                                $("<small>").attr('class', 'text-muted')
-                                                                    .append(
-                                                                        $("<span>").attr('class', 'glyphicon glyphicon-time')
-                                                                    )
-                                                                    .text(new Date())
-                                                            )
-                                                            .append(
-                                                                $("<strong>").attr("class", "pull-right primary-font").text(
-                                                                    "<%= name %>")
-                                                            )
-                                                            .append(
-                                                                $("<p>").text(document.getElementById('btn-input').value)
-                                                            )
-                                                    )
-                                            )
-<<<<<<< HEAD
                                             .text(data[i].time)
                                         )
                                         .append(
@@ -899,11 +852,9 @@
                                         .append(
                                             $("<p>").text(data[i].message)
                                         )
-=======
->>>>>>> 31744642865a69ff16374150cea922cc2e034b31
                                     )
+                                )
                             )
-<<<<<<< HEAD
                         }
                         else{
                             $("#removeC")
@@ -936,8 +887,6 @@
                                 )
                             )   
                         }
-=======
->>>>>>> 31744642865a69ff16374150cea922cc2e034b31
                     }
                 }
             });
@@ -948,7 +897,7 @@
             xhr.send(data);
         }
     </script>
-    <!-- Status New apllication js  -->
+        <!-- Status New apllication js  -->
     <script>
     function Addappli(){
                    $("#app1")

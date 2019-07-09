@@ -326,7 +326,7 @@
                                            
                                             <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                                 <div>
-                                                    <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
+                                                    <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 " id="announcements_list">
                                                         <div id="remove">
                                                         <% announcements.forEach(function(announcement){ %>
                                                         <li class="border-bottom pb-3 mt-3">
@@ -596,7 +596,7 @@
                     data = JSON.parse(this.responseText);
                     $("#remove").remove();
                     $("#announcements_list").append($("<div>").attr("id","remove"))
-                    for(var i=0; i<data.length; i++){
+                    for(var i=data.length-1; i>=0; i--){
                         $("#remove")
                         .append(
                             $("<li>").attr("class", "border-bottom pb-3 mt-3")
@@ -608,18 +608,6 @@
                             )
                             .append(
                                 $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
-                            )
-                            .append(
-                                $("<form>").attr("name", data[i].id).attr("action","deleteAnnouncement").attr("method", "POST")
-                                .append(
-                                    $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id)
-                                )
-                                .append(
-                                    $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
-                                    .append(
-                                        $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
-                                    )
-                                )
                             )
                         )
                     }
