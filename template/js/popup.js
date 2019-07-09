@@ -27,7 +27,10 @@ function popupOpenClose(popup) {
 }
 
 $(document).ready(function () {
-	$("[data-js=open]").on("click", function() {
-		popupOpenClose($(".popup"));
+	$("[data-js=openAnn]").on("click", function() {
+		popupOpenClose($(".popupAnn"));
+	});
+	$("[data-js=openApp]").on("click", function() {
+		popupOpenClose($(".popupApp"));
 	});
 });

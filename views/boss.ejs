@@ -90,9 +90,38 @@
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- application status css -->
+
+    <link rel="stylesheet" type="text/css" href="/contact_fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/contact_css/util.css">
+    <link rel="stylesheet" type="text/css" href="/contact_css/main.css">
 
     <!--humne khud banaya-->
     <style>
+        .ipp2 {
+            border-radius: 25px;
+            border: 1px solid rgb(197, 197, 197) !important;
+            width: 90%;
+            height: 35px;
+            box-sizing: border-box;
+        }
+
+        .addit {
+            background-color: aqua;
+            color: white;
+        }
+
+        .cross {
+            background-color: red;
+            color: white;
+        }
         textarea {
             width: 100%;
             height: 150px;
@@ -376,42 +405,49 @@
 
                                 <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                     <div id="autoRefresh">
-                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 " id="announcements_list">
+                                        <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 "
+                                            id="announcements_list">
                                             <div id="remove">
-                                            <% announcements.forEach(function(announcement){ %>
-                                            <li class="border-bottom pb-3 mt-3">
-                                                <span class="meta text-uppercase">
-                                                    <h5><b><font color="dodgerblue"><%= announcement.date %></font></b></h5>
-                                                </span>
-                                                <h4 class="font-weight-bold mt-0 ">
-                                                    <%= announcement.announcement %>
-                                                </h4>
-                                                <form name="<%= announcement.id %>" action="/deleteAnnouncement" method="POST">
-                                                <input type="hidden" name="id" value="<%= announcement.id %>">
-                                                <button type="submit" style="display: inline-block;" class="edit-btn"><img src="/img/core-img/del.png" 
-                                                    alt="delete"></button>
-                                                </form>
-                                                
-                                                
-                                            </li>
+                                                <% announcements.forEach(function(announcement){ %>
+                                                <li class="border-bottom pb-3 mt-3">
+                                                    <span class="meta text-uppercase">
+                                                        <h5><b>
+                                                                <font color="dodgerblue"><%= announcement.date %></font>
+                                                            </b></h5>
+                                                    </span>
+                                                    <h4 class="font-weight-bold mt-0 ">
+                                                        <%= announcement.announcement %>
+                                                    </h4>
+                                                    <form name="<%= announcement.id %>" action="/deleteAnnouncement"
+                                                        method="POST">
+                                                        <input type="hidden" name="id" value="<%= announcement.id %>">
+                                                        <button type="submit" style="display: inline-block;"
+                                                            class="edit-btn"><img src="/img/core-img/del.png"
+                                                                alt="delete"></button>
+                                                    </form>
 
-                                            <% }) %>
-                                        </div>
+
+                                                </li>
+
+                                                <% }) %>
+                                            </div>
                                         </ul>
 
                                     </div>
                             </section><br><br>
                             <div>
-                                <button name="add_announmt" class="uza-btn btn-2" data-js="open">Add
+                                <button name="add_announmt" class="uza-btn btn-2" data-js="openAnn">Add
                                     Announcement</button>
-                                <button name="refresh" class="uza-btn btn-2" onclick="refreshAnnouncements()">Refresh</button>
+                                <button name="refresh" class="uza-btn btn-2"
+                                    onclick="refreshAnnouncements()">Refresh</button>
                             </div>
                         </div>
                         <!--Popup starts here -->
-                        <div class="popup">
+                        <div class="popup popupAnn">
                             <h2>Add a new announcement</h2>
                             <form action="/addAnnouncement" method="POST">
-                                <textarea placeholder="Write here..." maxlength="" name="announcement" required></textarea><br><br>
+                                <textarea placeholder="Write here..." maxlength="" name="announcement"
+                                    required></textarea><br><br>
                                 <input type="submit" class="uza-btn btn-2" value="Add Announcement">
                             </form>
                         </div>
@@ -428,54 +464,56 @@
                                 <div class="panel-heading">
                                     <span class="glyphicon glyphicon-comment"></span> Chat
                                     <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-default btn-xs " onclick="refreshMessages()">
-                                                    <a href="#">
-                                                    </span></a>
-                                                
-                                            </button>
-                                            
-                                        </div>
+                                        <button type="button" class="btn btn-default btn-xs "
+                                            onclick="refreshMessages()">
+                                            <a href="#">
+                                                </span></a>
+
+                                        </button>
+
+                                    </div>
                                 </div>
                                 <div class="panel-body">
                                     <ul class="chat" id="chatList">
                                         <div id="removeC">
-                                        <% messages.forEach(function(message){ %>
-                                        <% if(message.name == name){ %>
-                                        <li class="right clearfix"><span class="chat-img pull-right">
-                                                <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar"
-                                                    class="img-circle" />
-                                            </span>
-                                            <div class="chat-body clearfix">
-                                                <div class="header">
-                                                    <small class=" text-muted"><span
-                                                            class="glyphicon glyphicon-time"></span><%= message.time %></small>
-                                                    <strong class="pull-right primary-font"><%= message.name %></strong>
+                                            <% messages.forEach(function(message){ %>
+                                            <% if(message.name == name){ %>
+                                            <li class="right clearfix"><span class="chat-img pull-right">
+                                                    <img src="http://placehold.it/50/FA6F57/fff&text=ME"
+                                                        alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                <div class="chat-body clearfix">
+                                                    <div class="header">
+                                                        <small class=" text-muted"><span
+                                                                class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                        <strong
+                                                            class="pull-right primary-font"><%= message.name %></strong>
+                                                    </div>
+                                                    <p>
+                                                        <%= message.message %>
+                                                    </p>
                                                 </div>
-                                                <p>
-                                                    <%= message.message %>
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <% } else { %>
-                                        <li class="left clearfix"><span class="chat-img pull-left">
-                                                <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar"
-                                                    class="img-circle" />
-                                            </span>
-                                            <div class="chat-body clearfix">
-                                                <div class="header">
-                                                    <strong class="primary-font"><%= message.name %></strong> <small
-                                                        class="pull-right text-muted">
-                                                        <span
-                                                            class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                            </li>
+                                            <% } else { %>
+                                            <li class="left clearfix"><span class="chat-img pull-left">
+                                                    <img src="http://placehold.it/50/55C1E7/fff&text=U"
+                                                        alt="User Avatar" class="img-circle" />
+                                                </span>
+                                                <div class="chat-body clearfix">
+                                                    <div class="header">
+                                                        <strong class="primary-font"><%= message.name %></strong> <small
+                                                            class="pull-right text-muted">
+                                                            <span
+                                                                class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                    </div>
+                                                    <p>
+                                                        <%= message.message %>
+                                                    </p>
                                                 </div>
-                                                <p>
-                                                    <%= message.message %>
-                                                </p>
-                                            </div>
-                                        </li>
-                                        <% } %>
-                                        <% }) %>
-                                    </div>
+                                            </li>
+                                            <% } %>
+                                            <% }) %>
+                                        </div>
                                     </ul>
 
 
@@ -495,16 +533,86 @@
                                 </form>
                             </div>
                         </div>
-
+                        <!-- Chat ends here -->
                     </div>
+                    <!--Application Status-->
+                    <br><br><br><br><br><br><br><br><br><br>
+                    <div class="container">
+                        <div class="col-lg-12 pl-0">
+
+
+
+                            <div class="table100 ver4 m-b-110">
+                                <div class="table100-head" style="border-bottom-width: thick">
+                                    <table>
+                                        <thead>
+                                            <tr class="row100 head">
+                                                <th class="cell100 column2" style="font-size: 30px">ID</th>
+                                                <th class="cell100 column2" style="font-size: 30px">Status</th>
+                                                <th class="cell100 column2" style="font-size: 30px">Date</th>
+                                                <th class="cell100 column2" style="font-size: 30px">Customer</th>
+                                                <th class="cell100 column2" style="font-size: 30px">Subject</th>
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                                <br><br>
+                                <div class="table100-body js-pscroll">
+
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td><button data-js="openApp">1234</button></td>
+                                                <td>pending</td>
+                                                <td>12/12/12</td>
+                                                <td>xyz</td>
+                                                <td>xyz</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- Application Status Popup -->
+                                <div class="popup popupApp">
+                                    <div class="container" id="app1">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <h3></h3>
+                                            </div>
+                                            <div class="col-2"><button><i class="fa fa-paperclip fa-2x"
+                                                        aria-hidden="true"></i></button></div>
+                                        </div><br>
+                                        <div class="row">
+                                            <div class="col-10"><input type="text" class="ipp2"></div>
+                                            <div class="col-1"><button class="addit" onclick="Addappli()"><i class="fa fa-plus fa-3x"
+                                                        aria-hidden="true"></i></button></div>
+                                            <div class="col-1"><button class="cross"><i class="fa fa-times fa-3x"
+                                                        aria-hidden="true"></i></button></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Application Status Popup ends here -->
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                    <!-- Application Status ends here -->
+                    <!-- todo-->
                     <div class="row topmargin">
                         <div class="col-md-6" id="todo">
                             <div class="todolist not-done">
                                 <h1>To-do</h1>
-                                
+
                                 <input style="font-size:20px" type="text" class="form-control add-todo"
                                     placeholder="Add to-do">
-                                
+
 
                                 <hr>
                                 <ul id="sortable" class="list-unstyled" style="font-size:20px">
@@ -537,35 +645,35 @@
                         </div>
                     </div>
                     <div class="container">
-                    <div class="row justify-content-between topmargin" style="display:flow-root">
+                        <div class="row justify-content-between topmargin" style="display:flow-root">
 
-                        <!-- Single Footer Widget -->
-                        <div class="col-12 col-sm-6 col-lg-3">
-                            <div class="single-footer-widget mb-80">
-                                <!-- Widget Title -->
-                                <h4 class="widget-title">Quick Links</h4>
+                            <!-- Single Footer Widget -->
+                            <div class="col-12 col-sm-6 col-lg-3">
+                                <div class="single-footer-widget mb-80">
+                                    <!-- Widget Title -->
+                                    <h4 class="widget-title">Quick Links</h4>
 
-                                <!-- Nav -->
-                                <nav>
-                                    <ul class="our-link">
-                                        <li class="current-item"><a href="/">Home</a></li>
+                                    <!-- Nav -->
+                                    <nav>
+                                        <ul class="our-link">
+                                            <li class="current-item"><a href="/">Home</a></li>
 
-                                        <li><a href="#todo">To-Do</a></li>
+                                            <li><a href="#todo">To-Do</a></li>
 
-                                        <li><a href="#">My Attendance</a></li>
+                                            <li><a href="#">My Attendance</a></li>
 
-                                        <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+                                            <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
 
-                                        <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
-                                    </ul>
-                                </nav>
+                                            <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
 
 
-
+                </div>
             </section>
             <!-- Background Curve -->
             <div class="background-curve">
@@ -605,33 +713,33 @@
                     $("#chatList")
                         .append(
                             $("<li>").attr('class', 'right clearfix')
-                            .append(
-                                $("<span>").attr('class', 'chat-img pull-right')
                                 .append(
-                                    $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
-                                    .attr('alt', 'User Avatar').attr('class', 'img-circle')
-                                )
-                            )
-                            .append(
-                                $("<div>").attr('class', 'chat-body clearfix')
-                                .append(
-                                    $("<div>").attr("class", "header")
-                                    .append(
-                                        $("<small>").attr('class', 'text-muted')
+                                    $("<span>").attr('class', 'chat-img pull-right')
                                         .append(
-                                            $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                            $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
+                                                .attr('alt', 'User Avatar').attr('class', 'img-circle')
                                         )
-                                        .text(new Date())
-                                    )
-                                    .append(
-                                        $("<strong>").attr("class", "pull-right primary-font").text(
-                                            "<%= name %>")
-                                    )
-                                    .append(
-                                        $("<p>").text(document.getElementById('btn-input').value)
-                                    )
                                 )
-                            )
+                                .append(
+                                    $("<div>").attr('class', 'chat-body clearfix')
+                                        .append(
+                                            $("<div>").attr("class", "header")
+                                                .append(
+                                                    $("<small>").attr('class', 'text-muted')
+                                                        .append(
+                                                            $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                                        )
+                                                        .text(new Date())
+                                                )
+                                                .append(
+                                                    $("<strong>").attr("class", "pull-right primary-font").text(
+                                                        "<%= name %>")
+                                                )
+                                                .append(
+                                                    $("<p>").text(document.getElementById('btn-input').value)
+                                                )
+                                        )
+                                )
                         )
                     e.preventDefault();
 
@@ -646,7 +754,7 @@
                         method: "POST",
                         data: frm_serialized,
                         success: function (data) {
-                            
+
                         }
                     });
                 }
@@ -654,9 +762,9 @@
         });
     </script>
     <script type="text/javascript">
-        function refreshAnnouncements(){
+        function refreshAnnouncements() {
             var data = null;
-     
+
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
@@ -665,35 +773,35 @@
                     console.log(this.responseText);
                     data = JSON.parse(this.responseText);
                     $("#remove").remove();
-                    for(var i=0; i<data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         $("#announcements_list")
-                        .append(
-                            $("<div>").attr("id","remove")
                             .append(
-                                $("<li>").attr("class", "border-bottom pb-3 mt-3")
-                                .append(
-                                    $("<span>").attr("class", "meta text-uppercase")
+                                $("<div>").attr("id", "remove")
                                     .append(
-                                        $("<h5>").append($("<b>").append($("<font>").attr("color","dodgerblue").text(data[i].date)))
+                                        $("<li>").attr("class", "border-bottom pb-3 mt-3")
+                                            .append(
+                                                $("<span>").attr("class", "meta text-uppercase")
+                                                    .append(
+                                                        $("<h5>").append($("<b>").append($("<font>").attr("color", "dodgerblue").text(data[i].date)))
+                                                    )
+                                            )
+                                            .append(
+                                                $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
+                                            )
+                                            .append(
+                                                $("<form>").attr("name", data[i].id).attr("action", "deleteAnnouncement").attr("method", "POST")
+                                                    .append(
+                                                        $("<input>").attr("type", "hidden").attr("name", "id").attr("value", data[i].id)
+                                                    )
+                                                    .append(
+                                                        $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
+                                                            .append(
+                                                                $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
+                                                            )
+                                                    )
+                                            )
                                     )
-                                )
-                                .append(
-                                    $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
-                                )
-                                .append(
-                                    $("<form>").attr("name", data[i].id).attr("action","deleteAnnouncement").attr("method", "POST")
-                                    .append(
-                                        $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id)
-                                    )
-                                    .append(
-                                        $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
-                                        .append(
-                                            $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
-                                        )
-                                    )
-                                )
                             )
-                        )
                     }
                 }
             });
@@ -705,9 +813,9 @@
         }
     </script>
     <script type="text/javascript">
-        function refreshMessages(){
+        function refreshMessages() {
             var data = null;
-     
+
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
@@ -716,41 +824,41 @@
                     console.log(this.responseText);
                     data = JSON.parse(this.responseText);
                     $("#removeC").remove();
-                    for(var i=0; i<data.length; i++){
+                    for (var i = 0; i < data.length; i++) {
                         $("#chatList")
-                        .append(
-                            $("<div>").attr("id", "removeC")
                             .append(
-                                $("<li>").attr('class', 'right clearfix')
-                                .append(
-                                    $("<span>").attr('class', 'chat-img pull-right')
+                                $("<div>").attr("id", "removeC")
                                     .append(
-                                        $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
-                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
-                                    )
-                                )
-                                .append(
-                                    $("<div>").attr('class', 'chat-body clearfix')
-                                    .append(
-                                        $("<div>").attr("class", "header")
-                                        .append(
-                                            $("<small>").attr('class', 'text-muted')
+                                        $("<li>").attr('class', 'right clearfix')
                                             .append(
-                                                $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                                $("<span>").attr('class', 'chat-img pull-right')
+                                                    .append(
+                                                        $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
+                                                            .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                                    )
                                             )
-                                            .text(new Date())
-                                        )
-                                        .append(
-                                            $("<strong>").attr("class", "pull-right primary-font").text(
-                                                "<%= name %>")
-                                        )
-                                        .append(
-                                            $("<p>").text(document.getElementById('btn-input').value)
-                                        )
+                                            .append(
+                                                $("<div>").attr('class', 'chat-body clearfix')
+                                                    .append(
+                                                        $("<div>").attr("class", "header")
+                                                            .append(
+                                                                $("<small>").attr('class', 'text-muted')
+                                                                    .append(
+                                                                        $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                                                    )
+                                                                    .text(new Date())
+                                                            )
+                                                            .append(
+                                                                $("<strong>").attr("class", "pull-right primary-font").text(
+                                                                    "<%= name %>")
+                                                            )
+                                                            .append(
+                                                                $("<p>").text(document.getElementById('btn-input').value)
+                                                            )
+                                                    )
+                                            )
                                     )
-                                )
                             )
-                        )
                     }
                 }
             });
@@ -761,7 +869,42 @@
             xhr.send(data);
         }
     </script>
-
+    <!-- Status New apllication js  -->
+    <script>
+    function Addappli(){
+                   $("#app1")
+                    .append(
+                        $("<br>"))
+                    .append(
+                        $("<div>").attr('class', 'row')
+                            .append(
+                                $("<div>").attr('class', 'col-10')
+                                    .append(
+                                        $("<input>").attr('type', "text").attr('class', 'ipp2')
+                                    )
+                            )
+                            .append(
+                                $("<div>").attr('class', 'col-1')
+                                    .append(
+                                        $("<button>").attr("onclick","Addappli()").attr('class', 'addit')
+                                            .append(
+                                                $("<i>").attr('class', 'fa fa-plus fa-3x').attr('aria-hidden', 'true')
+                                            )
+                                    )
+                            )
+                            .append(
+                                $("<div>").attr('class', 'col-1')
+                                    .append(
+                                        $("<button>").attr("onclick","this.parentNode.parentNode.remove()").attr('class', 'cross')
+                                            .append(
+                                                $("<i>").attr('class', 'fa fa-times fa-3x').attr('aria-hidden', 'true')
+                                            )
+                                    )
+                            )
+                    )
+                    
+            }
+    </script>
 </body>
 
 </html>
