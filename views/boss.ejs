@@ -665,31 +665,29 @@
                     console.log(this.responseText);
                     data = JSON.parse(this.responseText);
                     $("#remove").remove();
+                    $("#announcements_list").append($("<div>").attr("id","remove"))
                     for(var i=0; i<data.length; i++){
-                        $("#announcements_list")
+                        $("#remove")
                         .append(
-                            $("<div>").attr("id","remove")
+                            $("<li>").attr("class", "border-bottom pb-3 mt-3")
                             .append(
-                                $("<li>").attr("class", "border-bottom pb-3 mt-3")
+                                $("<span>").attr("class", "meta text-uppercase")
                                 .append(
-                                    $("<span>").attr("class", "meta text-uppercase")
-                                    .append(
-                                        $("<h5>").append($("<b>").append($("<font>").attr("color","dodgerblue").text(data[i].date)))
-                                    )
+                                    $("<h5>").append($("<b>").append($("<font>").attr("color","dodgerblue").text(data[i].date)))
+                                )
+                            )
+                            .append(
+                                $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
+                            )
+                            .append(
+                                $("<form>").attr("name", data[i].id).attr("action","deleteAnnouncement").attr("method", "POST")
+                                .append(
+                                    $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id)
                                 )
                                 .append(
-                                    $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
-                                )
-                                .append(
-                                    $("<form>").attr("name", data[i].id).attr("action","deleteAnnouncement").attr("method", "POST")
+                                    $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
                                     .append(
-                                        $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id)
-                                    )
-                                    .append(
-                                        $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
-                                        .append(
-                                            $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
-                                        )
+                                        $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
                                     )
                                 )
                             )
@@ -716,10 +714,10 @@
                     console.log(this.responseText);
                     data = JSON.parse(this.responseText);
                     $("#removeC").remove();
-                    for(var i=0; i<data.length; i++){
-                        $("#chatList")
-                        .append(
-                            $("<div>").attr("id", "removeC")
+                    $("#chatList").append($("<div>").attr("id", "removeC"))
+                    for(var i=0; i<data.length-1; i++){
+                        if(data[data.length-1].name == data[i].name){
+                            $("#removeC")
                             .append(
                                 $("<li>").attr('class', 'right clearfix')
                                 .append(
@@ -738,19 +736,49 @@
                                             .append(
                                                 $("<span>").attr('class', 'glyphicon glyphicon-time')
                                             )
-                                            .text(new Date())
+                                            .text(data[i].time)
                                         )
                                         .append(
-                                            $("<strong>").attr("class", "pull-right primary-font").text(
-                                                "<%= name %>")
+                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
                                         )
                                         .append(
-                                            $("<p>").text(document.getElementById('btn-input').value)
+                                            $("<p>").text(data[i].message)
                                         )
                                     )
                                 )
                             )
-                        )
+                        }
+                        else{
+                            $("#removeC")
+                            .append(
+                                $("<li>").attr('class', 'left clearfix')
+                                .append(
+                                    $("<span>").attr('class', 'chat-img pull-left')
+                                    .append(
+                                        $("<img>").attr('src', 'http://placehold.it/50/55C1E7/fff&text=U')
+                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                    )
+                                )
+                                .append(
+                                    $("<div>").attr('class', 'chat-body clearfix')
+                                    .append(
+                                        $("<div>").attr("class", "header")
+                                        .append(
+                                            $("<small>").attr("class", "pull-right text-muted")
+                                            .append(
+                                                $("<span>").attr("class", "glyphicon glyphicon-time")
+                                            ).text(data[i].time)
+                                        )
+                                        .append(
+                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
+                                        )
+                                        .append(
+                                            $("<p>").text(data[i].message)
+                                        )
+                                    )
+                                )
+                            )   
+                        }
                     }
                 }
             });

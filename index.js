@@ -240,7 +240,9 @@ app.get("/refreshMessages", function(req, res){
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("MainDB");
 			dbo.collection("Messages").find().toArray(function(err, result){
-				res.json(result);
+				var Arr = result
+				Arr.push({name: req.session.passport.user.name});
+				res.json(Arr);
 			});
 		});
 	}

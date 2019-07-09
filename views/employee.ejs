@@ -327,6 +327,7 @@
                                             <div class="announcement-slider border-r-xs-0 border-r position-relative ">
                                                 <div>
                                                     <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5 ">
+                                                        <div id="remove">
                                                         <% announcements.forEach(function(announcement){ %>
                                                         <li class="border-bottom pb-3 mt-3">
                                                             <span class="meta text-uppercase"><h5 ><b><font color="dodgerblue"><%= announcement.date %></font></b></h5></span>
@@ -335,13 +336,14 @@
                                                             </h4>
                                                         </li>
                                                         <% }) %>
+                                                    </div>
                                                     </ul>
                                                 </div>
                                         </section>
                                         <br><br>
                                         <div>
                                             
-                                            <button name="refresh" class="uza-btn btn-2">Refresh</button>
+                                            <button name="refresh" class="uza-btn btn-2" onclick="refreshAnnouncements()">Refresh</button>
                                         </div>
                                     </div>
                                     
@@ -353,9 +355,8 @@
                                             <div class="panel-heading">
                                                 <span class="glyphicon glyphicon-comment"></span> Chat
                                                 <div class="btn-group pull-right">
-                                                        <button type="button" class="btn btn-default btn-xs ">
-                                                                <a href="http://www.jquery2dotnet.com"><span
-                                                                    class="glyphicon glyphicon-refresh">
+                                                        <button type="button" class="btn btn-default btn-xs " onclick="refreshMessages()">
+                                                                <a href="#">
                                                                 </span></a>
                                                             
                                                         </button>
@@ -365,6 +366,7 @@
                                                 <div class="panel-body">
                                                     
                                                     <ul class="chat" id="chatList">
+                                                        <div id="removeC">
                                                         <% messages.forEach(function(message){ %>
                                                         <% if(message.name == name){ %>
                                                         <li class="right clearfix"><span class="chat-img pull-right">
@@ -399,6 +401,7 @@
                                                         </li>
                                                         <% } %>
                                                         <% }) %>
+                                                    </div>
                                                     </ul>
 
                                                        
@@ -573,13 +576,148 @@
                             method: "POST",
                             data: frm_serialized,
                             success: function(data) {
-                                console.log(data);
-                                $('div#id_div_' + frm_id_splitted_2).append(data);
+                                
                             }
                     });
                 }
             });
         });
+    </script>
+    <script type="text/javascript">
+        function refreshAnnouncements(){
+            var data = null;
+     
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    data = JSON.parse(this.responseText);
+                    $("#remove").remove();
+                    $("#announcements_list").append($("<div>").attr("id","remove"))
+                    for(var i=0; i<data.length; i++){
+                        $("#remove")
+                        .append(
+                            $("<li>").attr("class", "border-bottom pb-3 mt-3")
+                            .append(
+                                $("<span>").attr("class", "meta text-uppercase")
+                                .append(
+                                    $("<h5>").append($("<b>").append($("<font>").attr("color","dodgerblue").text(data[i].date)))
+                                )
+                            )
+                            .append(
+                                $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
+                            )
+                            .append(
+                                $("<form>").attr("name", data[i].id).attr("action","deleteAnnouncement").attr("method", "POST")
+                                .append(
+                                    $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id)
+                                )
+                                .append(
+                                    $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
+                                    .append(
+                                        $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
+                                    )
+                                )
+                            )
+                        )
+                    }
+                }
+            });
+
+            xhr.open("GET", "/refreshAnnouncements");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
+        }
+    </script>
+    <script type="text/javascript">
+        function refreshMessages(){
+            var data = null;
+     
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    data = JSON.parse(this.responseText);
+                    $("#removeC").remove();
+                    $("#chatList").append($("<div>").attr("id", "removeC"))
+                    for(var i=0; i<data.length-1; i++){
+                        if(data[data.length-1].name == data[i].name){
+                            $("#removeC")
+                            .append(
+                                $("<li>").attr('class', 'right clearfix')
+                                .append(
+                                    $("<span>").attr('class', 'chat-img pull-right')
+                                    .append(
+                                        $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
+                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                    )
+                                )
+                                .append(
+                                    $("<div>").attr('class', 'chat-body clearfix')
+                                    .append(
+                                        $("<div>").attr("class", "header")
+                                        .append(
+                                            $("<small>").attr('class', 'text-muted')
+                                            .append(
+                                                $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                            )
+                                            .text(data[i].time)
+                                        )
+                                        .append(
+                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
+                                        )
+                                        .append(
+                                            $("<p>").text(data[i].message)
+                                        )
+                                    )
+                                )
+                            )
+                        }
+                        else{
+                            $("#removeC")
+                            .append(
+                                $("<li>").attr('class', 'left clearfix')
+                                .append(
+                                    $("<span>").attr('class', 'chat-img pull-left')
+                                    .append(
+                                        $("<img>").attr('src', 'http://placehold.it/50/55C1E7/fff&text=U')
+                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                    )
+                                )
+                                .append(
+                                    $("<div>").attr('class', 'chat-body clearfix')
+                                    .append(
+                                        $("<div>").attr("class", "header")
+                                        .append(
+                                            $("<small>").attr("class", "pull-right text-muted")
+                                            .append(
+                                                $("<span>").attr("class", "glyphicon glyphicon-time")
+                                            ).text(data[i].time)
+                                        )
+                                        .append(
+                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
+                                        )
+                                        .append(
+                                            $("<p>").text(data[i].message)
+                                        )
+                                    )
+                                )
+                            )   
+                        }
+                    }
+                }
+            });
+
+            xhr.open("GET", "/refreshMessages");
+            xhr.setRequestHeader("cache-control", "no-cache");
+
+            xhr.send(data);
+        }
     </script>
 </body>
 
