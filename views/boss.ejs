@@ -418,12 +418,9 @@
                                                     <h4 class="font-weight-bold mt-0 ">
                                                         <%= announcement.announcement %>
                                                     </h4>
-                                                    <form name="<%= announcement.id %>" action="/deleteAnnouncement"
-                                                        method="POST">
-                                                        <input type="hidden" name="id" value="<%= announcement.id %>">
-                                                        <button type="submit" style="display: inline-block;"
-                                                            class="edit-btn"><img src="/img/core-img/del.png"
-                                                                alt="delete"></button>
+                                                    <form id="<%= announcement.id %>">
+                                                        <input type="hidden" name="id" value="<%= announcement.id %>" id="<%= announcement.id %>hidden">
+                                                        <input type="button" style="display: inline-block;" class="edit-btn" onclick="deleteAnnouncement($(this).parent().attr('id'))">
                                                     </form>
 
 
@@ -445,10 +442,10 @@
                         <!--Popup starts here -->
                         <div class="popup popupAnn">
                             <h2>Add a new announcement</h2>
-                            <form action="/addAnnouncement" method="POST">
+                            <form id="formA">
                                 <textarea placeholder="Write here..." maxlength="" name="announcement"
                                     required></textarea><br><br>
-                                <input type="submit" class="uza-btn btn-2" value="Add Announcement">
+                                <input id="addA" type="button" class="uza-btn btn-2" value="Add Announcement">
                             </form>
                         </div>
 
@@ -466,7 +463,7 @@
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn btn-default btn-xs "
                                             onclick="refreshMessages()">
-                                            <a href="#">
+                                            <a href="#"><span class="glyphicon glyphicon-refresh">
                                                 </span></a>
 
                                         </button>
@@ -615,13 +612,7 @@
                                 <hr>
                                 <ul id="sortable" class="list-unstyled" style="font-size:20px">
                                     <% todoList.forEach(function(todo){ %>
-                                    <li class="ui-state-default">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" value="" /><%= todo %>
-                                            </label>
-                                        </div>
-                                    </li>
+                                    <li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" /><%= todo %></label></div></li>
                                     <% }) %>
                                 </ul>
                                 <div class="todo-footer" style="font-size:20px">
@@ -634,9 +625,7 @@
                                 <h1>Already Done</h1>
                                 <ul id="done-items" class="list-unstyled" style="font-size:20px">
                                     <% todoDoneList.forEach(function(todoDone){ %>
-                                    <li><%= todoDone %> <button
-                                            class="remove-item btn btn-default btn-xs pull-right"><span
-                                                class="glyphicon glyphicon-remove"></span></button></li>
+                                    <li><%= todoDone %> <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
                                     <% }) %>
                                 </ul>
                             </div>
@@ -708,7 +697,7 @@
         $(document).ready(function () {
             $('input[id="btn-chat"]').on('click', function (e) {
                 if (document.getElementById('btn-input').value != "") {
-                    $("#chatList")
+                    $("#removeC")
                         .append(
                             $("<li>").attr('class', 'right clearfix')
                                 .append(
@@ -750,12 +739,43 @@
                     $.ajax({
                         url: "/chatAppend",
                         method: "POST",
-                        data: frm_serialized,
-                        success: function (data) {
-
-                        }
+                        data: frm_serialized
                     });
                 }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function deleteAnnouncement(id){
+                    
+                    $.ajax({
+                        url: "/deleteAnnouncement",
+                        method: "POST",
+                        data: {id: document.getElementById(id+"hidden").value}
+                    });
+
+                    refreshAnnouncements();
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[id="addA"]').on('click', function (e) {
+                    e.preventDefault();
+                    var frm = $(this).closest("form");
+                    var frm_id = frm.attr("id");
+                    var frm_id_splitted = frm_id.split("_");
+                    var frm_id_splitted_2 = frm_id_splitted[2];
+
+                    var frm_serialized = frm.serialize();
+                    $.ajax({
+                        url: "/addAnnouncement",
+                        method: "POST",
+                        data: frm_serialized
+                    });
+
+                    popupClose('.popupAnn');
+                    refreshAnnouncements();
+
             });
         });
     </script>
@@ -786,15 +806,12 @@
                                 $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
                             )
                             .append(
-                                $("<form>").attr("name", data[i].id).attr("action","deleteAnnouncement").attr("method", "POST")
+                                $("<form>").attr("id", data[i].id)
                                 .append(
-                                    $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id)
+                                    $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id).attr("id",data[i].id+"hidden")
                                 )
                                 .append(
-                                    $("<button>").attr("type", "submit").attr("style", "display: inline-block;").attr("class", "edit-btn")
-                                    .append(
-                                        $("<img>").attr("src", "/img/core-img/del.png").attr("alt", "delete")
-                                    )
+                                    $("<input>").attr("type", "button").attr("style", "display: inline-block;").attr("class", "edit-btn").attr("onclick","deleteAnnouncement($(this).parent().attr('id'))")
                                 )
                             )
                         )
@@ -823,6 +840,7 @@
                     data = JSON.parse(this.responseText);
                     $("#removeC").remove();
                     $("#chatList").append($("<div>").attr("id", "removeC"))
+                    
                     for(var i=0; i<data.length-1; i++){
                         if(data[data.length-1].name == data[i].name){
                             $("#removeC")
@@ -872,13 +890,13 @@
                                     .append(
                                         $("<div>").attr("class", "header")
                                         .append(
-                                            $("<small>").attr("class", "pull-right text-muted")
-                                            .append(
-                                                $("<span>").attr("class", "glyphicon glyphicon-time")
-                                            ).text(data[i].time)
+                                            $("<strong>").attr("class", "primary-font").text(data[i].name)
                                         )
                                         .append(
-                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
+                                            $("<small>").attr("class", "pull-right text-muted")
+                                            .append(
+                                                $("<span>").attr("class","glyphicon glyphicon-time")
+                                            ).text(data[i].time)
                                         )
                                         .append(
                                             $("<p>").text(data[i].message)
@@ -887,6 +905,7 @@
                                 )
                             )   
                         }
+                      
                     }
                 }
             });

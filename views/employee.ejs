@@ -356,7 +356,7 @@
                                                 <span class="glyphicon glyphicon-comment"></span> Chat
                                                 <div class="btn-group pull-right">
                                                         <button type="button" class="btn btn-default btn-xs " onclick="refreshMessages()">
-                                                                <a href="#">
+                                                                <a href="#"><span class="glyphicon glyphicon-refresh">
                                                                 </span></a>
                                                             
                                                         </button>
@@ -425,18 +425,13 @@
                                         <div class="todolist not-done">
                                          <h1>To-do</h1>
                                             <input style="font-size:20px" type="text" class="form-control add-todo" placeholder="Add to-do">
-                                                <button id="checkAll" style="font-size:20px" class="btn btn-primary">Mark all as done</button>
+                                                
                                                 
                                                 <hr>
                                                 <ul id="sortable" class="list-unstyled" style="font-size:20px">
                                                 <% todoList.forEach(function(todo){ %>
                                                 <li class="ui-state-default">
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            <input type="checkbox" value="" /><%= todo %>
-                                                        </label>
-                                                    </div>
-                                                </li>
+                                                    <div class="checkbox"><label><input type="checkbox" value="" /><%= todo %></label></div></li>
                                                 <% }) %>
                                             </ul>
                                             <div class="todo-footer" style="font-size:20px">
@@ -534,7 +529,7 @@
         $(document).ready(function(){
             $('input[id="btn-chat"]').on('click',function(e){
                 if(document.getElementById('btn-input').value != ""){
-                    $("#chatList")
+                    $("#removeC")
                     .append(
                         $("<li>").attr('class','right clearfix')
                         .append(
@@ -683,13 +678,13 @@
                                     .append(
                                         $("<div>").attr("class", "header")
                                         .append(
-                                            $("<small>").attr("class", "pull-right text-muted")
-                                            .append(
-                                                $("<span>").attr("class", "glyphicon glyphicon-time")
-                                            ).text(data[i].time)
+                                            $("<strong>").attr("class", "primary-font").text(data[i].name)
                                         )
                                         .append(
-                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
+                                            $("<small>").attr("class", "pull-right text-muted")
+                                            .append(
+                                                $("<span>").attr("class","glyphicon glyphicon-time")
+                                            ).text(data[i].time)
                                         )
                                         .append(
                                             $("<p>").text(data[i].message)

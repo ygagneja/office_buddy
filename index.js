@@ -20,8 +20,9 @@ app.listen(3000);
 
 function deleteDone(Arr, str){
 	for(var i=0; i<Arr.length; i++){
-		if(Arr[i] == str){
-			Arr.splice(i);
+		if(Arr[i].trim() === str.trim()){
+			Arr.splice(i,1);
+			break;
 		}
 	}
 	return Arr;
@@ -181,7 +182,6 @@ app.post("/deleteAnnouncement", function(req, res){
 	else if(req.session.passport.user.boss == true){	
 		mongo.connect(url,function(err,db){
 			var dbo = db.db("MainDB");
-			console.log(req.body.id);
 			dbo.collection("Announcements").remove({id: req.body.id});
 			res.redirect("/");
 		});
@@ -328,10 +328,7 @@ app.post("/todoDeletePostBoss", function(req, res){
 				if(err) throw err;
 				var myQuery = {name: req.session.passport.user.name};
 				var Arr = doc.todoDone;
-				console.log(Arr)
 				Arr = deleteDone(Arr, req.body.todoDelete)
-				console.log(req.body.todoDelete)
-				console.log(Arr)
 				var newValues = {$set: {todoDone: Arr}};
 				dbo.collection("Boss").updateOne(myQuery, newValues);
 			});
@@ -410,10 +407,7 @@ app.post("/todoDeletePost", function(req, res){
 				if(err) throw err;
 				var myQuery = {name: req.session.passport.user.name};
 				var Arr = doc.todoDone;
-				console.log(Arr)
 				Arr = deleteDone(Arr, req.body.todoDelete)
-				console.log(req.body.todoDelete)
-				console.log(Arr)
 				var newValues = {$set: {todoDone: Arr}};
 				dbo.collection("Employees").updateOne(myQuery, newValues);
 			});

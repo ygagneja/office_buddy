@@ -26,6 +26,13 @@ function popupOpenClose(popup) {
 	});
 }
 
+function popupClose(popup){
+		if ($(".formElementError").is(':visible')) {
+			$(".formElementError").remove();
+		}
+		$(popup).hide();
+}
+
 $(document).ready(function () {
 	$("[data-js=openAnn]").on("click", function() {
 		popupOpenClose($(".popupAnn"));

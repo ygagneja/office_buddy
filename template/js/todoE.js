@@ -28,7 +28,7 @@ $('.todolist').on('change','#sortable li input[type="checkbox"]',function(){
 
 //delete done task from "already done"
 $('.todolist').on('click','.remove-item',function(){
-  console.log($(this).parent().text())
+  
     $.ajax({
         url: "/todoDeletePost",
         method: "POST",
@@ -49,7 +49,7 @@ function countTodos(){
 function createTodo(text){
     var markup = '<li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" />'+ text +'</label></div></li>';
     $('#sortable').append(markup);
-    console.log(text)
+    
     $.ajax({
         url: "/todoPost",
         method: "POST",
@@ -65,7 +65,7 @@ function done(doneItem){
     var done = doneItem;
     var markup = '<li>'+ done +'<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
     $('#done-items').append(markup);
-    console.log(doneItem)
+    
     $.ajax({
         url: "/todoDonePost",
         method: "POST",

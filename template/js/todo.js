@@ -11,6 +11,13 @@ $('.add-todo').on('keypress',function (e) {
            var todo = $(this).val();
             createTodo(todo); 
             countTodos();
+            
+            $.ajax({
+                url: "/todoPostBoss",
+                method: "POST",
+                data: {todo: todo}
+                
+            });
            }else{
                // some validation
            }
@@ -23,19 +30,25 @@ $('.todolist').on('change','#sortable li input[type="checkbox"]',function(){
         $(this).parent().parent().parent().addClass('remove');
         done(doneItem);
         countTodos();
+        $.ajax({
+            url: "/todoDonePostBoss",
+            method: "POST",
+            data: {todoDone: doneItem}
+            
+        });
+        
     }
 });
 
 //delete done task from "already done"
 $('.todolist').on('click','.remove-item',function(){
-  console.log($(this).parent().text())
     $.ajax({
         url: "/todoDeletePostBoss",
         method: "POST",
-        data: {todoDelete: $(this).parent().text()},
+        data: {todoDelete: $(this).parent().text()}
 
     });
-
+    
     removeItem(this);
 });
 
@@ -49,13 +62,6 @@ function countTodos(){
 function createTodo(text){
     var markup = '<li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" />'+ text +'</label></div></li>';
     $('#sortable').append(markup);
-    console.log(text)
-    $.ajax({
-        url: "/todoPostBoss",
-        method: "POST",
-        data: {todo: text},
-        
-    });
 
     $('.add-todo').val('');
 }
@@ -65,13 +71,6 @@ function done(doneItem){
     var done = doneItem;
     var markup = '<li>'+ done +'<button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
     $('#done-items').append(markup);
-    console.log(doneItem)
-    $.ajax({
-        url: "/todoDonePostBoss",
-        method: "POST",
-        data: {todoDone: doneItem},
-        
-    });
 
     $('.remove').remove();
 }
