@@ -440,7 +440,7 @@
                             </div>
                         </div>
                         <!--Popup starts here -->
-                        <div class="popup popupAnn">
+                        <div class="popup popupAnn" style="text-align: center">
                             <h2>Add a new announcement</h2>
                             <form id="formA">
                                 <textarea placeholder="Write here..." maxlength="" name="announcement"
@@ -544,7 +544,7 @@
                                     <table>
                                         <thead>
                                             <tr class="row100 head">
-                                                <th class="cell100 column1">ID</th>
+                                                <th class="cell100 column1">Application ID</th>
                                                 <th class="cell100 column2">Status</th>
                                                 <th class="cell100 column3">Date</th>
                                                 <th class="cell100 column4">Customer</th>
@@ -571,24 +571,48 @@
 
                                 </div>
                                 <!-- Application Status Popup -->
-                                <div class="popup popupApp">
-                                    <div class="container" id="app1">
-                                        <div class="row">
-                                            <div class="col-10">
-                                                <h3></h3>
+                                <div class="popup1 popup popupApp">
+                                    <!-- < if(appplication.status === "new"){ > -->
+                                        <div class="container" id="app1">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h3></h3>
+                                                </div>
+                                                <div class="col-2"><button><i class="fa fa-paperclip fa-2x"
+                                                            aria-hidden="true"></i></button></div>
+                                            </div><br>
+                                            <div class="row">
+                                                <div class="col-10"><input type="text" class="ipp2"></div>
+                                                <div class="col-1"><button class="addit" onclick="Addappli()"><i class="fa fa-plus fa-3x"
+                                                            aria-hidden="true"></i></button></div>
+                                                <div class="col-1"><button class="cross"><i class="fa fa-times fa-3x"
+                                                            aria-hidden="true"></i></button></div>
+    
                                             </div>
-                                            <div class="col-2"><button><i class="fa fa-paperclip fa-2x"
-                                                        aria-hidden="true"></i></button></div>
-                                        </div><br>
-                                        <div class="row">
-                                            <div class="col-10"><input type="text" class="ipp2"></div>
-                                            <div class="col-1"><button class="addit" onclick="Addappli()"><i class="fa fa-plus fa-3x"
-                                                        aria-hidden="true"></i></button></div>
-                                            <div class="col-1"><button class="cross"><i class="fa fa-times fa-3x"
-                                                        aria-hidden="true"></i></button></div>
-
                                         </div>
-                                    </div>
+                                        <!-- < } else { > -->
+                                            <div class="container">
+                                                <h3 class="popup_heading">Application ID</h3>
+                                                <br>
+                                                <form>
+                                                    <div class="popup_form"><label for="customer_name">Customer</label>
+                                                        <input id="customer_name" type="text"></div>
+                                                    <div class="popup_form"><label for="date">Date</label>
+                                                        <input id="date" type="date"></div>
+                                                        <div class="popup_form"><label for="status">Status</label>
+                                                            <input id="status" type="text"></div>
+                                                            <div class="popup_form"><label for="subject">Subject</label>
+                                                                <input id="subject" type="text"></div>
+                                                        <div class="row">
+                                                            <div class="col-3"><label for="added_by">Added By :</label></div>
+                                                        <div class="col-8"><textarea placeholder="Write your comments here ..."></textarea></div>
+                                                        <div class="col-1">image here</div>
+                                                    </div>
+        
+        
+                                                </form>
+                                            </div>
+                                            <!-- < } > -->
                                 </div>
                                 <!-- Application Status Popup ends here -->
                             </div>
