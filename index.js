@@ -618,13 +618,13 @@ app.post("/boss/:username/contacts/:emp_username/update", function(req,res){
 			dbo.collection("Employees").findOne({username: req.params.emp_username}, function(err, doc){
 				var myQuery = {username: req.params.emp_username};
 				dbo.collection("Employees").remove(myQuery);
-				dbo.collection("Employees").insertOne(req.body,function(err,result){});
+				dbo.collection("Employees").insertOne({"name" : req.body.name, "username" : req.body.username, "designation" : req.body.designation, "phone" : req.body.phone, "mobile" : req.body.mobile, "email" : req.body.email, "gender" : req.body.gender, "address" : req.body.address, "nationality" : req.body.nationality, "dob" : req.body.dob, "adhaar" : req.body.adhaar, "account" : req.body.account, "joining" : req.body.joining, "marital" : req.body.marital, "todo" : doc.todo, "todoDone" : doc.todoDone});
 			});
 			var dbo2 = db.db("LoginDetails");
 			dbo2.collection("Employees").findOne({username: req.params.emp_username}, function(err, doc){
 				var myQuery = {username: req.params.emp_username};
 				dbo2.collection("Employees").remove(myQuery);
-				dbo2.collection("Employees").insertOne({name: req.body.name, username: req.body.username, password: doc.password}, function(err, doc){})
+				dbo2.collection("Employees").insertOne({name: req.body.name, username: req.body.username, password: doc.password})
 				res.redirect("/boss/" + req.params.username + "/contacts/" + req.body.username);
 			});
 		});
@@ -656,10 +656,124 @@ app.post("/boss/:username/profile/update", function(req, res){
 			dbo2.collection("Boss").findOne({username: req.params.username}, function(err, doc){
 				var myQuery = {username: req.params.username};
 				dbo2.collection("Boss").remove(myQuery);
-				dbo2.collection("Boss").insertOne({name: req.body.name, username: req.body.username, password: doc.password}, function(err, doc){})
+				dbo2.collection("Boss").insertOne({name: req.body.name, username: req.body.username, password: doc.password, boss:true}, function(err, doc){})
 				res.redirect("/boss/" + req.params.username + "/profile");
 			});
 		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.use(function(req,res,next) {
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+	next();
+  })
+  .get("/addEmployee", function(req,res){
+	  if(typeof req.session.passport === "undefined"){
+		  res.sendFile("/template/error.html",{root:__dirname});
+	  }
+	  else if(typeof req.session.passport.user === "undefined"){
+		  res.sendFile("/template/error.html",{root:__dirname});	
+	  }
+	  else if(typeof req.session.passport.user.boss === "undefined"){
+		  res.sendFile("/template/error.html",{root:__dirname});
+	  }
+	  else if(req.session.passport.user.boss){
+		  res.render("create_emp",{username: req.session.passport.user.username});
+	  }
+	  else{
+		  res.sendFile("/template/error.html",{root:__dirname});	
+	  }
+  });
+
+  app.use(function(req,res,next) {
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+	next();
+  })
+  .get("/addBoss", function(req,res){
+	  if(typeof req.session.passport === "undefined"){
+		  res.sendFile("/template/error.html",{root:__dirname});
+	  }
+	  else if(typeof req.session.passport.user === "undefined"){
+		  res.sendFile("/template/error.html",{root:__dirname});	
+	  }
+	  else if(typeof req.session.passport.user.boss === "undefined"){
+		  res.sendFile("/template/error.html",{root:__dirname});
+	  }
+	  else if(req.session.passport.user.boss){
+		  res.render("create_boss",{username: req.session.passport.user.username});
+	  }
+	  else{
+		  res.sendFile("/template/error.html",{root:__dirname});	
+	  }
+  });
+
+  app.post("/newEmployee", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(req.session.passport.user.boss){	
+		if(req.body.password != req.body.conf_password){
+			res.render("create_emp",{username: req.session.passport.user.username});
+		}
+		else if(req.body.password == req.body.conf_password){
+			mongo.connect(url, function(err, db){
+				var dbo = db.db("LoginDetails");
+				dbo.collection("Employees").insertOne({name: req.body.name, username: req.body.username, password: req.body.password})
+				var dbo = db.db("MainDB");
+				dbo.collection("Employees").insertOne({"name" : req.body.name, "username" : req.body.username, "designation" : req.body.designation, "phone" : req.body.phone, "mobile" : req.body.mobile, "email" : req.body.email, "gender" : req.body.gender, "address" : req.body.address, "nationality" : req.body.nationality, "dob" : req.body.dob, "adhaar" : req.body.adhaar, "account" : req.body.account, "joining" : req.body.joining, "marital" : req.body.marital, "todo" : [ ], "todoDone" : [ ]})
+				dbo.collection("Employees").find().toArray(function(err,result){
+					var EmployeesArr = [];
+					for(var i=0; i<result.length; i++){
+						EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email, username: result[i].username});
+					}
+					res.render("contactB",{employees: EmployeesArr, username: req.session.passport.user.username});
+				});
+			});
+		}
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/newBoss", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(req.session.passport.user.boss){	
+		if(req.body.password != req.body.conf_password){
+			res.render("create_boss",{username: req.session.passport.user.username});
+		}
+		else if(req.body.password == req.body.conf_password){
+			mongo.connect(url, function(err, db){
+				var dbo = db.db("LoginDetails");
+				dbo.collection("Boss").insertOne({name: req.body.name, username: req.body.username, password: req.body.password, boss: true})
+				var dbo = db.db("MainDB");
+				dbo.collection("Boss").insertOne({"name" : req.body.name, "username" : req.body.username, "designation" : req.body.designation, "phone" : req.body.phone, "mobile" : req.body.mobile, "email" : req.body.email, "gender" : req.body.gender, "address" : req.body.address, "nationality" : req.body.nationality, "dob" : req.body.dob, "adhaar" : req.body.adhaar, "account" : req.body.account, "joining" : req.body.joining, "marital" : req.body.marital, "todo" : [ ], "todoDone" : [ ]})
+				dbo.collection("Employees").find().toArray(function(err,result){
+					var EmployeesArr = [];
+					for(var i=0; i<result.length; i++){
+						EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email, username: result[i].username});
+					}
+					res.render("contactB",{employees: EmployeesArr, username: req.session.passport.user.username});
+				});
+			});
+		}
 	}
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	

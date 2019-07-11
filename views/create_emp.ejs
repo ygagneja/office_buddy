@@ -18,7 +18,10 @@
     <link href="/css/bootstrap-4.3.1.css" rel="stylesheet" type="text/css">
 	
 	  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <style>
+      
+      </style>
 </head>
 
 <body>
@@ -136,26 +139,26 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
-                    <form method="POST" action="/boss/<%= boss_user %>/contacts/<%= username %>/update">
+                    <form method="POST" action="/newEmployee">
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="username"><h4>Name</h4></label>
-                            <input name="name" type="text" class="form-control" placeholder="Enter name"   />
+                            <label for="username"><h4>Name<sup>*</sup></h4></label>
+                            <input name="name" type="text" class="form-control" placeholder="Enter name"  required />
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="username"><h4>Username</h4></label>
-                              <input name="username" type="text" class="form-control" placeholder="Enter username"   />
+                              <label for="username"><h4>Username<sup>*</sup></h4></label>
+                              <input name="username" type="text" class="form-control" placeholder="Enter username" required  />
                           </div>
                       </div>
 
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="designation"><h4>Designation</h4></label>
-                              <input name="designation" type="text" class="form-control" placeholder="Enter designation"   />
+                              <label for="designation"><h4>Designation<sup>*</sup></h4></label>
+                              <input name="designation" type="text" class="form-control" placeholder="Enter designation"  required />
                           </div>
                       </div>
                       
@@ -163,80 +166,94 @@
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="phone"><h4>Office No.</h4></label>
-                              <input name="phone" type="text" class="form-control" placeholder="Enter phone number"   />
+                              <label for="phone"><h4>Office No.<sup>*</sup></h4></label>
+                              <input name="phone" type="text" class="form-control" placeholder="Enter phone number" required  />
                           </div>
                       </div>
           
                       <div class="form-group">
                           <div class="col-xs-6">
-                             <label for="mobile"><h4>Mobile No.</h4></label>
-                              <input name="mobile" type="text" class="form-control" placeholder="Enter mobile number"   />
+                             <label for="mobile"><h4>Mobile No.<sup>*</sup></h4></label>
+                              <input name="mobile" type="text" class="form-control" placeholder="Enter mobile number"  required />
                           </div>
                       </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
-                              <input name="email" type="text" class="form-control" placeholder="<%= email %>"   />
+                              <label for="email"><h4>Email<sup>*</sup></h4></label>
+                              <input name="email" type="text" class="form-control" placeholder="Enter email "  required />
                           </div>
                       </div>
                       <div class="form-group">
                         <div class="col-xs-6">
-                           <label for="mobile"><h4>Gender</h4></label>
-                            <input name="gender" type="text" class="form-control" placeholder="<%= gender %>"   />
+                           <label for="mobile"><h4>Gender<sup>*</sup></h4></label>
+                            <input name="gender" type="text" class="form-control" placeholder="Enter gender " required  />
                         </div>
                     </div>
                       <div class="form-group">
                           
                           <div class="col-xs-6">
-                              <label for="location"><h4>Address</h4></label>
-                              <input name="address" type="text" class="form-control" placeholder="Enter address"   />
+                              <label for="location"><h4>Address<sup>*</sup></h4></label>
+                              <input name="address" type="text" class="form-control" placeholder="Enter address" required  />
                           </div>
                       </div>
                       <div class="form-group">
                           
                         <div class="col-xs-6">
-                            <label for="location"><h4>Nationality</h4></label>
-                            <input name="nationality" type="text" class="form-control" placeholder="Enter nationality" />
+                            <label for="location"><h4>Nationality<sup>*</sup></h4></label>
+                            <input name="nationality" type="text" class="form-control" placeholder="Enter nationality" required/>
                         </div>
                     </div>
                     <div class="form-group">
                           
                         <div class="col-xs-6">
-                            <label for="location"><h4>Date of Birth</h4></label>
-                            <input name="dob" type="text" class="form-control" placeholder="Enter date of birth"   />
+                            <label for="location"><h4>Date of Birth<sup>*</sup></h4></label>
+                            <input name="dob" type="text" class="form-control" placeholder="Enter date of birth"  required />
                         </div>
                     </div>
                     <div class="form-group">
                           
                         <div class="col-xs-6">
-                            <label for="location"><h4>Adhaar No.</h4></label>
-                            <input name="adhaar" type="text" class="form-control" placeholder="Enter adhaar number"/>
+                            <label for="location"><h4>Adhaar No.<sup>*</sup></h4></label>
+                            <input name="adhaar" type="text" class="form-control" placeholder="Enter adhaar number" required/>
                         </div>
                     </div>
                     <div class="form-group">
                           
                         <div class="col-xs-6">
-                            <label for="location"><h4>Account No.</h4></label>
-                            <input name="account" type="text" class="form-control" placeholder="Enter account number" />
+                            <label for="location"><h4>Account No.<sup>*</sup></h4></label>
+                            <input name="account" type="text" class="form-control" placeholder="Enter account number" required />
                         </div>
                     </div>
                     <div class="form-group">
                           
                         <div class="col-xs-6">
-                            <label for="location"><h4>Joining Date</h4></label>
-                            <input name="joining" type="text" class="form-control" placeholder="Enter date of joining"/>
+                            <label for="location"><h4>Joining Date<sup>*</sup></h4></label>
+                            <input name="joining" type="text" class="form-control" placeholder="Enter date of joining" required/>
                         </div>
                     </div>
                     <div class="form-group">
                           
                         <div class="col-xs-6">
-                            <label for="location"><h4>Marital Status</h4></label>
-                            <input name="marital" type="text" class="form-control" placeholder="Enter marital status" />
+                            <label for="location"><h4>Marital Status<sup>*</sup></h4></label>
+                            <input name="marital" type="text" class="form-control" placeholder="Enter marital status" required/>
                         </div>
                     </div>
-                    <center><div class="fff"><button class="btn uza-btn btn-2 edit" id="edit_button">Create Profile</button></div></center>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Enter Password<sup>*</sup></h4></label>
+                            <input name="password" type="password" class="form-control" placeholder="Enter password" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          
+                        <div class="col-xs-6">
+                            <label for="location"><h4>Retype Password<sup>*</sup></h4></label>
+                            <input name="conf_password" type="password" class="form-control" placeholder="Confirm password" required/>
+                        </div>
+                    </div>
+                    <center><div class="fff"><button class="btn uza-btn btn-2 edit" id="edit_button">Add Employee</button></div></center>
                 </form>
                 <hr>
             </div><!--/tab-pane-->

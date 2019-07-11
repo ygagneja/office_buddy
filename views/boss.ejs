@@ -111,16 +111,20 @@
             width: 90%;
             height: 35px;
             box-sizing: border-box;
+            margin-bottom: 15px;
+            padding: 5px;
+            padding-left: 15px;
         }
 
         .addit {
-            background-color: aqua;
             color: white;
+            background-color: #6c7ae0;
+            border-radius: 20px;
+            padding: 8px;
         }
 
         .cross {
-            background-color: red;
-            color: white;
+            color: lightslategray;
         }
         textarea {
             width: 100%;
@@ -313,6 +317,30 @@
         .scroll_text::-webkit-scrollbar-thumb:hover {
             background-color: #000;
         }
+        .scroll_text1 {
+            height: 300px;
+            overflow: auto;
+            padding: 0px 15px;
+
+        }
+
+        .scroll_text1::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scroll_text1::-webkit-scrollbar-track {
+            background-color: #E7E7E7;
+        }
+
+        .scroll_text1::-webkit-scrollbar-thumb {
+            background-color: dodgerblue;
+            border: 1px solid rgba(92, 92, 92, 0.5);
+            border-radius: 10px;
+        }
+
+        .scroll_text1::-webkit-scrollbar-thumb:hover {
+            background-color: #000;
+        }
 
         .pt-lg-5 {
             padding-top: 0 !important;
@@ -441,12 +469,13 @@
                         </div>
                         <!--Popup starts here -->
                         <div class="popup popupAnn" style="text-align: center">
+                           <div class="wrapper">
                             <h2>Add a new announcement</h2>
                             <form id="formA">
                                 <textarea placeholder="Write here..." maxlength="" name="announcement"
                                     required></textarea><br><br>
                                 <input id="addA" type="button" class="uza-btn btn-2" value="Add Announcement">
-                            </form>
+                            </form></div>
                         </div>
 
 
@@ -532,7 +561,7 @@
                         </div>
                         <!-- Chat ends here -->
                     </div>
-                    <!--Application Status-->
+                    <!--Application Status starts -->
                     <br><br><br><br><br><br><br><br><br><br>
                     <div class="container">
                         <div class="col-lg-12 pl-0">
@@ -573,39 +602,39 @@
                                 <!-- Application Status Popup -->
                                 <div class="popup1 popup popupApp">
                                     <!-- < if(appplication.status === "new"){ > -->
-                                        <div class="container" id="app1">
-                                            <div class="row">
-                                                <div class="col-10">
-                                                    <h3></h3>
-                                                </div>
-                                                <div class="col-2"><button><i class="fa fa-paperclip fa-2x"
-                                                            aria-hidden="true"></i></button></div>
-                                            </div><br>
-                                            <div class="row">
-                                                <div class="col-10"><input type="text" class="ipp2"></div>
-                                                <div class="col-1"><button class="addit" onclick="Addappli()"><i class="fa fa-plus fa-3x"
-                                                            aria-hidden="true"></i></button></div>
-                                                <div class="col-1"><button class="cross"><i class="fa fa-times fa-3x"
-                                                            aria-hidden="true"></i></button></div>
-    
-                                            </div>
-                                        </div>
+                                        <!-- <div class="container">
+                                                <div class="col-12">
+                                                        <center><h2 style="color: black"><b>Application ID : 1234</b></h2></center>
+                                                    </div>
+                
+                                                    <p align="left">Customer : Shiv<br>
+                                                    Date : 12/45/78
+                                                </p><div align="right">
+                                                        <div class="col-12"><button class="addit" onclick="Addappli()">Add Employee</button></div>
+                                                        </div>
+                
+                                                    <hr><br>
+                                                    <div class="container scroll_text1"  id="app1">
+                                                    </div>
+                                                    <br>
+                                                    <button class="uza-btn btn-2">Submit</button>
+                                        </div> -->
                                         <!-- < } else { > -->
-                                            <div class="container">
-                                                <h3 class="popup_heading">Application ID</h3>
+                                            <div class="container scroll_text" id="app1">
+                                                    <center><h2 style="color: black"><b>Application ID : 1234</b></h2></center>
                                                 <br>
                                                 <form>
                                                     <div class="popup_form"><label for="customer_name">Customer</label>
-                                                        <input id="customer_name" type="text"></div>
+                                                        <input id="customer_name" type="text" style="margin-left: 8px !important" readonly="readonly" /></div>
                                                     <div class="popup_form"><label for="date">Date</label>
-                                                        <input id="date" type="date"></div>
+                                                        <input id="date" type="date"  style="margin-left: 40px !important" readonly="readonly" /></div>
                                                         <div class="popup_form"><label for="status">Status</label>
-                                                            <input id="status" type="text"></div>
+                                                            <input id="status" type="text"  style="margin-left: 30px !important" readonly="readonly" /></div>
                                                             <div class="popup_form"><label for="subject">Subject</label>
-                                                                <input id="subject" type="text"></div>
+                                                                <input id="subject" type="text"  style="margin-left: 20px !important" readonly="readonly" /></div>
                                                         <div class="row">
                                                             <div class="col-3"><label for="added_by">Added By :</label></div>
-                                                        <div class="col-8"><textarea placeholder="Write your comments here ..."></textarea></div>
+                                                        <div class="col-8"><textarea placeholder="Write your comments here ..." readonly="readonly" ></textarea></div>
                                                         <div class="col-1">image here</div>
                                                     </div>
         
@@ -945,25 +974,24 @@
     <script>
     function Addappli(){
                    $("#app1")
-                    .append(
-                        $("<br>"))
+                    
                     .append(
                         $("<div>").attr('class', 'row')
                             .append(
                                 $("<div>").attr('class', 'col-10')
                                     .append(
-                                        $("<input>").attr('type', "text").attr('class', 'ipp2')
+                                        $("<input>").attr('type', "text").attr('placeholder','Enter employee name').attr('class', 'ipp2')
                                     )
                             )
-                            .append(
-                                $("<div>").attr('class', 'col-1')
-                                    .append(
-                                        $("<button>").attr("onclick","Addappli()").attr('class', 'addit')
-                                            .append(
-                                                $("<i>").attr('class', 'fa fa-plus fa-3x').attr('aria-hidden', 'true')
-                                            )
-                                    )
-                            )
+                            // .append(
+                            //     $("<div>").attr('class', 'col-1')
+                            //         .append(
+                            //             $("<button>").attr("onclick","Addappli()").attr('class', 'addit')
+                            //                 .append(
+                            //                     $("<i>").attr('class', 'fa fa-plus fa-3x').attr('aria-hidden', 'true')
+                            //                 )
+                            //         )
+                            // )
                             .append(
                                 $("<div>").attr('class', 'col-1')
                                     .append(
