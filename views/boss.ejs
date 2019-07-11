@@ -587,71 +587,42 @@
 
                                     <table>
                                         <tbody>
+                                            <% applications.forEach(function(application){ %>
+                                            <% if(application.status == "New"){ %>
                                             <tr class="row100 body">
-                                                <td class="cell100 column1"><button data-js="openApp">1234</button></td>
-                                                <td class="cell100 column2">pending</td>
-                                                <td class="cell100 column3">12/12/12</td>
-                                                <td class="cell100 column4">xyz</td>
-                                                <td class="cell100 column5">xyz</td>
+                                                <td class="cell100 column1"><button name="<%= application.id %>" onclick="popupNew(this.name)"><%= application.id %></button></td>
+                                                <td class="cell100 column2" id="<%= application.id %>status"><%= application.status %></td>
+                                                <td class="cell100 column3" id="<%= application.id %>date"><%= application.date %></td>
+                                                <td class="cell100 column4" id="<%= application.id %>customer"><%= application.customer %></td>
+                                                <td class="cell100 column5" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <input type="hidden" id="<%= application.id %>attachments" value="<%= application.attachments %>">
                                             </tr>
-
+                                            <% } else if(application.status == "Pending" || application.status == "Complete" || application.status == "Error") { %>
+                                            <tr class="row100 body">
+                                                <td class="cell100 column1"><button name="<%= application.id %>" onclick="popupApp(this.name)"><%= application.id %></button></td>
+                                                <td class="cell100 column2" id="<%= application.id %>status"><%= application.status %></td>
+                                                <td class="cell100 column3" id="<%= application.id %>date"><%= application.date %></td>
+                                                <td class="cell100 column4" id="<%= application.id %>customer"><%= application.customer %></td>
+                                                <td class="cell100 column5" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <input type="hidden" id="<%= application.id %>attachments" value="<%= application.attachments %>">
+                                                <input type="hidden" id="<%= application.id %>employees" value="<%= application.employees %>">
+                                                <input type="hidden" id="<%= application.id %>comments" value="<%= application.comments %>">
+                                            </tr>
+                                            <% } %>
+                                            <% }) %>
                                         </tbody>
                                     </table>
 
                                 </div>
-                                <!-- Application Status Popup -->
-                                <div class="popup1 popup popupApp">
-                                    <!-- < if(appplication.status === "new"){ > -->
-                                        <!-- <div class="container">
-                                                <div class="col-12">
-                                                        <center><h2 style="color: black"><b>Application ID : 1234</b></h2></center>
-                                                    </div>
-                
-                                                    <p align="left">Customer : Shiv<br>
-                                                    Date : 12/45/78
-                                                </p><div align="right">
-                                                        <div class="col-12"><button class="addit" onclick="Addappli()">Add Employee</button></div>
-                                                        </div>
-                
-                                                    <hr><br>
-                                                    <div class="container scroll_text1"  id="app1">
-                                                    </div>
-                                                    <br>
-                                                    <button class="uza-btn btn-2">Submit</button>
-                                        </div> -->
-                                        <!-- < } else { > -->
-                                            <div class="container scroll_text" id="app1">
-                                                    <center><h2 style="color: black"><b>Application ID : 1234</b></h2></center>
-                                                <br>
-                                                <form>
-                                                    <div class="popup_form"><label for="customer_name">Customer</label>
-                                                        <input id="customer_name" type="text" style="margin-left: 8px !important" readonly="readonly" /></div>
-                                                    <div class="popup_form"><label for="date">Date</label>
-                                                        <input id="date" type="date"  style="margin-left: 40px !important" readonly="readonly" /></div>
-                                                        <div class="popup_form"><label for="status">Status</label>
-                                                            <input id="status" type="text"  style="margin-left: 30px !important" readonly="readonly" /></div>
-                                                            <div class="popup_form"><label for="subject">Subject</label>
-                                                                <input id="subject" type="text"  style="margin-left: 20px !important" readonly="readonly" /></div>
-                                                        <div class="row">
-                                                            <div class="col-3"><label for="added_by">Added By :</label></div>
-                                                        <div class="col-8"><textarea placeholder="Write your comments here ..." readonly="readonly" ></textarea></div>
-                                                        <div class="col-1">image here</div>
-                                                    </div>
-        
-        
-                                                </form>
-                                            </div>
-                                            <!-- < } > -->
-                                </div>
-                                <!-- Application Status Popup ends here -->
-                            </div>
-
-
-
 
                         </div>
                     </div>
+                    </div>
+
                     <!-- Application Status ends here -->
+
+                     </div>
+                      <div id="popups">
                     <!-- todo-->
                     <div class="row topmargin">
                         <div class="col-md-6" id="todo">
@@ -970,41 +941,7 @@
         }
         setInterval(refreshMessages, 5000);
     </script>
-        <!-- Status New apllication js  -->
-    <script>
-    function Addappli(){
-                   $("#app1")
-                    
-                    .append(
-                        $("<div>").attr('class', 'row')
-                            .append(
-                                $("<div>").attr('class', 'col-10')
-                                    .append(
-                                        $("<input>").attr('type', "text").attr('placeholder','Enter employee name').attr('class', 'ipp2')
-                                    )
-                            )
-                            // .append(
-                            //     $("<div>").attr('class', 'col-1')
-                            //         .append(
-                            //             $("<button>").attr("onclick","Addappli()").attr('class', 'addit')
-                            //                 .append(
-                            //                     $("<i>").attr('class', 'fa fa-plus fa-3x').attr('aria-hidden', 'true')
-                            //                 )
-                            //         )
-                            // )
-                            .append(
-                                $("<div>").attr('class', 'col-1')
-                                    .append(
-                                        $("<button>").attr("onclick","this.parentNode.parentNode.remove()").attr('class', 'cross')
-                                            .append(
-                                                $("<i>").attr('class', 'fa fa-times fa-3x').attr('aria-hidden', 'true')
-                                            )
-                                    )
-                            )
-                    )
-                    
-            }
-    </script>
+       
 </body>
 
 </html>

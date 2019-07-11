@@ -446,19 +446,34 @@ app.use(function(req,res,next) {
 						Messages.push(result[i]);
 					}
 					if(req.params.type == "employees" && typeof req.session.passport.user.boss === "undefined"){
-						dbo.collection("Employees").findOne({username: req.session.passport.user.username}, function(err, doc){
-							if(err) throw err;
-							if(doc){
-								res.render("employee", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages, todoList: doc.todo, todoDoneList: doc.todoDone});
-							}
+						dbo.collection("Applications").find().toArray(function(err, result){
+								dbo.collection("Employees").findOne({username: req.session.passport.user.username}, function(err, doc){
+								if(err) throw err;
+								if(doc){
+									var Arr = [];
+									for(var i=0; i<result.length; i++){
+										if(result[i].status == "Pending"){
+											for(var j=0; j<result[i].employees.length; j++){
+												if(result[i].employees[j] == req.session.passport.user.name && (typeof result[i].comments[j] === "undefined" || result[i].comments[j] == "") && (j==0 || typeof result[i].comments[j-1] != "undefined")){
+													Arr.push(result[i]);
+													break;
+												}
+											}
+										}
+									}
+									res.render("employee", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages, todoList: doc.todo, todoDoneList: doc.todoDone, applications: Arr});
+								}
+							});
 						});
 					}
 					else if(req.params.type == "boss" && req.session.passport.user.boss == true){
-						dbo.collection("Boss").findOne({username: req.session.passport.user.username}, function(err, doc){
-							if(err) throw err;
-							if(doc){
-								res.render("boss", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages, todoList: doc.todo, todoDoneList: doc.todoDone});
-							}
+						dbo.collection("Applications").find().toArray(function(err, result){
+								dbo.collection("Boss").findOne({username: req.session.passport.user.username}, function(err, doc){
+								if(err) throw err;
+								if(doc){
+									res.render("boss", {name: req.session.passport.user.name, username: req.session.passport.user.username, announcements: Announcements, messages: Messages, todoList: doc.todo, todoDoneList: doc.todoDone, applications: result});
+								}
+							});
 						});
 					}
 				});
@@ -774,6 +789,86 @@ app.post("/newBoss", function(req, res){
 				});
 			});
 		}
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/employeesPost", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(typeof req.session.passport.user.boss === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});		
+	}
+	else if(req.session.passport.user.boss){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Applications").findOne({id: req.body.id}, function(err, doc){
+				var newValues = {$set: {status: "Pending", employees: req.body.employees, comments: []}};
+				dbo.collection("Applications").updateOne({id: req.body.id}, newValues);
+				res.redirect("/");
+			});
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/submitComment", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.name == req.body.employee){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Applications").findOne({id: req.body.id}, function(err, doc){
+				var Arr = doc.comments;
+				Arr.push(req.body.comment)
+				if(Arr.length == doc.employees.length){
+					var newValues = {$set: {comments: Arr, status: "Complete"}};
+					dbo.collection("Applications").updateOne({id: req.body.id}, newValues);
+					res.redirect("/");
+				}
+				else{
+					var newValues = {$set: {comments: Arr}};
+					dbo.collection("Applications").updateOne({id: req.body.id}, newValues);
+					res.redirect("/");
+				}
+			})
+		});
+	}
+	else{
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+});
+
+app.post("/reportError", function(req, res){
+	if(typeof req.session.passport === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});
+	}
+	else if(typeof req.session.passport.user === "undefined"){
+		res.sendFile("/template/error.html",{root:__dirname});	
+	}
+	else if(req.session.passport.user.name == req.body.employee){	
+		mongo.connect(url, function(err, db){
+			var dbo = db.db("MainDB");
+			dbo.collection("Applications").findOne({id: req.body.id}, function(err, doc){
+				var Arr = doc.comments;
+				Arr.push(req.body.comment)
+				var newValues = {$set: {comments: Arr, status: "Error"}};
+				dbo.collection("Applications").updateOne({id: req.body.id}, newValues);
+				res.redirect("/");
+			})
+		});
 	}
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	
