@@ -207,7 +207,7 @@ app.post("/chatAppend", function(req, res){
 	else if(req.session.passport.user){	
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("MainDB");
-			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date().toString().substr(new Date().toString(), new Date().toString().length - 18), message: req.body.message}, function(err, result){});
+			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date().toString().substr(new Date().toString(), new Date().toString().length - 18), message: req.body.message});
 		});
 	}
 	else{
@@ -885,6 +885,22 @@ app.post("/reportError", function(req, res){
 	else{
 		res.sendFile("/template/error.html",{root:__dirname});	
 	}
+});
+
+app.use(function(req,res,next) {
+  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  next();
+})
+.get("/addApplication", function(req,res){
+	res.sendFile("/template/application.html", {root:__dirname});
+});
+
+app.post("/submitApplication", function(req, res){
+	mongo.connect(url, function(err, db){
+		var dbo = db.db("MainDB");
+		dbo.collection("Applications").insertOne({id: new Date().getTime().toString(), customer: req.body.customer, attachments: req.body.attachments, subject: req.body.subject, status: "New", date: new Date().getDate().toString() + "-" + (new Date().getMonth()+1).toString() + "-" + new Date().getFullYear().toString()})
+		res.redirect("/");
+	});
 });
 
 app.get("/logout", function(req,res){
