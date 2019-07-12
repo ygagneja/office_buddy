@@ -109,7 +109,7 @@ function popupOpenCloseApp(id, status, date, customer, subject, attachments, emp
 		iter = comments.length-1;
 
 	for(var i=0; i<employees.length;i++){
-		if(typeof comments[i] === "undefined" || comments[i] == "" && i>iter){
+		if(typeof comments[i] === "undefined" || comments[i] == "" && i>=iter){
 			$("#app1").append(
 						$("<div>").attr("class","row")
 						.append(
