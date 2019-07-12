@@ -103,20 +103,23 @@ app.post("/loginBoss", passport.authenticate('Boss', {failureRedirect: "/"}),fun
 
 app.post("/changePassword", function(req,res){
 	if(req.body.newpassword != req.body.retypepassword){
+		//alert
 		res.redirect("/employees/" + req.user.username + "/profile/changePassword");
 	}
 	else if(req.body.newpassword == req.body.retypepassword){
+		//alert
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("LoginDetails");
 			dbo.collection("Employees").SfindOne({username: req.user.username}, function(err, doc){
 				if(err) throw err;
 				if(doc.password == req.body.oldpassword){
 					var myQuery = {username: doc.username};
-					dbo.collection("Employees").remove(myQuery);
-					dbo.collection("Employees").insertOne({name: req.user.name, username: req.user.username, password: req.body.newpassword},function(err,result){});
+					var newValues = {$set: {password: req.body.newpassword}}
+					dbo.collection("Employees").updateOne(myQuery, newValues);
 					res.redirect("/employees/" + req.user.username + "/profile");
 				}
 				else{
+					//alert
 					res.redirect("/employees/" + req.user.username + "/profile/changePassword");
 				}
 			});	
@@ -126,20 +129,23 @@ app.post("/changePassword", function(req,res){
 
 app.post("/changePasswordBoss", function(req,res){
 	if(req.body.newpassword != req.body.retypepassword){
+		//alert
 		res.redirect("/boss/" + req.user.username + "/profile/changePassword");
 	}
 	else if(req.body.newpassword == req.body.retypepassword){
+		//alert
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("LoginDetails");
 			dbo.collection("Boss").findOne({username: req.user.username}, function(err, doc){
 				if(err) throw err;
 				if(doc.password == req.body.oldpassword){
 					var myQuery = {username: doc.username};
-					dbo.collection("Boss").remove(myQuery);
-					dbo.collection("Boss").insertOne({name: req.user.name, username: req.user.username, password: req.body.newpassword, boss:true},function(err,result){});
+					var newValues = {$set: {password: req.body.newpassword}};
+					dbo.collection("Boss").updateOne(myQuery, newValues);
 					res.redirect("/boss/" + req.user.username + "/profile");
 				}
 				else{
+					//alert
 					res.redirect("/boss/" + req.user.username + "/profile/changePassword");
 				}
 			});	
@@ -160,7 +166,7 @@ app.post("/addAnnouncement", function(req, res){
 	else if(req.session.passport.user.boss == true){	
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("MainDB");
-			dbo.collection("Announcements").insertOne({id: new Date().getUTCMilliseconds().toString(),date: new Date(), announcement: req.body.announcement});
+			dbo.collection("Announcements").insertOne({id: new Date().getTime().toString(),date: new Date().toString().substr(new Date().toString(), new Date().toString().length - 18), announcement: req.body.announcement});
 			res.redirect("/");
 		});
 	}
@@ -201,7 +207,7 @@ app.post("/chatAppend", function(req, res){
 	else if(req.session.passport.user){	
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("MainDB");
-			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date(), message: req.body.message}, function(err, result){});
+			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date().toString().substr(new Date().toString(), new Date().toString().length - 18), message: req.body.message}, function(err, result){});
 		});
 	}
 	else{
@@ -632,14 +638,15 @@ app.post("/boss/:username/contacts/:emp_username/update", function(req,res){
 			var dbo = db.db("MainDB");
 			dbo.collection("Employees").findOne({username: req.params.emp_username}, function(err, doc){
 				var myQuery = {username: req.params.emp_username};
-				dbo.collection("Employees").remove(myQuery);
-				dbo.collection("Employees").insertOne({"name" : req.body.name, "username" : req.body.username, "designation" : req.body.designation, "phone" : req.body.phone, "mobile" : req.body.mobile, "email" : req.body.email, "gender" : req.body.gender, "address" : req.body.address, "nationality" : req.body.nationality, "dob" : req.body.dob, "adhaar" : req.body.adhaar, "account" : req.body.account, "joining" : req.body.joining, "marital" : req.body.marital, "todo" : doc.todo, "todoDone" : doc.todoDone});
+				var newValues = {$set: {"name" : req.body.name, "username" : req.body.username, "designation" : req.body.designation, "phone" : req.body.phone, "mobile" : req.body.mobile, "email" : req.body.email, "gender" : req.body.gender, "address" : req.body.address, "nationality" : req.body.nationality, "dob" : req.body.dob, "adhaar" : req.body.adhaar, "account" : req.body.account, "joining" : req.body.joining, "marital" : req.body.marital, "todo" : doc.todo, "todoDone" : doc.todoDone}}
+				dbo.collection("Employees").updateOne(myQuery, newValues);
 			});
 			var dbo2 = db.db("LoginDetails");
 			dbo2.collection("Employees").findOne({username: req.params.emp_username}, function(err, doc){
 				var myQuery = {username: req.params.emp_username};
-				dbo2.collection("Employees").remove(myQuery);
-				dbo2.collection("Employees").insertOne({name: req.body.name, username: req.body.username, password: doc.password})
+				var newValues = {$set: {name: req.body.name, username: req.body.username}}
+				dbo2.collection("Employees").updateOne(myQuery, newValues);
+				//alert
 				res.redirect("/boss/" + req.params.username + "/contacts/" + req.body.username);
 			});
 		});
@@ -664,14 +671,15 @@ app.post("/boss/:username/profile/update", function(req, res){
 			var dbo = db.db("MainDB");
 			dbo.collection("Boss").findOne({username: req.params.username}, function(err, doc){
 				var myQuery = {username: req.params.username};
-				dbo.collection("Boss").remove(myQuery);
-				dbo.collection("Boss").insertOne(req.body,function(err,result){});
+				var newValues = {$set: req.body};
+				dbo.collection("Boss").updateOne(myQuery, newValues);
 			});
 			var dbo2 = db.db("LoginDetails");
 			dbo2.collection("Boss").findOne({username: req.params.username}, function(err, doc){
 				var myQuery = {username: req.params.username};
-				dbo2.collection("Boss").remove(myQuery);
-				dbo2.collection("Boss").insertOne({name: req.body.name, username: req.body.username, password: doc.password, boss:true}, function(err, doc){})
+				var newValues = {$set: {name: req.body.name, username: req.body.username}};
+				dbo2.collection("Boss").updateOne(myQuery, newValues);
+				//alert
 				res.redirect("/boss/" + req.params.username + "/profile");
 			});
 		});
@@ -737,7 +745,8 @@ app.use(function(req,res,next) {
 	}
 	else if(req.session.passport.user.boss){	
 		if(req.body.password != req.body.conf_password){
-			res.render("create_emp",{username: req.session.passport.user.username});
+			//alert
+			res.redirect("/addEmployee");
 		}
 		else if(req.body.password == req.body.conf_password){
 			mongo.connect(url, function(err, db){
@@ -750,7 +759,8 @@ app.use(function(req,res,next) {
 					for(var i=0; i<result.length; i++){
 						EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email, username: result[i].username});
 					}
-					res.render("contactB",{employees: EmployeesArr, username: req.session.passport.user.username});
+					//alert
+					res.redirect("/boss/" + req.user.username + "");
 				});
 			});
 		}
@@ -772,7 +782,8 @@ app.post("/newBoss", function(req, res){
 	}
 	else if(req.session.passport.user.boss){	
 		if(req.body.password != req.body.conf_password){
-			res.render("create_boss",{username: req.session.passport.user.username});
+			//alert
+			res.redirect("/addBoss");
 		}
 		else if(req.body.password == req.body.conf_password){
 			mongo.connect(url, function(err, db){
@@ -785,7 +796,8 @@ app.post("/newBoss", function(req, res){
 					for(var i=0; i<result.length; i++){
 						EmployeesArr.push({name: result[i].name, designation: result[i].designation, phone: result[i].phone, mobile: result[i].mobile, email: result[i].email, username: result[i].username});
 					}
-					res.render("contactB",{employees: EmployeesArr, username: req.session.passport.user.username});
+					//alert
+					res.redirect("/boss/" + req.user.username + "/contacts");
 				});
 			});
 		}

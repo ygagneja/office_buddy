@@ -32,7 +32,7 @@ function popupOpenCloseApp(id, status, date, customer, subject, attachments, emp
 	.append(
 		$("<div>").attr("class","popup1 popup popupApp")
 		.append(
-				$("<div>").attr("class","container scroll_text").attr("id","app1")
+				$("<div>").attr("class","container")
 				.append(
 						$("<div>").attr("class","row")
 						.append(
@@ -99,17 +99,23 @@ function popupOpenCloseApp(id, status, date, customer, subject, attachments, emp
 				.append(
 						$("<br>")
 					)
+				.append(
+					$("<div>").attr("class"," scroll_text").attr("id","app1")
+				)
 			)
 	)
 	employees = employees.split(',')
 	comments = comments.split(',')
 
-	iter = 0
+	iter = -1
+	
 	if(comments[0] != "")
 		iter = comments.length-1;
 
+	console.log(iter)
+
 	for(var i=0; i<employees.length;i++){
-		if(typeof comments[i] === "undefined" || comments[i] == "" && i>=iter){
+		if((typeof comments[i] === "undefined" || comments[i] == "" && i>iter)|| iter==-1){
 			$("#app1").append(
 						$("<div>").attr("class","row")
 						.append(
@@ -205,7 +211,7 @@ function popupOpenCloseEmployee(id, status, date, customer, subject, attachments
 	.append(
 		$("<div>").attr("class","popup1 popup popupEmployee")
 		.append(
-				$("<div>").attr("class","container scroll_text").attr("id","app1")
+				$("<div>").attr("class","container")
 				.append(
 						$("<div>").attr("class","row")
 						.append(
@@ -272,6 +278,9 @@ function popupOpenCloseEmployee(id, status, date, customer, subject, attachments
 				.append(
 						$("<br>")
 					)
+				.append(
+					$("<div>").attr("class"," scroll_text").attr("id","app1")
+				)
 			)
 	)
 	employees = employees.split(',')
@@ -372,21 +381,28 @@ function popupOpenCloseNew(id, status, date, customer, subject, attachments) {
     		.append(
     			$("<div>").attr("class", "col-12")
     			.append(
-    				$("<center>").append($("<h2>").attr("style", "color:black").append("<b>").text("Application ID: " + id))
+					$("<center>")
+					.append(
+						$("<h2>").attr("style", "color:black")
+						.append(
+							$("<b>").text("Application ID: " + id)
+						)
+					)
     			)
     		)
     		.append(
-    			$("<p>").attr("align", "left").text("Customer: "+ customer).append($("<br/>")).text("Date: " + date)
+				$("<p>").attr("align", "left").text("Customer: " + customer + "Date: " + date)
+					
     		)
     		.append(
     			$("<div>").attr("align", "right")
     			.append(
     				$("<div>").attr("class","col-12")
     				.append(
-    					$("<button>").attr("class","addit").attr("onclick","Addappli()").text("Add Employee")
-    				)
+    					$("<button>").attr("class","addit").attr("onclick","Addappli()").text("Add Employee").attr("style","font-size:16px")
+					)
     				.append(
-    					$("<button>").attr("class","addit").append($("<a>").attr("href", attachments).text("Attachments"))
+    					$("<button>").attr("class","addit").append($("<a>").attr("href", attachments).text("Attachments").attr("style","color:white"))
     				)
     			)
     		)
@@ -403,11 +419,12 @@ function popupOpenCloseNew(id, status, date, customer, subject, attachments) {
     				.append(
     					$("<input>").attr("type", "hidden").attr("name", "id").attr("value", id)
     				)
-    				.append(
-    					$("<button>").attr("class","uza-btn btn-2").text("Submit")
-    				)
-    			)
-    		)
+				)
+				
+			)
+			.append(
+				$("<button>").attr("class","addit").text("Submit").attr("form","app1")
+			)
     		.append(
     			$("<br/>")
     		)
@@ -491,7 +508,7 @@ function Addappli(){
                                     .append(
                                         $("<button>").attr("onclick","this.parentNode.parentNode.remove()").attr('class', 'cross')
                                             .append(
-                                                $("<i>").attr('class', 'fa fa-times fa-3x').attr('aria-hidden', 'true')
+                                                $("<i>").attr('class', 'fa fa-times-circle fa-2x').attr('aria-hidden', 'true')
                                             )
                                     )
                             )

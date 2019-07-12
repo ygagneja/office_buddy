@@ -59,7 +59,7 @@ ul, li {
 input {
   display: block;
 	outline: none;
-	border: none !important;
+	border: inherit !important;
 }
 
 textarea {
@@ -67,9 +67,7 @@ textarea {
   outline: none;
 }
 
-textarea:focus, input:focus {
-  border-color: transparent !important;
-}
+
 
 /* ------------------------------------ */
 button {
@@ -157,7 +155,7 @@ iframe {
 }
 
 .wrap-table100 {
-  width: 1170px;
+  width: 100%;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -176,7 +174,7 @@ th, td {
 }
 
 .column1 {
-  width: 33%;
+  width: 25%;
   padding-left: 40px;
 }
 
@@ -185,14 +183,17 @@ th, td {
 }
 
 .column3 {
-  width: 22%;
+  width: 20%;
 }
 
 .column4 {
-  width: 19%;
+  width: 17%;
 }
 
 .column5 {
+  width: 12%;
+}
+.column6 {
   width: 13%;
 }
 

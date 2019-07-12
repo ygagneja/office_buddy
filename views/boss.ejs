@@ -105,7 +105,46 @@
 
     <!--humne khud banaya-->
     <style>
+        .dropdown {
+            background-color: transparent;
+            padding: 12px 20px 12px 50px;
+            border: 1px !important;
+            border-radius: 0px !important;
+            border-style:solid !important;
+            border-color: rgb(240, 233, 233) !important;
+            margin-bottom: px;
+            box-shadow: 1px 2px #e2e0e0;
+
+        }
+        .dropdown:focus{
+            outline: none;         
+        }
+        #myInput {
+            background-image: url('/img/core-img/search(2).jpg');
+            background-position: left;
+            background-repeat: no-repeat;
+            width: 90%;
+            font-size: 16px;
+            padding: 12px 20px 12px 50px;
+            border: 1px !important;
+            border-radius: 20px;
+            border-style:solid !important;
+            border-color: rgb(240, 233, 233) !important;
+            margin-bottom: 16px;
+            box-shadow: 1px 2px #e2e0e0;
+        }
         .ipp2 {
+            border-radius: 25px;
+            border: 1px solid rgb(197, 197, 197) !important;
+            width: 90%;
+            height: 35px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            padding: 5px;
+            padding-left: 15px;
+        }
+
+        .ipp2:focus {
             border-radius: 25px;
             border: 1px solid rgb(197, 197, 197) !important;
             width: 90%;
@@ -126,6 +165,7 @@
         .cross {
             color: lightslategray;
         }
+
         textarea {
             width: 100%;
             height: 150px;
@@ -139,13 +179,21 @@
         }
 
         .edit-btn {
-            height: 10%;
-            width: 10%;
+            height: 30px;
+            width: 8%;
             border-radius: 5px;
+            background-image: url(/img/core-img/del.png);
+            background-size: 30px; 
+            background-color: inherit;
+            background-repeat: no-repeat;
+            float: right;
+            
         }
 
         .edit-btn:hover {
-            background: #e7f2fd
+            background-image: url(/img/core-img/del.png);
+            
+
         }
 
         a:hover {
@@ -317,6 +365,7 @@
         .scroll_text::-webkit-scrollbar-thumb:hover {
             background-color: #000;
         }
+
         .scroll_text1 {
             height: 300px;
             overflow: auto;
@@ -389,8 +438,6 @@
 
                                 <li><a href="#todo">To-Do</a></li>
 
-                                <li><a href="#">My Attendance</a></li>
-
                                 <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
 
                                 <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
@@ -447,9 +494,13 @@
                                                         <%= announcement.announcement %>
                                                     </h4>
                                                     <form id="<%= announcement.id %>">
-                                                        <input type="hidden" name="id" value="<%= announcement.id %>" id="<%= announcement.id %>hidden">
-                                                        <input type="button" style="display: inline-block;" class="edit-btn" onclick="deleteAnnouncement($(this).parent().attr('id'))">
+                                                        <input type="hidden" name="id" value="<%= announcement.id %>"
+                                                            id="<%= announcement.id %>hidden">
+                                                        <input type="button" style="display: inline-block;"
+                                                            class="edit-btn fa fa-trash" aria-hidden="true"
+                                                            onclick="deleteAnnouncement($(this).parent().attr('id'))">
                                                     </form>
+                                                    <br>
 
 
                                                 </li>
@@ -469,13 +520,14 @@
                         </div>
                         <!--Popup starts here -->
                         <div class="popup popupAnn" style="text-align: center">
-                           <div class="wrapper">
-                            <h2>Add a new announcement</h2>
-                            <form id="formA">
-                                <textarea placeholder="Write here..." maxlength="" name="announcement"
-                                    required></textarea><br><br>
-                                <input id="addA" type="button" class="uza-btn btn-2" value="Add Announcement">
-                            </form></div>
+                            <div class="wrapper">
+                                <h2>Add a new announcement</h2>
+                                <form id="formA">
+                                    <textarea placeholder="Write here..." maxlength="" name="announcement"
+                                        required></textarea><br><br>
+                                    <input id="addA" type="button" class="uza-btn btn-2" value="Add Announcement">
+                                </form>
+                            </div>
                         </div>
 
 
@@ -487,13 +539,16 @@
                         <!-- Chat Start Here-->
                         <div class="col-md-4 topmargin chat-flex">
                             <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <span class="glyphicon glyphicon-comment"></span> Chat
+                                <div class="panel-heading" style="background: #6c7ae0">
+                                    <i class="fa fa-comments fa-2x" aria-hidden="true"></i> &nbsp;&nbsp;&nbsp;&nbsp;<b
+                                        style="font-size: 18px">Chat</b>
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn btn-default btn-xs "
-                                            onclick="refreshMessages()">
-                                            <a href="#"><span class="glyphicon glyphicon-refresh">
-                                                </span></a>
+                                            onclick="refreshMessages()" style="background: #6c7ae0; border:none">
+
+                                            <a href="#"><i class="fa fa-refresh "
+                                                    style="color:white; font-size: 25px"></i>
+                                            </a>
 
                                         </button>
 
@@ -549,10 +604,12 @@
                                     <div class="panel-footer">
                                         <div class="input-group">
                                             <input name="message" id="btn-input" type="text"
-                                                class="form-control input-sm" placeholder="Type your message here..." />
+                                                class="form-control input-sm" placeholder="Type your message here..."
+                                                style="height:40px; font-size: 15px;">
                                             <span class="input-group-btn">
                                                 <input type="button" class="btn btn-warning btn-sm" id="btn-chat"
-                                                    value="Send">
+                                                    value="Send"
+                                                    style="height:40px; font-size: 15px; background: #6c7ae0">
                                             </span>
                                         </div>
                                     </div>
@@ -563,11 +620,33 @@
                     </div>
                     <!--Application Status starts -->
                     <br><br><br><br><br><br><br><br><br><br>
-                    <div class="container">
+                    
+                    <div class="row">
+                        <div class="col-sm-7"><input id="myInput" type="text" placeholder="Search.."></div>
+                        <div class="col-sm-5 ">
+                            <label for="filter"><img src="/img/core-img/filter.png" height="30px" width="25px"> &nbsp&nbsp </label>
+                                <select class="dropdown" id="FilterBy" class="form-control">
+                                  <option>ID</option>
+                                  <option>Status</option>
+                                  <option>Date</option>
+                                  <option>Customer</option>
+                                  <option>Subject</option>
+                                </select>
+                        </div>
+                        <!-- <div class="form-group">
+                                <label for="gender1" class="col-sm-2 control-label">With Bootstrap:</label>
+                                <div class="col-sm-2">
+                                <select class="form-control" id="gender1">
+                                  <option>Male</option>
+                                  <option>Female</option>
+                                </select>          
+                                  
+                                </div>
+                            </div> -->
+                    </div>
+
+                    <div class="row" style="width: 95%">
                         <div class="col-lg-12 pl-0">
-
-
-
                             <div class="table100 ver1 m-b-110">
                                 <div class="table100-head">
                                     <table>
@@ -578,6 +657,7 @@
                                                 <th class="cell100 column3">Date</th>
                                                 <th class="cell100 column4">Customer</th>
                                                 <th class="cell100 column5">Subject</th>
+                                                <th class="cell100 column6">More</th>
 
                                             </tr>
                                         </thead>
@@ -585,28 +665,39 @@
                                 </div>
                                 <div class="table100-body js-pscroll">
 
-                                    <table>
+                                    <table class="myTable">
                                         <tbody>
                                             <% applications.forEach(function(application){ %>
                                             <% if(application.status == "New"){ %>
                                             <tr class="row100 body">
-                                                <td class="cell100 column1"><button name="<%= application.id %>" onclick="popupNew(this.name)"><%= application.id %></button></td>
-                                                <td class="cell100 column2" id="<%= application.id %>status"><%= application.status %></td>
-                                                <td class="cell100 column3" id="<%= application.id %>date"><%= application.date %></td>
-                                                <td class="cell100 column4" id="<%= application.id %>customer"><%= application.customer %></td>
-                                                <td class="cell100 column5" id="<%= application.id %>subject"><%= application.subject %></td>
-                                                <input type="hidden" id="<%= application.id %>attachments" value="<%= application.attachments %>">
+                                                <td class="cell100 column1 7id" id="<%= application.id %>id"><%= application.id %></td>
+                                                <td class="cell100 column2 7status" id="<%= application.id %>status"><%= application.status %></td>
+                                                <td class="cell100 column3 7date" id="<%= application.id %>date"><%= application.date %></td>
+                                                <td class="cell100 column4 7customer" id="<%= application.id %>customer"><%= application.customer %></td>
+                                                <td class="cell100 column5 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <td class="cell100 column6"><button name="<%= application.id %>"
+                                                        onclick="popupNew(this.name)" style="color: #6c7ae0">Click here</button>
+                                                </td>
+                                                <input type="hidden" id="<%= application.id %>attachments"
+                                                    value="<%= application.attachments %>">
                                             </tr>
                                             <% } else if(application.status == "Pending" || application.status == "Complete" || application.status == "Error") { %>
                                             <tr class="row100 body">
-                                                <td class="cell100 column1"><button name="<%= application.id %>" onclick="popupApp(this.name)"><%= application.id %></button></td>
-                                                <td class="cell100 column2" id="<%= application.id %>status"><%= application.status %></td>
-                                                <td class="cell100 column3" id="<%= application.id %>date"><%= application.date %></td>
-                                                <td class="cell100 column4" id="<%= application.id %>customer"><%= application.customer %></td>
-                                                <td class="cell100 column5" id="<%= application.id %>subject"><%= application.subject %></td>
-                                                <input type="hidden" id="<%= application.id %>attachments" value="<%= application.attachments %>">
-                                                <input type="hidden" id="<%= application.id %>employees" value="<%= application.employees %>">
-                                                <input type="hidden" id="<%= application.id %>comments" value="<%= application.comments %>">
+                                                <td class="cell100 column1 7id" id="<%= application.id %>id>"><%= application.id %>
+                                                </td>
+                                                <td class="cell100 column2 7status" id="<%= application.id %>status"><%= application.status %></td>
+                                                <td class="cell100 column3 7date" id="<%= application.id %>date"><%= application.date %></td>
+                                                <td class="cell100 column4 7customer" id="<%= application.id %>customer"><%= application.customer %></td>
+                                                <td class="cell100 column5 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <td class="cell100 column6"><button name="<%= application.id %>"
+                                                        onclick="popupApp(this.name)" style="color: #6c7ae0">Click here</button>
+                                                </td>
+                                                <input type="hidden" id="<%= application.id %>attachments"
+                                                    value="<%= application.attachments %>">
+                                                <input type="hidden" id="<%= application.id %>employees"
+                                                    value="<%= application.employees %>">
+                                                <input type="hidden" id="<%= application.id %>comments"
+                                                    value="<%= application.comments %>">
                                             </tr>
                                             <% } %>
                                             <% }) %>
@@ -615,83 +706,86 @@
 
                                 </div>
 
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Application Status ends here -->
-
-                     </div>
-                      <div id="popups">
-                    <!-- todo-->
-                    <div class="row topmargin">
-                        <div class="col-md-6" id="todo">
-                            <div class="todolist not-done">
-                                <h1>To-do</h1>
-
-                                <input style="font-size:20px" type="text" class="form-control add-todo"
-                                    placeholder="Add to-do">
-
-
-                                <hr>
-                                <ul id="sortable" class="list-unstyled" style="font-size:20px">
-                                    <% todoList.forEach(function(todo){ %>
-                                    <li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" /><%= todo %></label></div></li>
-                                    <% }) %>
-                                </ul>
-                                <div class="todo-footer" style="font-size:20px">
-                                    <strong><span class="count-todos"></span></strong> Items Left
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="todolist">
-                                <h1>Already Done</h1>
-                                <ul id="done-items" class="list-unstyled" style="font-size:20px">
-                                    <% todoDoneList.forEach(function(todoDone){ %>
-                                    <li><%= todoDone %> <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li>
-                                    <% }) %>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row justify-content-between topmargin" style="display:flow-root">
-
-                            <!-- Single Footer Widget -->
-                            <div class="col-12 col-sm-6 col-lg-3">
-                                <div class="single-footer-widget mb-80">
-                                    <!-- Widget Title -->
-                                    <h4 class="widget-title">Quick Links</h4>
-
-                                    <!-- Nav -->
-                                    <nav>
-                                        <ul class="our-link">
-                                            <li class="current-item"><a href="/">Home</a></li>
-
-                                            <li><a href="#todo">To-Do</a></li>
-
-                                            <li><a href="#">My Attendance</a></li>
-
-                                            <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
-
-                                            <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>
 
 
+                    <div id="popups"></div>
+               
+                <!-- Application Status ends here -->
+
+                <!-- todo starts-->
+                <div class="row topmargin">
+                    <div class="col-md-6" id="todo">
+                        <div class="todolist not-done">
+                            <h1>To-do</h1>
+
+                            <input style="font-size:20px" type="text" class="form-control add-todo"
+                                placeholder="Add to-do">
+
+
+                            <hr>
+                            <ul id="sortable" class="list-unstyled" style="font-size:20px">
+                                <% todoList.forEach(function(todo){ %>
+                                <li class="ui-state-default">
+                                    <div class="checkbox"><label><input type="checkbox" value="" /><%= todo %></label>
+                                    </div>
+                                </li>
+                                <% }) %>
+                            </ul>
+                            <div class="todo-footer" style="font-size:20px">
+                                <strong><span class="count-todos"></span></strong> Items Left
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="todolist">
+                            <h1>Already Done</h1>
+                            <ul id="done-items" class="list-unstyled" style="font-size:20px">
+                                <% todoDoneList.forEach(function(todoDone){ %>
+                                <li><%= todoDone %> <button class="remove-item btn btn-default btn-xs pull-right"><span
+                                            class="glyphicon glyphicon-remove"></span></button></li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </section>
-            <!-- Background Curve -->
-            <div class="background-curve">
-                <img src="/img/core-img/curve-1.png" alt="">
-            </div>
+                <div class="container">
+                    <div class="row justify-content-between topmargin" style="display:flow-root">
 
-        </div>
+                        <!-- Single Footer Widget -->
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <div class="single-footer-widget mb-80">
+                                <!-- Widget Title -->
+                                <h4 class="widget-title">Quick Links</h4>
+
+                                <!-- Nav -->
+                                <nav>
+                                    <ul class="our-link">
+                                        <li class="current-item"><a href="/">Home</a></li>
+
+                                        <li><a href="#todo">To-Do</a></li>
+
+                                        <li><a href="/boss/<%= username %>/contacts">Contacts</a></li>
+
+                                        <li><a href="/boss/<%= username%>/profile">My Profile</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+        
+    </section>
+    <!-- Background Curve -->
+    <div class="background-curve">
+        <img src="/img/core-img/curve-1.png" alt="">
+    </div>
+
+    </div>
 
     </section>
 
@@ -719,6 +813,8 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            var date=new Date().toString();
+            date=date.substr(date,date.length-34);
             $('input[id="btn-chat"]').on('click', function (e) {
                 if (document.getElementById('btn-input').value != "") {
                     $("#removeC")
@@ -740,7 +836,7 @@
                                                         .append(
                                                             $("<span>").attr('class', 'glyphicon glyphicon-time')
                                                         )
-                                                        .text(new Date())
+                                                        .text(date)
                                                 )
                                                 .append(
                                                     $("<strong>").attr("class", "pull-right primary-font").text(
@@ -770,75 +866,78 @@
         });
     </script>
     <script type="text/javascript">
-        function deleteAnnouncement(id){
-                    
-                    $.ajax({
-                        url: "/deleteAnnouncement",
-                        method: "POST",
-                        data: {id: document.getElementById(id+"hidden").value}
-                    });
+        function deleteAnnouncement(id) {
 
-                    refreshAnnouncements();
+            $.ajax({
+                url: "/deleteAnnouncement",
+                method: "POST",
+                data: { id: document.getElementById(id + "hidden").value }
+            });
+
+            refreshAnnouncements();
         }
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('input[id="addA"]').on('click', function (e) {
-                    e.preventDefault();
-                    var frm = $(this).closest("form");
-                    var frm_id = frm.attr("id");
-                    var frm_id_splitted = frm_id.split("_");
-                    var frm_id_splitted_2 = frm_id_splitted[2];
+                e.preventDefault();
+                var frm = $(this).closest("form");
+                var frm_id = frm.attr("id");
+                var frm_id_splitted = frm_id.split("_");
+                var frm_id_splitted_2 = frm_id_splitted[2];
 
-                    var frm_serialized = frm.serialize();
-                    $.ajax({
-                        url: "/addAnnouncement",
-                        method: "POST",
-                        data: frm_serialized
-                    });
+                var frm_serialized = frm.serialize();
+                $.ajax({
+                    url: "/addAnnouncement",
+                    method: "POST",
+                    data: frm_serialized
+                });
 
-                    popupClose('.popupAnn');
-                    refreshAnnouncements();
+                popupClose('.popupAnn');
+                refreshAnnouncements();
 
             });
         });
     </script>
     <script type="text/javascript">
-        function refreshAnnouncements(){
+        function refreshAnnouncements() {
             var data = null;
-     
+
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                    
+
                     data = JSON.parse(this.responseText);
                     $("#remove").remove();
-                    $("#announcements_list").append($("<div>").attr("id","remove"))
-                    for(var i=data.length-1; i>=0; i--){
+                    $("#announcements_list").append($("<div>").attr("id", "remove"))
+                    for (var i = data.length - 1; i >= 0; i--) {
                         $("#remove")
-                        .append(
-                            $("<li>").attr("class", "border-bottom pb-3 mt-3")
                             .append(
-                                $("<span>").attr("class", "meta text-uppercase")
-                                .append(
-                                    $("<h5>").append($("<b>").append($("<font>").attr("color","dodgerblue").text(data[i].date)))
-                                )
+                                $("<li>").attr("class", "border-bottom pb-3 mt-3")
+                                    .append(
+                                        $("<span>").attr("class", "meta text-uppercase")
+                                            .append(
+                                                $("<h5>").append($("<b>").append($("<font>").attr("color", "dodgerblue").text(data[i].date)))
+                                            )
+                                    )
+                                    .append(
+                                        $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
+                                    )
+                                    .append(
+                                        $("<form>").attr("id", data[i].id)
+                                            .append(
+                                                $("<input>").attr("type", "hidden").attr("name", "id").attr("value", data[i].id).attr("id", data[i].id + "hidden")
+                                            )
+                                            .append(
+                                                $("<input>").attr("type", "button").attr("style", "display: inline-block;").attr("class", "edit-btn").attr("onclick", "deleteAnnouncement($(this).parent().attr('id'))")
+                                            )
+                                    )
+                                    .append(
+                                        $("<br>")
+                                    )
                             )
-                            .append(
-                                $("<h4>").attr("class", "font-weight-bold mt-0").text(data[i].announcement)
-                            )
-                            .append(
-                                $("<form>").attr("id", data[i].id)
-                                .append(
-                                    $("<input>").attr("type", "hidden").attr("name","id").attr("value", data[i].id).attr("id",data[i].id+"hidden")
-                                )
-                                .append(
-                                    $("<input>").attr("type", "button").attr("style", "display: inline-block;").attr("class", "edit-btn").attr("onclick","deleteAnnouncement($(this).parent().attr('id'))")
-                                )
-                            )
-                        )
                     }
                 }
             });
@@ -848,88 +947,88 @@
 
             xhr.send(data);
         }
-        
-        setInterval(refreshAnnouncements,20000);
+
+        setInterval(refreshAnnouncements, 20000);
     </script>
     <script type="text/javascript">
-        function refreshMessages(){
+        function refreshMessages() {
             var data = null;
-     
+
             var xhr = new XMLHttpRequest();
             xhr.withCredentials = true;
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                    
+
                     data = JSON.parse(this.responseText);
                     $("#removeC").remove();
                     $("#chatList").append($("<div>").attr("id", "removeC"))
-                    
-                    for(var i=0; i<data.length-1; i++){
-                        if(data[data.length-1].name == data[i].name){
+
+                    for (var i = 0; i < data.length - 1; i++) {
+                        if (data[data.length - 1].name == data[i].name) {
                             $("#removeC")
-                            .append(
-                                $("<li>").attr('class', 'right clearfix')
                                 .append(
-                                    $("<span>").attr('class', 'chat-img pull-right')
-                                    .append(
-                                        $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
-                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
-                                    )
+                                    $("<li>").attr('class', 'right clearfix')
+                                        .append(
+                                            $("<span>").attr('class', 'chat-img pull-right')
+                                                .append(
+                                                    $("<img>").attr('src', 'http://placehold.it/50/FA6F57/fff&text=ME')
+                                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                                )
+                                        )
+                                        .append(
+                                            $("<div>").attr('class', 'chat-body clearfix')
+                                                .append(
+                                                    $("<div>").attr("class", "header")
+                                                        .append(
+                                                            $("<small>").attr('class', 'text-muted')
+                                                                .append(
+                                                                    $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                                                )
+                                                                .text(data[i].time)
+                                                        )
+                                                        .append(
+                                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
+                                                        )
+                                                        .append(
+                                                            $("<p>").text(data[i].message)
+                                                        )
+                                                )
+                                        )
                                 )
-                                .append(
-                                    $("<div>").attr('class', 'chat-body clearfix')
-                                    .append(
-                                        $("<div>").attr("class", "header")
-                                        .append(
-                                            $("<small>").attr('class', 'text-muted')
-                                            .append(
-                                                $("<span>").attr('class', 'glyphicon glyphicon-time')
-                                            )
-                                            .text(data[i].time)
-                                        )
-                                        .append(
-                                            $("<strong>").attr("class", "pull-right primary-font").text(data[i].name)
-                                        )
-                                        .append(
-                                            $("<p>").text(data[i].message)
-                                        )
-                                    )
-                                )
-                            )
                         }
-                        else{
+                        else {
                             $("#removeC")
-                            .append(
-                                $("<li>").attr('class', 'left clearfix')
                                 .append(
-                                    $("<span>").attr('class', 'chat-img pull-left')
-                                    .append(
-                                        $("<img>").attr('src', 'http://placehold.it/50/55C1E7/fff&text=U')
-                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
-                                    )
+                                    $("<li>").attr('class', 'left clearfix')
+                                        .append(
+                                            $("<span>").attr('class', 'chat-img pull-left')
+                                                .append(
+                                                    $("<img>").attr('src', 'http://placehold.it/50/55C1E7/fff&text=U')
+                                                        .attr('alt', 'User Avatar').attr('class', 'img-circle')
+                                                )
+                                        )
+                                        .append(
+                                            $("<div>").attr('class', 'chat-body clearfix')
+                                                .append(
+                                                    $("<div>").attr("class", "header")
+                                                        .append(
+                                                            $("<strong>").attr("class", "primary-font").text(data[i].name)
+                                                        )
+                                                        .append(
+                                                            $("<small>").attr("class", "pull-right text-muted")
+                                                                .append(
+                                                                    $("<span>").attr("class", "glyphicon glyphicon-time")
+                                                                ).text(data[i].time)
+                                                        )
+                                                        .append(
+                                                            $("<p>").text(data[i].message)
+                                                        )
+                                                )
+                                        )
                                 )
-                                .append(
-                                    $("<div>").attr('class', 'chat-body clearfix')
-                                    .append(
-                                        $("<div>").attr("class", "header")
-                                        .append(
-                                            $("<strong>").attr("class", "primary-font").text(data[i].name)
-                                        )
-                                        .append(
-                                            $("<small>").attr("class", "pull-right text-muted")
-                                            .append(
-                                                $("<span>").attr("class","glyphicon glyphicon-time")
-                                            ).text(data[i].time)
-                                        )
-                                        .append(
-                                            $("<p>").text(data[i].message)
-                                        )
-                                    )
-                                )
-                            )   
                         }
-                      
+
                     }
                 }
             });
@@ -941,7 +1040,34 @@
         }
         setInterval(refreshMessages, 5000);
     </script>
-       
+
+    <!--search js starts-->
+    <script>
+            $('.js-pscroll').each(function(){
+                var ps = new PerfectScrollbar(this);
+    
+                $(window).on('resize', function(){
+                    ps.update();
+                })
+            });
+                
+            
+        </script>
+        <script>
+            $(document).ready(function(){
+                  $("#myInput").on("keyup", function() {
+                  var value = $(this).val().toLowerCase();
+                  if($("#FilterBy").value=="ID")
+                  {
+                    $(".tr").hide();
+                    $(".7id").filter(function() {
+                        return $(this).text().toLowerCase().indexOf(value) < -1;
+                    }).parent().show();
+                }
+            });
+        </script>
+    <!--search js ends-->
+
 </body>
 
 </html>

@@ -40,15 +40,17 @@
 
         #myInput {
             background-image: url('/img/core-img/search(2).jpg');
-            background-position: ;
+            background-position: left;
             background-repeat: no-repeat;
-            width: 40%;
+            width: 90%;
             font-size: 16px;
             padding: 12px 20px 12px 50px;
-            border: 5px;
-            border-style:solid;
-            border-color:black;
+            border: 1px !important;
+            border-radius: 20px;
+            border-style:solid !important;
+            border-color: rgb(240, 233, 233) !important;
             margin-bottom: 12px;
+            box-shadow: 1px 2px #e2e0e0;
         }
     </style>
 
@@ -94,8 +96,6 @@
                                 
                                 <li><a href="/employees/<%= username %>#todo">To-Do</a></li>
 
-                                <li><a href="#">My Attendance</a></li>
-                                
                                 <li class="current-item"><a href="/employees/<%= username %>/contacts">Contacts</a></li>
 
                                 <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
@@ -122,17 +122,35 @@
         <!-- Single Welcome Slide -->
             <div class="single-welcome-slide">
                 <!-- Background Curve -->
-                <div class="limiter container">
-
-                    <div class="container-table100" style="background: none">
-                        <input id="myInput" type="text" placeholder="Search.."> 
+                <div class="container">
                         <div class="background-curve">
-                            <img src="/img/core-img/curve-1.png" alt="">
-                                
-                        </div>
+                                <img src="/img/core-img/curve-1.png" alt="">
+                            </div><br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+            
+                            <div class="row">
+                                <div class="col-sm-7"><input id="myInput" type="text" placeholder="Search.."></div>
+            
+                                <div class="col-sm-3"><button class="uza-btn btn-2 m-l-60"><a href="/addEmployee"
+                                            style="color: inherit">Add Employee</a></button></div>
+                                <div class="col-sm-2"><button class="uza-btn btn-2"><a href="/addBoss" style="color:inherit">Add
+                                            Boss</a></button></div>
+                            </div>
+                    
+                        
+                        <div class="row">
+                            <div class="col-sm-12">
                         <div class="wrap-table100">
 
-                            <div class="table100 ver1 m-b-110">
+                            <div class="table100 ver1 m-t-10">
 
                                 <div class="table100-head">
 
@@ -166,6 +184,7 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </div>
 
                 </div>
@@ -197,8 +216,6 @@
                                 
                                 <li><a href="/employees/<%= username %>#todo">To-Do</a></li>
 
-                                <li><a href="#">My Attendance</a></li>
-                                
                                 <li class="current-item"><a href="/employees/<%= username %>/contacts">Contacts</a></li>
 
                                 <li><a href="/employees/<%= username%>/profile">My Profile</a></li>
