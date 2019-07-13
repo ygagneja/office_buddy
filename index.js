@@ -166,7 +166,7 @@ app.post("/addAnnouncement", function(req, res){
 	else if(req.session.passport.user.boss == true){	
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("MainDB");
-			dbo.collection("Announcements").insertOne({id: new Date().getTime().toString(),date: new Date().toString().substr(new Date().toString(), new Date().toString().length - 18), announcement: req.body.announcement});
+			dbo.collection("Announcements").insertOne({id: new Date().getTime().toString(),date: new Date().toString().substr(new Date().toString(), new Date().toString().length - 34), announcement: req.body.announcement});
 			res.redirect("/");
 		});
 	}
@@ -207,7 +207,7 @@ app.post("/chatAppend", function(req, res){
 	else if(req.session.passport.user){	
 		mongo.connect(url, function(err, db){
 			var dbo = db.db("MainDB");
-			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date().toString().substr(new Date().toString(), new Date().toString().length - 18), message: req.body.message});
+			dbo.collection("Messages").insertOne({name: req.session.passport.user.name, time: new Date().toString().substr(new Date().toString(), new Date().toString().length - 34), message: req.body.message});
 		});
 	}
 	else{
@@ -898,7 +898,7 @@ app.use(function(req,res,next) {
 app.post("/submitApplication", function(req, res){
 	mongo.connect(url, function(err, db){
 		var dbo = db.db("MainDB");
-		dbo.collection("Applications").insertOne({id: new Date().getTime().toString(), customer: req.body.customer, attachments: req.body.attachments, subject: req.body.subject, status: "New", date: new Date().getDate().toString() + "-" + (new Date().getMonth()+1).toString() + "-" + new Date().getFullYear().toString()})
+		dbo.collection("Applications").insertOne({id: new Date().getTime().toString(), customer: req.body.customer, attachments: req.body.attachments, subject: req.body.subject, status: "New", date: new Date().getDate().toString() + "-" + (new Date().getMonth()+1).toString() + "-" + new Date().getFullYear().toString(), customerid: req.body.customerid})
 		res.redirect("/");
 	});
 });

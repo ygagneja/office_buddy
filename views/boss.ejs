@@ -655,8 +655,9 @@
                                                 <th class="cell100 column2">Status</th>
                                                 <th class="cell100 column3">Date</th>
                                                 <th class="cell100 column4">Customer</th>
-                                                <th class="cell100 column5">Subject</th>
-                                                <th class="cell100 column6">More</th>
+                                                <th class="cell100 column5">Customer ID</th>
+                                                <th class="cell100 column6">Subject</th>
+                                                <th class="cell100 column7"></th>
 
                                             </tr>
                                         </thead>
@@ -673,8 +674,9 @@
                                                 <td class="cell100 column2 7status" id="<%= application.id %>status"><%= application.status %></td>
                                                 <td class="cell100 column3 7date" id="<%= application.id %>date"><%= application.date %></td>
                                                 <td class="cell100 column4 7customer" id="<%= application.id %>customer"><%= application.customer %></td>
-                                                <td class="cell100 column5 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
-                                                <td class="cell100 column6"><button name="<%= application.id %>"
+                                                <td class="cell100 column5 7customerid" id="<%= application.id %>customerid"><%= application.customerid %></td>
+                                                <td class="cell100 column6 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <td class="cell100 column7"><button name="<%= application.id %>"
                                                         onclick="popupNew(this.name)" style="color: #6c7ae0">Click here</button>
                                                 </td>
                                                 <input type="hidden" id="<%= application.id %>attachments"
@@ -687,8 +689,9 @@
                                                 <td class="cell100 column2 7status" id="<%= application.id %>status"><%= application.status %></td>
                                                 <td class="cell100 column3 7date" id="<%= application.id %>date"><%= application.date %></td>
                                                 <td class="cell100 column4 7customer" id="<%= application.id %>customer"><%= application.customer %></td>
-                                                <td class="cell100 column5 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
-                                                <td class="cell100 column6"><button name="<%= application.id %>"
+                                                <td class="cell100 column5 7customerid" id="<%= application.id %>customerid"><%= application.customerid %></td>
+                                                <td class="cell100 column6 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <td class="cell100 column7"><button name="<%= application.id %>"
                                                         onclick="popupApp(this.name)" style="color: #6c7ae0">Click here</button>
                                                 </td>
                                                 <input type="hidden" id="<%= application.id %>attachments"
@@ -861,8 +864,9 @@
                         data: frm_serialized
                     });
                     document.getElementById('btn-input').value='';
-                    $("#7Chat").animate({ scrollTop: $('#7Chat').prop("scrollHeight")}, 1000);
+                    
                 }
+                $("#7Chat").animate({ scrollTop: $('#7Chat').prop("scrollHeight")}, 1000);
             });
         });
     </script>
@@ -1094,8 +1098,16 @@
                       $(".myTable .7subject").filter(function() {
                             return $(this).text().toLowerCase().indexOf(value) > -1;
                         }).parent().show();
-                }    
+                }
+                else if(e.options[e.selectedIndex].text=="Customer ID"){
+                      
+                      $(".7customerid").parent().hide();    
+                      $(".myTable .7customerid").filter(function() {
+                            return $(this).text().toLowerCase().indexOf(value) > -1;
+                        }).parent().show();
+                }        
                 });
+                
             });
         </script>
     <!--search js ends-->

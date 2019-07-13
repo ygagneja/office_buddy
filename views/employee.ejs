@@ -105,6 +105,20 @@
 
     <!--humne khud banaya-->
     <style>
+        .dropdown {
+            background-color: transparent;
+            padding: 12px 20px 12px 50px;
+            border: 1px !important;
+            border-radius: 0px !important;
+            border-style:solid !important;
+            border-color: rgb(240, 233, 233) !important;
+            margin-bottom: px;
+            box-shadow: 1px 2px #e2e0e0;
+
+        }
+        .dropdown:focus{
+            outline: none;         
+        }
         #myInput {
             background-image: url('/img/core-img/search(2).jpg');
             background-position: left;
@@ -505,7 +519,7 @@
 
                                     </div>
                                 </div>
-                                <div class="panel-body">
+                                <div class="panel-body" id="7Chat">
 
                                     <ul class="chat" id="chatList">
                                         <div id="removeC">
@@ -572,6 +586,12 @@
                     <% if(applications != ""){ %>
                     <br><br><br><br><br><br><br><br><br><br>
                     <div class="row">
+                            <div class="col-12"><center><h1>Application Status</h1></center></div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="row" style="margin: 0px 0px 0px 20%">
                             <div class="col-sm-7"><input id="myInput" type="text" placeholder="Search.."></div>
                             <div class="col-sm-5 ">
                                 <label for="filter"><img src="/img/core-img/filter.png" height="30px" width="25px"> &nbsp&nbsp </label>
@@ -583,7 +603,10 @@
                                       <option>Subject</option>
                                     </select>
                             </div>
-                    </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
                     <div class="row" style="width: 95%">
                         <div class="col-lg-12 pl-0">
                             <div class="table100 ver1 m-b-110">
@@ -595,8 +618,9 @@
                                                 <th class="cell100 column2">Status</th>
                                                 <th class="cell100 column3">Date</th>
                                                 <th class="cell100 column4">Customer</th>
-                                                <th class="cell100 column5">Subject</th>
-                                                <th class="cell100 column6">More</th>
+                                                <th class="cell100 column5">Customer ID</th>
+                                                <th class="cell100 column6">Subject</th>
+                                                <th class="cell100 column7"></th>
 
                                             </tr>
                                         </thead>
@@ -608,12 +632,13 @@
                                         <tbody>
                                             <% applications.forEach(function(application){ %>
                                             <tr class="row100 body">
-                                                <td class="cell100 column1" id="<%= application.id %>id"><%= application.id %></td>
-                                                <td class="cell100 column2" id="<%= application.id %>status"><%= application.status %></td>
-                                                <td class="cell100 column3" id="<%= application.id %>date"><%= application.date %></td>
-                                                <td class="cell100 column4" id="<%= application.id %>customer"><%= application.customer %></td>
-                                                <td class="cell100 column5" id="<%= application.id %>subject"><%= application.subject %></td>
-                                                <td class="cell100 column6"><button name="<%= application.id %>"
+                                                <td class="cell100 column1 7id" id="<%= application.id %>id"><%= application.id %></td>
+                                                <td class="cell100 column2 7status" id="<%= application.id %>status"><%= application.status %></td>
+                                                <td class="cell100 column3 7date" id="<%= application.id %>date"><%= application.date %></td>
+                                                <td class="cell100 column4 7customer" id="<%= application.id %>customer"><%= application.customer %></td>
+                                                <td class="cell100 column5 7customerid" id="<%= application.id %>customerid"><%= application.customerid %></td>
+                                                <td class="cell100 column6 7subject" id="<%= application.id %>subject"><%= application.subject %></td>
+                                                <td class="cell100 column7"><button name="<%= application.id %>"
                                                         onclick="popupEmployee(this.name)" style="color: #6c7ae0">Click here</button>
                                                 </td>
                                                 <input type="hidden" id="<%= application.id %>attachments"
@@ -790,8 +815,9 @@
                         }
                     });
                     document.getElementById('btn-input').value='';
-                    $("#7Chat").animate({ scrollTop: $('#7Chat').prop("scrollHeight")}, 1000);
+                    
                 }
+                $("#7Chat").animate({ scrollTop: $('#7Chat').prop("scrollHeight")}, 1000);
             });
         });
     </script>
@@ -962,7 +988,14 @@
                       $(".myTable .7subject").filter(function() {
                             return $(this).text().toLowerCase().indexOf(value) > -1;
                         }).parent().show();
-                }    
+                }
+                else if(e.options[e.selectedIndex].text=="Customer ID"){
+                      
+                      $(".7customerid").parent().hide();    
+                      $(".myTable .7customerid").filter(function() {
+                            return $(this).text().toLowerCase().indexOf(value) > -1;
+                        }).parent().show();
+                }     
                 });
             });
         </script>
