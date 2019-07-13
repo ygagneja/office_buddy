@@ -227,14 +227,14 @@ function popupOpenCloseEmployee(id, status, date, customer, subject, attachments
 									)
 							)
 						.append(
-								$("<div>").attr("class","col-1")
+							$("<div>").attr("class","col-1")
+							.append(
+								$("<a>").attr("href",attachments)
 								.append(
-										$("<a>").attr("href",attachments)
-										.append(
-												$("<i>").attr("class","fa fa-paperclip fa-3x").attr("style","color: rgb(88, 92, 88)").attr("aria-hidden","true")
-											)
-									)
+									$("<i>").attr("class","fa fa-paperclip fa-3x").attr("style","color: rgb(88, 92, 88)").attr("aria-hidden","true")
+								)
 							)
+						)
 					)
 				.append(
 						$("<br>")
@@ -379,31 +379,57 @@ function popupOpenCloseNew(id, status, date, customer, subject, attachments) {
     	.append(
     		$("<div>").attr("class", "container")
     		.append(
-    			$("<div>").attr("class", "col-12")
-    			.append(
-					$("<center>")
+				$("<div>").attr("class","row")
+				.append(
+					$("<div>").attr("class", "col-11")
 					.append(
-						$("<h2>").attr("style", "color:black")
+						$("<center>")
 						.append(
-							$("<b>").text("Application ID: " + id)
+							$("<h2>").attr("style", "color:black")
+							.append(
+								$("<b>").text("Application ID: " + id)
+							)
 						)
 					)
-    			)
-    		)
+				)
+				.append(
+					$("<div>").attr("class","col-1")
+					.append(
+						$("<a>").attr("href",attachments)
+						.append(
+							$("<i>").attr("class","fa fa-paperclip fa-3x").attr("style","color: rgb(88, 92, 88)").attr("aria-hidden","true")
+						)
+					)
+				)
+			)
     		.append(
-				$("<p>").attr("align", "left").text("Customer: " + customer + "Date: " + date)
-					
-    		)
+				$("<div>").attr("class","row").attr("style","font-size:20px")
+				.append(
+					$("<div>").attr("class","col-2").text("Customer: " )
+				)
+				.append(
+					$("<div>").attr("class","col-3").text(customer).attr("style","font-weight:550")	
+				)
+			)
+			.append(
+				$("<br>")
+			)
+			.append(
+				$("<div>").attr("class","row").attr("style","font-size:20px")
+				.append(
+					$("<div>").attr("class","col-2").text("Date: " )
+				)
+				.append(
+					$("<div>").attr("class","col-3").text(date).attr("style","font-weight:550")	
+				)
+			)
     		.append(
     			$("<div>").attr("align", "right")
     			.append(
     				$("<div>").attr("class","col-12")
     				.append(
-    					$("<button>").attr("class","addit").attr("onclick","Addappli()").text("Add Employee").attr("style","font-size:16px")
+    					$("<button>").attr("class","uza-btn btn-2").attr("onclick","Addappli()").text("Assign Employees").attr("style","font-size:16px")
 					)
-    				.append(
-    					$("<button>").attr("class","addit").append($("<a>").attr("href", attachments).text("Attachments").attr("style","color:white"))
-    				)
     			)
     		)
     		.append(
@@ -423,7 +449,10 @@ function popupOpenCloseNew(id, status, date, customer, subject, attachments) {
 				
 			)
 			.append(
-				$("<button>").attr("class","addit").text("Submit").attr("form","app1")
+    			$("<br/>")
+    		)
+			.append(
+				$("<button>").attr("class","uza-btn btn-2").text("Submit").attr("form","app1")
 			)
     		.append(
     			$("<br/>")

@@ -8,26 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>LOGIN</title>
+    <title>Submit a new Application</title>
 
 
 
-    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
+    
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -72,11 +57,7 @@
                         </div>
 
                         <!-- Nav Start -->
-                        <div class="classynav">
-                            <ul id="nav">
-                                <li><a href="/addApplication">Submit Application</a></li>
-                            </ul>
-                            </div>
+                        
                         <!-- Nav End -->
                     </div>
                 </nav>
@@ -98,29 +79,34 @@
 	                	<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
 							<form class="login100-form validate-form" method="POST">
 								<span class="login100-form-title p-b-33">
-									<b>Login</b>
+									<b>Submit a new Application</b>
 								</span>
 
 								<div class="wrap-input100 validate-input">
-									<input class="input100" type="text" name="username" placeholder="Username">
+										<input type="text" name="customer" class="input100" placeholder="Customer">
+									<!-- <input class="input100" type="text" name="username" placeholder="Username"> -->
 									<span class="focus-input100-1"></span>
 									<span class="focus-input100-2"></span>
 								</div>
 
-								<div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-									<input class="input100" type="password" name="password" placeholder="Password">
+								<div class="wrap-input100 rs1 validate-input" >
+										<input type="text" name="subject" class="input100" placeholder="Subject">
+									<!-- <input class="input100" type="password" name="password" placeholder="Password"> -->
+									<span class="focus-input100-1"></span>
+									<span class="focus-input100-2"></span>
+								</div>
+
+								<div class="wrap-input100 rs1 validate-input" >
+										
+										<input type="text" name="attachments" class="input100" placeholder="Add an Attachment    &#128206;">
+									<!-- <input class="input100" type="password" name="password" placeholder="Password"> -->
 									<span class="focus-input100-1"></span>
 									<span class="focus-input100-2"></span>
 								</div>
 
 								<div class="container-login100-form-btn m-t-20">
-									<button class="login100-form-btn" formaction="/loginBoss">
-										Log in as Boss
-									</button>
-								</div>
-								<div class="container-login100-form-btn m-t-20">
-									<button class="login100-form-btn" formaction="/loginEmployee">
-										Log in as Employee
+									<button class="login100-form-btn" formaction="/submitApplication">
+										Submit
 									</button>
 								</div>
 							</form>

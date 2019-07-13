@@ -518,7 +518,7 @@
                                                 <div class="chat-body clearfix">
                                                     <div class="header">
                                                         <small class=" text-muted"><span
-                                                                class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                                class=""></span><%= message.time %></small>
                                                         <strong
                                                             class="pull-right primary-font"><%= message.name %></strong>
                                                     </div>
@@ -537,7 +537,7 @@
                                                         <strong class="primary-font"><%= message.name %></strong> <small
                                                             class="pull-right text-muted">
                                                             <span
-                                                                class="glyphicon glyphicon-time"></span><%= message.time %></small>
+                                                                class=""></span><%= message.time %></small>
                                                     </div>
                                                     <p>
                                                         <%= message.message %>
@@ -572,9 +572,18 @@
                     <% if(applications != ""){ %>
                     <br><br><br><br><br><br><br><br><br><br>
                     <div class="row">
-                        <div class="col-sm-7"><input id="myInput" type="text" placeholder="Search.."></div>
+                            <div class="col-sm-7"><input id="myInput" type="text" placeholder="Search.."></div>
+                            <div class="col-sm-5 ">
+                                <label for="filter"><img src="/img/core-img/filter.png" height="30px" width="25px"> &nbsp&nbsp </label>
+                                    <select class="dropdown" id="FilterBy" class="form-control">
+                                      <option>ID</option>
+                                      <option>Status</option>
+                                      <option>Date</option>
+                                      <option>Customer</option>
+                                      <option>Subject</option>
+                                    </select>
+                            </div>
                     </div>
-
                     <div class="row" style="width: 95%">
                         <div class="col-lg-12 pl-0">
                             <div class="table100 ver1 m-b-110">
@@ -751,7 +760,7 @@
                                                 .append(
                                                     $("<small>").attr('class', 'text-muted')
                                                         .append(
-                                                            $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                                            $("<span>").attr('class', '')
                                                         )
                                                         .text(date)
                                                 )
@@ -780,6 +789,8 @@
 
                         }
                     });
+                    document.getElementById('btn-input').value='';
+                    $("#7Chat").animate({ scrollTop: $('#7Chat').prop("scrollHeight")}, 1000);
                 }
             });
         });
@@ -854,7 +865,7 @@
                                                         .append(
                                                             $("<small>").attr('class', 'text-muted')
                                                                 .append(
-                                                                    $("<span>").attr('class', 'glyphicon glyphicon-time')
+                                                                    $("<span>").attr('class', '')
                                                                 )
                                                                 .text(data[i].time)
                                                         )
@@ -889,7 +900,7 @@
                                                         .append(
                                                             $("<small>").attr("class", "pull-right text-muted")
                                                                 .append(
-                                                                    $("<span>").attr("class", "glyphicon glyphicon-time")
+                                                                    $("<span>").attr("class", "")
                                                                 ).text(data[i].time)
                                                         )
                                                         .append(
@@ -909,26 +920,49 @@
             xhr.send(data);
         }
         setInterval(refreshMessages, 5000);
+        $("#7Chat").animate({ scrollTop: $('#7Chat').prop("scrollHeight")}, 1000);
     </script>
     <!--search js starts-->
     <script>
-            $('.js-pscroll').each(function(){
-                var ps = new PerfectScrollbar(this);
-    
-                $(window).on('resize', function(){
-                    ps.update();
-                })
-            });
-                
-            
-        </script>
-        <script>
             $(document).ready(function(){
                   $("#myInput").on("keyup", function() {
                   var value = $(this).val().toLowerCase();
-                  $(".myTable tr").filter(function() {
-                  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                  });
+                  var e=document.getElementById("FilterBy");
+                  if(e.options[e.selectedIndex].text=="ID"){
+                      
+                  $(".7id").parent().hide();    
+                  $(".myTable .7id").filter(function() {
+                        return $(this).text().toLowerCase().indexOf(value) > -1;
+                    }).parent().show();
+                }
+                else if(e.options[e.selectedIndex].text=="Status"){
+                      
+                  $(".7status").parent().hide();    
+                  $(".myTable .7status").filter(function() {
+                        return $(this).text().toLowerCase().indexOf(value) > -1;
+                    }).parent().show();
+                }
+                else if(e.options[e.selectedIndex].text=="Date"){
+                      
+                      $(".7date").parent().hide();    
+                      $(".myTable .7date").filter(function() {
+                            return $(this).text().toLowerCase().indexOf(value) > -1;
+                        }).parent().show();
+                }
+                else if(e.options[e.selectedIndex].text=="Customer"){
+                      
+                      $(".7customer").parent().hide();    
+                      $(".myTable .7customer").filter(function() {
+                            return $(this).text().toLowerCase().indexOf(value) > -1;
+                        }).parent().show();
+                }
+                else if(e.options[e.selectedIndex].text=="Subject"){
+                      
+                      $(".7subject").parent().hide();    
+                      $(".myTable .7subject").filter(function() {
+                            return $(this).text().toLowerCase().indexOf(value) > -1;
+                        }).parent().show();
+                }    
                 });
             });
         </script>
