@@ -4,8 +4,8 @@ const url = 'mongodb://localhost:27017/';
 const bodyparser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 //const cookieparser = require('cookie-parser');
+const LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
 
